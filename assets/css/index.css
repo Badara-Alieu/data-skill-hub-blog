@@ -1,0 +1,180 @@
+/* ===========================
+    Responsive
+=========================== */
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .site-branding {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-menu {
+        flex-direction: row; /* column */
+        width: 100%;
+        margin-top: 10px;
+    }
+
+/* Typewriter */
+    .typewriter {
+        font-size: 15px;
+        padding: 15px;
+    }
+
+    .typewriter h1 {
+        font-size: 1.6rem;
+    }
+
+        .typewriter h3 {
+        font-size: 1.2rem;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 8px 0;
+    }
+}
+
+/*
+--///////////////////////////////////////////////////////////////////////////////////////////////////////--
+--///////////////////////////////////////////////////////////////////////////////////////////////////////--
+*/
+
+/* ===========================
+    Bloc typewriter
+=========================== */
+.typewriter {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 850px;
+    margin: 10px auto;
+    padding: 20px 25px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    position: relative;
+    position: sticky;
+    margin-left: 10px;
+}
+
+/* Curseur clignotant */
+.typewriter::after {
+    content: "|";
+    animation: blink 1s infinite;
+    margin-left: 4px;
+    color: #007bff;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/*
+    ///////////////START CHECK///////////////
+*/
+/* Curseur clignotant */
+.cursor {                          /*//////////*/
+    display: inline-block;         /*//////////*/
+    width: 6px;                    /*//////////*/
+    background-color: black;     /*//////////*/
+    margin-left: 2px;              /*//////////*/
+    animation: blink 0.8s infinite;/*//////////*/
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+}
+/*
+    ///////////////END CHECK///////////////
+*/
+
+/* ===========================
+    Titres & textes
+=========================== */
+/* Styles des titres/paragraphes */
+.typewriter h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #222;
+}
+
+#typewriter .baseline {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+#typewriter h3 {
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    color: #0077cc;
+    /*
+    margin: 1rem 0 0.5rem;
+    font-size: 1.4rem;
+    color: #444;
+    */
+}
+
+.typewriter p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+/*
+    /////////////// START CHECK /////////////// 
+*/
+
+/* Mise en valeur baseline */
+.typewriter .baseline {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #555;
+    margin: 0.25rem 0 0.75rem 0;
+}
+
+/* ===========================
+    Liens
+=========================== */
+.typewriter a {
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 1rem;
+    transition: color 0.2s ease;
+}
+
+.typewriter a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/*
+    /////////////// END CHECK /////////////// 
+*/
+
+/* ============================
+    Tutoriels - Accordéon
+   ============================ */
+#categories-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-top: 2rem;
+}
+
+/* === Organisation principale avec aside à droite === */
+#conteneur-principal {
+    /*display: flex;*/ 
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+#main-content {
+    flex: 1;
+    padding-right: 20px;
+}

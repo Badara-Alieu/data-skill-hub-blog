@@ -1,0 +1,26 @@
+{
+    "PostgreSQL - Bases": [
+        {
+            "titre": "Création d’une base de données",
+            "url": "tutoriels/postgresql/base-de-donnees.html",
+            "description": "Créez et configurez votre première base PostgreSQL."
+        },
+        {
+            "titre": "Première table",
+            "url": "tutoriels/postgresql/table.html",
+            "description": "Apprenez à créer et manipuler vos premières tables."
+        }
+    ],
+    "PostgreSQL - Requêtes": [
+        {
+            "titre": "Sélections simples",
+            "url": "tutoriels/postgresql/introduction.html",
+            "description": "Écrivez vos premières requêtes SELECT."
+        },
+        {
+            "titre": "Filtres et conditions",
+            "url": "tutoriels/postgresql/table.html",
+            "description": "Utilisez WHERE, ORDER BY et LIMIT pour cibler vos données."
+        }
+    ]
+}

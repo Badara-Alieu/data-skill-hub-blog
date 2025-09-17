@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5. Exécution de requêtes SQL | Tutoriel PostgreSQL</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="../images/illustrations/PostgreSQL/Logo PostgreSQL.png" alt="Logo du site" class="logo" />
+            <h1>Apprenez PostgreSQL, Excel et VBA</h1>
+            <button class="menu-toggle" aria-label="Ouvrir le menu">&#9776;</button>
+        </div>
+        <nav aria-label="Navigation principale">
+            <ul class="nav-menu">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../postgresql.html">PostgreSQL</a></li>
+                <li><a href="../excel.html">Excel</a></li>
+                <li><a href="../excel-vba.html">Excel VBA</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../ressources.html">Ressources</a></li>
+                <li><a href="../apropos.html">À propos</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="layout-postgres">
+        <aside class="sidebar">
+            <h2>PostgreSQL : Leçons</h2>
+            <ul>
+                <li><a href="01-introduction.html">1. Introduction</a></li>
+                <li><a href="02-installation.html">2. Installation de PostgreSQL</a></li>
+                <li><a href="03-connexion.html">3. Connexion au serveur</a></li>
+                <li><a href="04-creation-base.html">4. Création d’une base</a></li>
+                <li><a href="05-execution-requetes.html">5. Exécution de requêtes SQL</a></li>
+                <li><a href="06-types-donnees.html">6. Les types de données</a></li>
+                <li><a href="07-fonctions-utiles.html">7. Les fonctions utiles</a></li>
+                <li><a href="08-sauvegarde.html">8. Sauvegarde & restauration</a></li>
+                <li><a href="09-select-from.html">9. La commande SELECT FROM...</a></li>
+                <li><a href="100-exercices.html">100. Exercices</a></li>
+            </ul>
+        </aside>
+        
+        <main class="main-content">
+        <aside class="toc">
+            <h2 class="no-toc">Sommaire</h2>
+            <nav id="toc-content"></nav>
+        </aside>
+
+            <h2>5. Exécution de requêtes SQL</h2>
+            <p>
+                Voyons comment écrire et exécuter des requêtes SQL simples pour interagir avec la base : sélection, insertion, mise à jour, suppression.
+            </p>
+        </main>
+    </div>
+
+    <div class="pagination">
+        <a href="04-creation-base.html" class="prev">
+            ← Création d’une base de données
+        </a>
+        <a href="../index.html" class="home">🏠 Accueil</a>
+        <a href="06-types-donnees.html" class="next">
+            Les types de données →
+        </a>
+    </div>
+
+    <!-- Pied de page -->
+    <footer role="contentinfo">
+        <p>&copy; 2025 - Ce site vous guide pas à pas vers la maîtrise de PostgreSQL</p>
+        <a href="#top" class="back-to-top">↑ Retour en haut</a>
+        <!-- <a href="#top" class="back-to-top">&#8593; Retour en haut</a> -->
+    </footer>
+    <script src="../js/script.js" defer></script>
+<!--  
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPage = location.pathname.split('/').pop();
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            sidebarLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+-->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const main = document.querySelector('main');
+        const toc = document.getElementById('toc-content');
+
+        if (!main || !toc) return;
+
+        const headers = main.querySelectorAll('h2, h3');
+        headers.forEach((el, i) => {
+            // ❌ Ignore les titres avec la classe "no-toc"
+            if (el.classList.contains('no-toc')) return;
+
+            // ✅ Crée un id unique s’il n’existe pas
+            if (!el.id) {
+                el.id = `section-${i}`;
+            }
+
+            // ✅ Crée un lien dans le sommaire
+            const link = document.createElement('a');
+            link.href = `#${el.id}`;
+            link.textContent = el.textContent;
+            link.className = el.tagName.toLowerCase(); // h2 ou h3
+            toc.appendChild(link);
+        });
+    });
+</script>
+</body>
+</html>

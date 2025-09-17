@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+    <!-- Favicon standard -->
+    <link rel="icon" href="favicon.png" type="image/png">
+
+    <!-- Icône pour iPhone/iPad -->
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Manifest PWA (optionnel mais pro) -->
+    <link rel="manifest" href="site.webmanifest">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. Introduction à PostgreSQL | Tutoriel PostgreSQL</title>
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <script defer>
+        // JS pour activer/désactiver le menu mobile
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.nav-menu');
+            toggle.addEventListener('click', () => {
+                nav.classList.toggle('active');
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <img src="../images/illustrations/PostgreSQL/Logo PostgreSQL.png" alt="Logo du site" class="logo" />
+            <h1>Apprenez PostgreSQL, Excel et VBA</h1>
+            <button class="menu-toggle" aria-label="Ouvrir le menu">&#9776;</button>
+        </div>
+        
+        <nav aria-label="Navigation principale">
+            <ul class="nav-menu">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../postgresql.html">PostgreSQL</a></li>
+                <li><a href="../excel.html">Excel</a></li>
+                <li><a href="../VBA/vba_introduction_vba.html">Excel VBA</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../ressources.html">Ressources</a></li>
+                <li><a href="../apropos.html">À propos</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="layout-postgres">
+        <aside class="sidebar">
+            <h2>Excel VBA : Leçons</h2>
+            <ul>
+                <li><a href="01-introduction.html">1. Introduction à Excel VBA</a></li>
+                <li><a href="02-environnement-vba.html">2. L’environnement VBEL</a></li>
+                <li><a href="03-premieres-macros.html">3. Ecrivez vos premières macros</a></li>
+                <li><a href="04-variables-types.html">4. Les types de variables</a></li>
+                <li><a href="05-conditions-boucles.html">5. Les boucles</a></li>
+                <li><a href="06-sub-fonctions.html">6. Les différents types de fonctions</a></li>
+                <li><a href="07-interaction-excel.html">7. Interaction avec Excel</a></li>
+                <li><a href="08-projets-pratiques.html">8. Projets pratiques</a></li>
+                <li><a href="100-exercices.html">100. Exercices</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+        <aside class="toc">
+            <h2 class="no-toc">Sommaire</h2>
+            <nav id="toc-content"></nav>
+        </aside>
+
+            <h2>1. Introduction à Excel VBA</h2>
+            <h3>1. Objectifs pédagogiques du tutoriel</h3>
+            <p>
+                Dans ce premier tutoriel, vous allez :
+            </p>
+            <ul class="indent">
+                <li>Comprendre ce qu’est réellement Excel VBA, à quoi il sert et ce qu’il peut vous apporter ;</li>
+                <li>Découvrir les principales possibilités du langage dans un cadre professionnel ;</li>
+                <li>Apprendre à activer l’environnement de développement (l’onglet "Développeur") ;</li>
+                <li>Acquérir les bonnes habitudes dès le départ pour avancer sereinement dans les chapitres suivants.</li>
+            </ul>
+
+            <h3>2. Introduction à Excel VBA</h3>
+            <p>
+                Lorsque vous travaillez avec Excel au quotidien, il arrive un moment où les formules, les filtres et les tableaux croisés dynamiques ne suffisent plus. Vous voulez aller plus loin. Vous voulez <strong>automatiser</strong> vos tâches répétitives, <strong>créer vos propres outils</strong>, et <strong>interagir avec Excel comme un véritable développeur</strong>.
+            </p>
+            <p>
+                C’est là qu’intervient <strong>VBA</strong>, ou <strong>Visual Basic for Applications</strong>.
+            </p>
+            <p>
+                VBA est le langage de programmation embarqué dans Excel (et d'autres applications Office) qui te permet de :
+            </p>
+            <ul class="indent">
+                <li>Créer des <strong>macros</strong> personnalisées,</li>
+                <li>Automatiser des processus complexes (ex. : nettoyer un fichier de données chaque matin),</li>
+                <li>Créer des <strong>interfaces utilisateur</strong> (formulaires),</li>
+                <li>Contrôler l’ouverture, la fermeture, ou la modification de fichiers,</li>
+                <li>Gagner un temps précieux.</li>
+            </ul>
+            <p>
+                Vous ne devez pas avoir peur du mot <code class="acronyme">"programmation"</code>. Avec une bonne méthode et des exemples concrets, <strong>VBA devient accessible</strong>, même si vous n’avez jamais codé.
+            </p>
+
+                            <h3>3. Pourquoi apprendre Excel VBA ?</h3> 
+                <p>
+                    Excel est l’un des outils les plus puissants et les plus utilisés dans les entreprises du monde entier. Des analystes financiers aux responsables de la paie, des gestionnaires de stocks aux assistants administratifs, tous utilisent Excel pour traiter, organiser et analyser des données.
+                </p>
+                <p>
+                    Mais il arrive un moment où les fonctionnalités classiques d’Excel — formules, tableaux croisés dynamiques, filtres automatiques — ne suffisent plus. Vous passez un temps considérable à répéter les mêmes tâches chaque semaine, chaque jour, voire chaque heure. C’est à ce moment précis que <strong>VBA devient une nécessité</strong>.
+                </p>
+                <p>
+                    <strong>VBA</strong>, ou <code class="vba-définition">Visual Basic for Applications</code>, est un langage de programmation intégré à Excel. Il permet d’automatiser vos tâches, de construire des interfaces, d’interagir avec d’autres fichiers ou logiciels (comme Outlook), et de créer vos propres outils sur mesure.
+                </p>
+                <p>
+                    Apprendre VBA, c’est transformer Excel en un <strong>véritable assistant intelligent</strong>, capable d’exécuter vos consignes les plus complexes sans intervention manuelle.
+                </p>
+                
+                <h3>4. Qu’est-ce que VBA exactement ?</h3>
+                <p>
+                    <strong>VBA (Visual Basic for Applications)</strong> est un langage de programmation créé par Microsoft dans les années 90. Il est intégré aux logiciels Office (Excel, Word, Outlook, etc.) et permet de contrôler ces logiciels via du code.
+                </p>
+                <p>
+                    VBA vous permet de <strong>communiquer avec Excel à travers des instructions</strong> : vous pouvez dire à Excel <code class="acronyme">quoi faire, comment et quand</code>.
+                </p>
+                <p>
+                    Dans le cas d’<strong>Excel</strong>, cela signifie que vous pouvez :
+                </p>
+                <ul class="indent">
+                    <li>Écrire des instructions pour manipuler les cellules, les feuilles, les graphiques ou les fichiers ;</li>
+                    <li>Automatiser des tâches fastidieuses (exemples : générer des rapports, envoyer des e-mails, filtrer ou trier des données) ;</li>
+                    <li>Créer des applications complètes directement dans Excel, avec des formulaires personnalisés, des menus, des boutons, etc.</li>
+                </ul>
+                <p>
+                    Exemple :
+                </p>
+            <div class="code-wrapper">
+                <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                <pre><code class="vba-code">
+Sub Bonjour()
+    Feuil1.Range("A1").Value = "Bonjour N’Kôfé"
+End Sub
+                </code></pre>
+            </div>
+                <p>
+                    En résumé ce code dit à Excel : "Place-toi dans la cellule A1 de la feuille 1 <code>(Feuil1)</code> et écris 'Bonjour N’Kôfé'."
+                    <br>N’essayez pas encore de tout comprendre; chaque partie vous sera expliquée <strong>progressivement dans les tutoriels à venir</strong>.
+                </p>
+                <p>
+                    <strong>VBA n’est pas réservé qu’aux développeurs</strong>.
+                    <br>Il a été conçu pour être compréhensible par les utilisateurs avancés d’Excel, avec une syntaxe claire, proche de l’anglais.
+                </p>
+                <h3>5.  Quelques exemples d’utilisation concrète en entreprise</h3>
+                <p>
+                    Voici quelques cas d’usage typiques de VBA dans le monde professionnel :
+                </p>
+            <div style="overflow-x:auto;">
+                <table class="composants-table">
+                    <thead>
+                        <tr>
+                            <th>Domaine</th>
+                            <th>Cas d’usage avec VBA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Finances</td>
+                            <td>Générer automatiquement un rapport mensuel à partir de plusieurs feuilles de calcul.</td>
+                        </tr>
+                        <tr>
+                            <td>Comptabilité</td>
+                            <td>Nettoyer et consolider les écritures comptables issues de plusieurs journaux.</td>
+                        </tr>
+                        <tr>
+                            <td>Ressources humaines</td>
+                            <td>Envoyer une fiche de présence personnalisée à chaque employé via Outlook.</td>
+                        </tr>
+                        <tr>
+                            <td>Logistique</td>
+                            <td>Créer un formulaire de suivi d’inventaire avec boutons et listes déroulantes.</td>
+                        </tr>
+                        <tr>
+                            <td>Direction</td>
+                            <td>Automatiser la mise en forme d’un tableau de bord hebdomadaire.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>                            
+<!--    
+                    <pre><code class="vab-table">
++---------------------+--------------------------------------------------------------------------------------+
+|       <strong>Domaine</strong>       |                                 <strong>Cas d’usage avec VBA</strong>                                 |
++---------------------+--------------------------------------------------------------------------------------+ 
+| Finance             | Générer automatiquement un rapport mensuel à partir de plusieurs feuilles de calcul. |
+| Comptabilité        | Nettoyer et consolider les écritures comptables issues de plusieurs journaux.        |
+| Ressources humaines | Envoyer une fiche de présence personnalisée à chaque employé via Outlook.            |
+| Logistique          | Créer un formulaire de suivi d’inventaire avec boutons et listes déroulantes.        |
+| Direction           | Automatiser la mise en forme d’un tableau de bord hebdomadaire.                      |
++---------------------+--------------------------------------------------------------------------------------+
+                    </code></pre>
+-->
+                <p>
+                    📌 VBA vous transforme en <strong>super-utilisateur d’Excel</strong>. C’est un accélérateur de carrière pour les analystes, comptables, contrôleurs de gestion, etc.
+                </p>
+                <h3>6. Activer l’environnement VBA dans Excel</h3>
+                <p>
+                    Par défaut, Excel ne montre pas les outils VBA. Il faut d’abord activer l’onglet <strong>Développeur</strong> dans le ruban.
+                </p>
+                <h4><strong>➤</strong> Étapes à suivre :</h4>
+                <ul class="indent">
+                    <li>1. Ouvrez Excel.</li>
+                    <li>2. Faites un clic droit n’importe où sur le <strong>ruban</strong> :</li>
+                    <ul>
+                        <li>Un <strong>menu contextuel</strong> s’affiche avec les options spécifiques liées à la <strong>personnalisation du ruban ou de la barre d’outils</strong></li>
+                    </ul>
+                </ul>
+                        <!-- 👇 Illustration ajoutée ici -->
+                        <figure class="illustration">
+                            <img src="../images/illustrations/Excel_VBA/Activer l'onglet Développeur 1.png" alt="Activer l’onglet Développeur dans Excel" style="max-width:100%; border:1px solid #ccc; border-radius:8px;">
+                            <figcaption class="description-illustration">
+                                Figure 1 – Affichage du menu contextuel dans Excel
+                            </figcaption>
+                        </figure>
+                <ul class="indent">
+                    <li>3. Cliquez sur <span class="vba-instructions">Personnaliser le ruban...</span> :</li>
+                    <ul>
+                        <li>Excel ouvre automatiquement la fenêtre <strong>"Options"</strong>.</li>
+                        <ul>
+                            <li>C’est la même fenêtre que vous obtiendrez en allant manuellement dans <strong>Fichier > Options</strong></li>
+                            <li>Cette fenêtre porte le titre <strong>"Options Excel"</strong></li>
+                            <li>Dans le menu lateral gauche de cette fenêtre, Excel sélectionne <strong>automatiquement</strong> la section appelée <strong>"Personnaliser le ruban"</strong>: vous n’avez pas besoin de cliquer vous-même; Excel vous amène <strong>directement</strong>.</li>
+                        </ul>
+                    </ul>
+                </ul>
+                        <!-- 👇 Illustration ajoutée ici -->
+                        <figure class="illustration">
+                            <img src="../images/illustrations/Excel_VBA/Activer l'onglet Développeur 2.png" alt="Activer l’onglet Développeur dans Excel" style="max-width:100%; border:1px solid #ccc; border-radius:8px;">
+                            <figcaption class="description-illustration">
+                                Figure 2 – Sélection <strong>automatiquement</strong> de la section appelée <strong>"Personnaliser le ruban"</strong> de dans Excel
+                            </figcaption>
+                        </figure>
+                <ul class="indent">
+                    <li>4. Sur la partie droite, Excel vous montre la liste des <strong>onglets affichés dans le ruban</strong>. Constatez qu’ils sont cochés (Accueil, Insertion, Mise en page, etc.). Vous y trouvez aussi l’option <strong>"Développeur"</strong>.</li>
+                    <li>5. Il vous suffit de cocher la case <strong>"Développeur"</strong>.</li>
+                    <li>6. Puis cliquez sur <strong>OK</strong></li>
+                </ul> 
+                        <!-- 👇 Illustration ajoutée ici -->
+                        <figure class="illustration">
+                            <img src="../images/illustrations/Excel_VBA/Activer l'onglet Développeur 3.png" alt="Activer l’onglet Développeur dans Excel" style="max-width:100%; border:1px solid #ccc; border-radius:8px;">
+                            <figcaption class="description-illustration">
+                                Figure 3 – Activation de l’onglet Développeur
+                            </figcaption>
+                        </figure>
+                <h3>7. Résultat final :</h3>
+                <p>
+                    L’onglet <strong>Développeur</strong> s’affiche immédiatement à votre ruban Excel. Et vous pouvez désormais accéder à votre <strong>Visual Basic</strong>, <strong>l’enregistreur de macro, ...</strong>.
+                </p>
+                <!-- 👇 Illustration ajoutée ici -->
+                <figure class="illustration">
+                    <img src="../images/illustrations/Excel_VBA/Activer l'onglet Développeur 4.png" alt="Activer l’onglet Développeur dans Excel" style="max-width:100%; border:1px solid #ccc; border-radius:8px;">
+                    <figcaption class="description-illustration">
+                        Figure 4 – Apparition de l’onglet Développeur dans Excel
+                    </figcaption>
+                </figure>
+                <p>
+                    Cet onglet contient les accès directs à <strong>l’enregistreur de macros</strong>, à <strong>l’éditeur VBE</strong>, et aux <strong>contrôles de formulaire</strong>.
+                </p>
+                <h3>8. Accéder et explorer l’éditeur VBE :</h3>
+                <p>
+                    L’environnement de développement intégré à Excel s’appelle <strong>VBE</strong>, acronyme de <code class="acronyme">Visual Basic Editor</code>. C’est dans cet éditeur que vous serez amené à écrire, modifier et organiser l’ensemble de vos macros VBA.</strong>
+                </p>
+                <p>
+                    L’accès à cet éditeur est simple, mais souvent méconnu par les utilisateurs non initiés. Il s’agit pourtant d’une étape incontournable dans tout projet d’automatisation sur Excel.
+                </p>
+                <h5>➤ Étape 1 : Afficher l’onglet Développeur</h5>
+                <p>
+                    Avant toute chose, il convient de vérifier que l’onglet <strong>Développeur</strong> est bien visible dans le ruban Excel.
+                </p>
+                <p>
+                    S’il ne l’est pas, vous pouvez l’activer depuis le menu :
+                </p>
+                    <span class="indent">
+                        <strong>Fichier</strong> > <strong>Options</strong> > <strong>Personnaliser le ruban</strong> > <strong>Cochez "Développeur"</strong>
+                    </span>
+                <p>
+                    Une fois cela fait, l’onglet s’ajoute au ruban, au même niveau que "Accueil", "Insertion" ou "Données".
+                </p>
+                <h5>➤ Étape 2 : Accéder à l’éditeur VBE</h5>
+                <p>
+                    Deux méthodes permettent d’ouvrir l’éditeur VBA :
+                </p>
+                <ol>
+                    <li>
+                        <strong>Via l’onglet Développeur</strong>
+                        <br>Cliquez sur <strong>Développeur</strong>, puis sur le bouton <strong>Visual Basic</strong>, situé dans le groupe <strong>Code</strong>.
+                        <br>Cela ouvre immédiatement l’éditeur dans une nouvelle fenêtre.
+                    </li>
+                    <li>
+                        </strong>Via un raccourci clavier universel</strong>
+                        <br>Appuyez sur les touches <strong>Alt + F11</strong>.
+                        <br>Ce raccourci fonctionne dans toutes les versions récentes d’Excel, même si l’onglet Développeur est masqué.
+                    </li>
+                </ol>
+                <!-- 👇 Illustration ajoutée ici -->
+                <figure class="illustration">
+                    <img src="../images/illustrations/Excel_VBA/L’environnement VBE 1.png" alt="Activer l’onglet Développeur dans Excel" style="max-width:100%; border:1px solid #ccc; border-radius:8px;">
+                    <figcaption class="description-illustration">
+                        Figure 5 – L’environnement VBE
+                    </figcaption>
+                </figure>
+                
+                <h5>➤ Étape 3 : Découvrir les éléments de l’éditeur VBE</h5>
+                <p>
+                    Une fois l’éditeur ouvert, vous entrez dans un environnement structuré en plusieurs zones complémentaires.
+                    <br>Voici une présentation des composantes principales :
+                </p>
+
+                    <div style="overflow-x:auto;">
+                <table class="composants-table">
+                    <thead>
+                        <tr>
+                            <th>Zone</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Explorateur de projets</td>
+                            <td>Affiche l’arborescence des éléments VBA de votre fichier Excel (feuilles, modules, classeur).</td>
+                        </tr>
+                        <tr>
+                            <td>Fenêtre de code</td>
+                            <td>Espace dans lequel vous écrivez vos procédures, fonctions et instructions VBA.</td>
+                        </tr>
+                        <tr>
+                            <td>Fenêtre d’exécution immédiate</td>
+                            <td>Permet de tester des instructions en direct. Très utile pour le débogage rapide (Ctrl + G).</td>
+                        </tr>
+                        <tr>
+                            <td>Barres d’outils</td>
+                            <td>Accès rapide aux commandes telles que "Exécuter", "Arrêter", "Insérer un module", "Déboguer".</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>                            
+
+<!--  
+                    <pre><code class="vba-table">
++-------------------------------+----------------------------------------------------------------------------------------------+
+|       <strong>Zone</strong>                    |                     <strong>Description</strong>                                             |
++-------------------------------+----------------------------------------------------------------------------------------------+ 
+| Explorateur de projets        | Affiche l’arborescence des éléments VBA de votre fichier Excel (feuilles, modules, classeur).|
+| Fenêtre de code               | Espace dans lequel vous écrivez vos procédures, fonctions et instructions VBA.               |
+| Fenêtre d’exécution immédiate | Permet de tester des instructions en direct. Très utile pour le débogage rapide (Ctrl + G).  |
+| Barres d’outils               | Accès rapide aux commandes telles que "Exécuter", "Arrêter", "Insérer un module", "Déboguer".|
++-------------------------------+----------------------------------------------------------------------------------------------+
+                    </code></pre>
+-->
+                <p>
+                    Retenez que l’éditeur VBE est indépendant de <strong>l’interface Excel</strong> : vous pouvez passer de l’un à l’autre à tout moment via le raccourci Alt + F11.
+                </p>
+                <p>
+                    C’est dans ce nouvel espace que vous allez construire, étape par étape, vos premières automatisations VBA.
+                </p>
+                <h3>9. Bonnes pratiques</h3>
+                <ul class="indent">
+                    <li>Prenez quelques minutes pour explorer visuellement chaque panneau de l’éditeur : il est sobre, mais très puissant.</li>
+                    <li>Essayez d’agrandir la <strong>fenêtre Projet</strong> (gauche) et de cliquer sur les feuilles ou modules.</li>
+                    <li>Familiarisez-vous avec le menu <strong>Insertion</strong>, qui vous permettra de créer des modules dans les prochains tutoriels.</li>
+                </ul>
+
+            <section id="quiz-vba-intro" aria-labelledby="quiz-vba-intro">
+                <h3>10. Quiz : Introduction à VBA</h3>
+                
+                <p>
+                    Répondez à ces questions pour valider votre compréhension. Cliquez sur <span class="valider">"Valider"</span> après chaque question.
+                </p>
+
+                <!-- Question 1 -->
+                <div class="exercice" id="exercice-quiz-vba-intro-1">
+                    <label for="reponse-quiz-vba-intro-1">1. Que signifie l’abréviation VBA ?</label>
+                    <input type="text" id="reponse-quiz-vba-intro-1" placeholder="Votre réponse ici..." />
+                    <button class="valider-btn" data-id="quiz-vba-intro-1" data-type="texte">Valider</button>
+                    <p id="message-quiz-vba-intro-1" class="message" aria-live="polite"></p>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="exercice" id="exercice-quiz-vba-intro-2" style="display: none;">
+                    <label for="reponse-quiz-vba-intro-2">2. Quel est le raccourci clavier universel pour ouvrir l’éditeur VBA ?</label>
+                    <input type="text" id="reponse-quiz-vba-intro-2" placeholder="Votre réponse ici..." />
+                    <button class="valider-btn" data-id="quiz-vba-intro-2" data-type="texte">Valider</button>
+                    <p id="message-quiz-vba-intro-2" class="message" aria-live="polite"></p>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="exercice" id="exercice-quiz-vba-intro-3" style="display: none;">
+                    <label for="reponse-quiz-vba-intro-3">3. VRAI ou FAUX : L’onglet Développeur est toujours visible par défaut dans Excel.</label>
+                    <select id="reponse-quiz-vba-intro-3">
+                        <option value="">-- Choisissez --</option>
+                        <option value="Vrai">Vrai</option>
+                        <option value="Faux">Faux</option>
+                    </select>
+                    <button class="valider-btn" data-id="quiz-vba-intro-3" data-type="quiz">Valider</button>
+                    <p id="message-quiz-vba-intro-3" class="message" aria-live="polite"></p>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="exercice" id="exercice-quiz-vba-intro-4" style="display: none;">
+                    <label for="reponse-quiz-vba-intro-4">4. Quelle action permet d’accéder à l’éditeur VBA via l’interface ?</label>
+                    <select id="reponse-quiz-vba-intro-4">
+                        <option value="">-- Choisissez --</option>
+                        <option value="a">a) Fichier > Options > Enregistrer</option>
+                        <option value="b">b) Onglet Développeur > Visual Basic</option>
+                        <option value="c">c) Alt + Entrée</option>
+                        <option value="d">d) Clic droit sur le ruban > Masquer</option>
+                    </select>
+                    <button class="valider-btn" data-id="quiz-vba-intro-4" data-type="quiz">Valider</button>
+                    <p id="message-quiz-vba-intro-4" class="message" aria-live="polite"></p>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="exercice" id="exercice-quiz-vba-intro-5" style="display: none;">
+                    <label for="reponse-quiz-vba-intro-5">5. Que fait ce code ? <br><code>Feuil1.Range("A1").Value = "Bonjour"</code></label>
+                    <input type="text" id="reponse-quiz-vba-intro-5" placeholder="Votre réponse ici..." />
+                    <button class="valider-btn" data-id="quiz-vba-intro-5" data-type="texte">Valider</button>
+                    <p id="message-quiz-vba-intro-5" class="message" aria-live="polite"></p>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="exercice" id="exercice-quiz-vba-intro-6" style="display: none;">
+                    <label for="reponse-quiz-vba-intro-6">6. Donnez un cas réel où VBA vous ferait gagner du temps dans Excel :</label>
+                    <input type="text" id="reponse-quiz-vba-intro-6" placeholder="Votre exemple ici..." />
+                    <button class="valider-btn" data-id="quiz-vba-intro-6" data-type="texte">Valider</button>
+                    <p id="message-quiz-vba-intro-6" class="message" aria-live="polite"></p>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="exercice" id="exercice-quiz-vba-intro-7" style="display: none;">
+                    <label for="reponse-quiz-vba-intro-7">7. Quelle est la commande pour insérer une valeur <code>"Bonjour"</code> dans une cellule via VBA ?</label>
+                    <input type="text" id="reponse-quiz-vba-intro-7" placeholder="Votre réponse ici..." />
+                    <button class="valider-btn" data-id="quiz-vba-intro-7" data-type="texte">Valider</button>
+                    <p id="message-quiz-vba-intro-7" class="message" aria-live="polite"></p>
+                </div>
+
+
+                <!-- Aures exercices ici ☟ -->
+            
+            </section>
+        </main>
+    </div>
+
+    <div class="pagination">
+        <a href="02-installation.html" class="next">
+            Installation de PostgreSQL →
+        </a>
+        <a href="index.html" class="home">🏠 Accueil</a>
+    </div>
+
+    <!-- Pied de page -->
+    <footer role="contentinfo">
+        <p>
+            &copy; 2025 Data Skill Hub - Tous droits réservés.
+            &copy; 2025 - Ce site vous guide pas à pas vers la maîtrise de PostgreSQL
+        </p>
+        <a href="#top" class="back-to-top">↑ Retour en haut</a>
+        <!-- <a href="#top" class="back-to-top">&#8593; Retour en haut</a> -->
+    </footer>
+
+        <script src="../js/script.js" defer></script>
+        <script src="../assets/js/main.js"></script>
+        <script src="../assets/js/exercices.js"></script>
+        <script src="../assets/js/tutoriels.js"></script>
+        <button id="scrollTopBtn" aria-label="Retour en haut">&#8679;</button>
+<!--  
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPage = location.pathname.split('/').pop();
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            sidebarLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+-->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const main = document.querySelector('main');
+        const toc = document.getElementById('toc-content');
+
+        if (!main || !toc) return;
+
+        const headers = main.querySelectorAll('h2, h3');
+        headers.forEach((el, i) => {
+            // ❌ Ignore les titres avec la classe "no-toc"
+            if (el.classList.contains('no-toc')) return;
+
+            // ✅ Crée un id unique s’il n’existe pas
+            if (!el.id) {
+                el.id = `section-${i}`;
+            }
+
+            // ✅ Crée un lien dans le sommaire
+            const link = document.createElement('a');
+            link.href = `#${el.id}`;
+            link.textContent = el.textContent;
+            link.className = el.tagName.toLowerCase(); // h2 ou h3
+            toc.appendChild(link);
+        });
+    });
+</script>
+</body>
+</html>

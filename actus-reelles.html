@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualités PostgreSQL (réelles)</title>
+  <style>
+    #news-banner {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background: #fff;
+      padding: 10px 0;
+      box-sizing: border-box;
+    }
+    #news-marquee {
+      display: inline-block;
+      white-space: nowrap;
+      padding-left: 100%;
+    }
+    #news-banner:hover #news-marquee {
+      animation-play-state: paused;
+    }
+    #news-marquee a {
+      text-decoration: none;
+      color: #007bff;
+      margin-right: 30px;
+    }
+    #news-marquee a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Actualités PostgreSQL (réelles)</h1>
+  <div id="news-banner">
+    <div id="news-marquee">Chargement des actualités…</div>
+  </div>
+
+  <script>
+    const newsMarquee = document.getElementById("news-marquee");
+    const feedUrl = "https://api.rss2json.com/v1/api.json?rss_url=https://www.postgresql.org/feed/";
+
+    async function loadNews() {
+      try {
+        const response = await fetch(feedUrl);
+        const data = await response.json();
+
+        if (!data.items || data.items.length === 0) throw new Error("Pas d’articles");
+
+        const links = data.items.slice(0, 5).map(item =>
+          `<a href="${item.link}" target="_blank">${item.title}</a>`
+        );
+
+        newsMarquee.innerHTML = links.join("");
+
+        // Durée dynamique selon longueur du texte
+        const totalChars = newsMarquee.textContent.length;
+        const duration = Math.max(15, totalChars * 0.15);
+        newsMarquee.style.animation = `scroll ${duration}s linear infinite`;
+
+        // Keyframes
+        const style = document.createElement("style");
+        style.innerHTML = `
+          @keyframes scroll {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }
+          }
+        `;
+        document.head.appendChild(style);
+
+      } catch (e) {
+        newsMarquee.innerHTML = `<a href="https://www.postgresql.org/" target="_blank">PostgreSQL 17.6 Released – Nouvelle version stable disponible !</a>`;
+        newsMarquee.style.animation = `scroll 25s linear infinite`;
+      }
+    }
+
+    loadNews();
+  </script>
+</body>
+</html>

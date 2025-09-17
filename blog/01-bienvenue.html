@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Favicon standard -->
+    <link rel="icon" href="../favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../favicon.png">
+    <link rel="manifest" href="../site.webmanifest">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bienvenue sur le blog | Data Skills Hub</title>
+<!--     
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/blog.css">
+-->
+
+
+    
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/bloguer.css" />
+    <link rel="stylesheet" href="../assets/css/blog.css" />
+
+
+
+    <script defer>
+        // JS pour activer/désactiver le menu mobile
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.nav-menu');
+            toggle.addEventListener('click', () => {
+                nav.classList.toggle('active');
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <!-- En-tête -->
+    <header>
+        <div class="site-branding">
+            <img src="../images/logo/logo-site.jpeg" alt="Logo du site" class="site-logo" />
+        </div>
+        <h1 id="site-title">Data Skill Hub</h1>
+
+        <nav aria-label="Navigation principale">
+            <ul class="nav-menu">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../tutoriels.html">Tutoriels</a></li>
+                <li><a href="../exercices.html">Exercices</a></li>
+                <li><a href="blog.html" aria-current="page">Blog</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Mise en page -->
+    <div class="blog-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Articles récents</h2>
+            <ul>
+                <li><a href="01-bienvenue.html">Bienvenue sur le blog</a></li>
+                <li><a href="02-pourquoi-apprendre-postgresql.html">Pourquoi apprendre PostgreSQL en 2025 ?</a></li>
+                <li><a href="03-astuces-excel.html">5 astuces Excel à connaître</a></li>
+                <li><a href="04-vba-automatisation.html">Automatiser avec Excel VBA</a></li>
+            </ul>
+        </aside>
+
+        <!-- Contenu principal -->
+        <main class="blog-main">
+<!--
+            <aside class="toc">
+                <h2 class="no-toc">Sommaire</h2>
+                <nav id="toc-content"></nav>
+            </aside>
+-->
+            <h2>Bienvenue sur le blog du Data Skills Hub</h2>
+
+            <p>
+                Bonjour et bienvenue sur mon blog, le <strong>Data Skills Hub</strong> !  
+                J’ai créé cet espace pour partager avec vous mon <strong>parcours d’apprentissage</strong> autour de trois outils qui me passionnent&nbsp;:
+            </p>
+
+            <ul class="indent">
+                <li><strong>PostgreSQL</strong>, un système de base de données puissant.</li>
+                <li><strong>Excel</strong>, l’incontournable du traitement de données.</li>
+                <li><strong>Excel VBA</strong>, le langage qui permet d’automatiser des tâches répétitives.</li>
+            </ul>
+            
+            <h3>Pourquoi ce blog&nbsp;?</h3>
+            <p>
+                Je suis en <strong>apprentissage continu</strong>. À 42 ans, j’ai choisi de me lancer sérieusement dans PostgreSQL, Excel et VBA. Mon objectif n’est pas d’enseigner comme un expert, mais de partager mon chemin pas à pas, avec mes découvertes, mes réussites… et parfois mes erreurs.
+                <br>👉 Si vous apprenez aussi, vous verrez que nous ne sommes pas seuls sur ce parcours. 
+            </p>
+
+            <ul class="indent">
+                <li>Certains commencent aussi de zéro et veulent des bases claires.</li>
+                <li>D’autres avancent déjà mais apprécient des explications simples.</li>
+                <li>Et tout le monde aime découvrir une petite astuce qui fait gagner du temps.</li>
+            </ul>
+
+            <div class="info-box">
+                ℹ️ Ce blog est donc mon carnet d’apprentissage… mais ouvert à vous.
+            </div>
+
+            <h3>Ce que vous allez trouver ici</h3>
+            <ul class="indent">
+                <li>Des <strong>articles simples</strong> pour apprendre étape par étape.</li>
+                <li>Des <strong>astuces pratiques</strong> pour être plus efficace.</li>
+                <li>Des <strong>mini-tutos</strong> pour tester directement dans vos projets.</li>
+            </ul>
+
+            <h3>Ma philosophie</h3>
+            <p>
+                Je crois qu’apprendre doit être à la fois <strong>utile, clair et agréable</strong>.  
+                Ici, je mélange donc <strong>sérieux</strong> et parfois une petite dose <strong>d’humour</strong> pour rendre la lecture plus vivante.
+            </p>
+
+            <h3>Et maintenant&nbsp;?</h3>
+            <p>
+                Vous pouvez déjà explorer les premiers articles&nbsp;:
+            </p>
+            <ul class="indent">
+                <li><a href="02-pourquoi-apprendre-postgresql.html">Pourquoi apprendre PostgreSQL en 2025</a></li>
+                <li><a href="03-astuces-excel.html">5 astuces Excel que tout professionnel devrait connaître</a></li>
+                <li><a href="04-vba-automatisation.html">Automatiser vos tâches avec Excel VBA : par où commencer ?</a></li>
+            </ul>
+
+            <div class="tip-box">
+                💡 Astuce&nbsp;: si vous débutez, commencez par l’article “5 astuces Excel”, il est simple et utile pour tout le monde.
+            </div>
+
+            <h3>Conclusion</h3>
+            <p>
+                Merci d’avoir pris le temps de découvrir ce blog 🙏.  
+                Ici, la curiosité et la pratique seront nos meilleures alliées.  
+                <strong>Prêt à progresser pas à pas ? Avançons ensemble dans l’univers des données et de l’automatisation.</strong>
+            </p>
+        </main>
+    </div>
+
+    <!-- Pied de page -->
+    <footer role="contentinfo">
+        <p>&copy; 2025 Data Skills Hub - Tous droits réservés.</p>
+        <a href="#top" class="back-to-top">↑ Retour en haut</a>
+    </footer>
+
+    <script src="../js/script.js" defer></script>
+
+    <script>
+        // Générer le sommaire automatique
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('main');
+            const toc = document.getElementById('toc-content');
+
+            if (!main || !toc) return;
+
+            const headers = main.querySelectorAll('h2, h3');
+            headers.forEach((el, i) => {
+                if (el.classList.contains('no-toc')) return;
+                if (!el.id) el.id = `section-${i}`;
+
+                const link = document.createElement('a');
+                link.href = `#${el.id}`;
+                link.textContent = el.textContent;
+                link.className = el.tagName.toLowerCase();
+                toc.appendChild(link);
+            });
+        });
+    </script>
+    <script src="../js/script.js" defer></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/blog.css">
+
+</body>
+</html>

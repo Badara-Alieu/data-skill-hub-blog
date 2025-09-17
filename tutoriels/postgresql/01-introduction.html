@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+    <!-- Favicon standard -->
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. Introduction à PostgreSQL | Tutoriel PostgreSQL</title>
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <script defer>
+        // JS pour activer/désactiver le menu mobile
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.nav-menu');
+            toggle.addEventListener('click', () => {
+                nav.classList.toggle('active');
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <img src="../images/illustrations/Logo Data Skills Hub.png" alt="Logo du site" class="logo" />
+            <h1>Apprenez PostgreSQL, Excel et VBA</h1>
+            <button class="menu-toggle" aria-label="Ouvrir le menu">&#9776;</button>
+        </div>
+        
+        <nav aria-label="Navigation principale">
+            <ul class="nav-menu">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../postgresql.html">PostgreSQL</a></li>
+                <li><a href="../excel.html">Excel</a></li>
+                <li><a href="../excel-vba.html">Excel VBA</a></li>
+                <li><a href="../blog/blog.html">Blog</a></li>
+                <li><a href="../ressources.html">Ressources</a></li>
+                <li><a href="../apropos.html">À propos</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="layout-postgres">
+        <aside class="sidebar">
+            <h2>PostgreSQL : Leçons</h2>
+            <ul>
+                <li><a href="01-introduction.html">1. Introduction</a></li>
+                <li><a href="02-installation.html">2. Installation de PostgreSQL</a></li>
+                <li><a href="03-connexion.html">3. Connexion au serveur</a></li>
+                <li><a href="04-creation-base.html">4. Création d’une base</a></li>
+                <li><a href="05-execution-requetes.html">5. Exécution de requêtes SQL</a></li>
+                <li><a href="06-types-donnees.html">6. Les types de données</a></li>
+                <li><a href="07-fonctions-utiles.html">7. Les fonctions utiles</a></li>
+                <li><a href="08-sauvegarde.html">8. Sauvegarde & restauration</a></li>
+                <li><a href="09-select-from.html">9. La commande SELECT FROM...</a></li>
+                <li><a href="100-exercices.html">100. Exercices</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+        <aside class="toc">
+            <h2 class="no-toc">Sommaire</h2>
+            <nav id="toc-content"></nav>
+        </aside>
+
+            <h2>1. Introduction à PostgreSQL</h2>
+            <ul>
+                <!-- 👇 Illustration ajoutée ici -->
+                <figure class="illustration">
+                    <img src="../images/" alt="">
+                    <img src="../images/illustrations/PostgreSQL/Logo PostgreSQL.png" alt="Le logo officiel de PostgreSQL" style="max-width:100%; border:1px solid #ccc; border-radius:8px;">
+                    <figcaption class="description-illustration">
+                        Figure 1 – Logo officiel de PostgreSQL
+                    </figcaption>
+                </figure>
+            </ul>
+            
+            <p>Ce Tutoriel servira de point de départ pour comprendre l’intérêt et les cas d’usage de PostgreSQL.</p>
+
+            <p>
+                Bienvenue dans ce premier module consacré à PostgreSQL.  Dans ce didacticiel, nous allons découvrir ensemble les bases de ce système de gestion de base de données relationnelle.
+            </p>
+
+            <h3>Qu’est-ce que PostgreSQL&nbsp;?</h3>
+            <p>
+                PostgreSQL est un système de gestion de bases de données relationnelles (SGBDR) moderne, puissant et libre. Il repose sur les principes du modèle relationnel tout en intégrant des fonctionnalités avancées telles que la gestion de données non relationnelles via le format JSON.
+            </p>
+            <p>
+                Reconnu pour sa robustesse, sa conformité aux standards et sa flexibilité, PostgreSQL bénéficie de plus de deux décennies de développement continu porté par une large communauté open source. Cette longévité et cette implication collective en font une solution fiable, aussi bien pour les applications web et mobiles que pour les systèmes d’analyse de données à grande échelle.
+            </p>
+            <p>
+                PostgreSQL est souvent abrégé en "Postgres" et se prononce généralement /ˈpoʊstɡrɛs ˌkjuː ˈɛl/.
+            </p>
+
+            <h3>Origines et évolution de PostgreSQL</h3>
+            <p>
+                Le projet PostgreSQL trouve ses racines en 1986 au sein du département d’informatique de l’Université de Californie à Berkeley. Il est alors baptisé "POSTGRES", en clin d’œil à Ingres, une base de données relationnelle également née dans ce laboratoire.
+            </p>
+            <p>
+                L’objectif initial de POSTGRES était d’étendre les capacités des bases relationnelles en introduisant la gestion de types de données complexes. En 1996, pour refléter l’intégration du langage SQL, le projet est renommé PostgreSQL.
+            </p>
+            <p>
+                Depuis cette transition, le développement de PostgreSQL est assuré par le <strong>PostgreSQL Global Development Group</strong>, une communauté internationale de contributeurs engagés.
+            </p>
+            <p>
+                Conçu à l’origine pour les systèmes de type UNIX, PostgreSQL est aujourd’hui compatible avec de nombreuses plateformes, notamment Windows, macOS et Solaris, ce qui renforce encore sa polyvalence et son adoption à grande échelle.
+            </p>
+            
+            <h3>Cas d’usage typiques de PostgreSQL</h3>
+            <p>
+                PostgreSQL est utilisé dans un très grand nombre de contextes, allant de l’hébergement de simples sites web à l’exploitation de bases de données critiques à grande échelle. Voici un aperçu des domaines où il excelle particulièrement.
+            </p>
+            <h4>1. Composant central de la pile LAPP</h4>
+            <p>
+                PostgreSQL joue un rôle clé dans ce que l’on appelle la pile LAPP : Linux, Apache, PostgreSQL, PHP/Python/Perl.
+                Dans cette architecture, PostgreSQL remplace MySQL en tant que moteur de base de données, apportant plus de robustesse, de fiabilité et de conformité aux standards. Cette pile est couramment utilisée pour héberger des sites web dynamiques, des plateformes e-commerce, des API RESTful ou des applications internes.
+            </p>
+            <h4>2. Base de données transactionnelle polyvalente</h4>
+            <p>
+                De nombreuses entreprises, des startups innovantes aux grandes structures, choisissent PostgreSQL comme base de données principale pour soutenir leurs applications critiques.
+                Il est parfaitement adapté aux systèmes de gestion des utilisateurs, à la facturation, aux logiciels de gestion (ERP, CRM), ou encore aux plateformes SaaS nécessitant des performances stables et des garanties transactionnelles solides.
+            </p>            
+            <h4>3. Base de données géospatiale avancée</h4>
+            <p>
+                Grâce à l’extension PostGIS, PostgreSQL devient un système de gestion de données géographiques à part entière.
+                Il est capable de gérer des coordonnées spatiales, des cartes, des géométries complexes et des calculs de distances ou d’intersections. Il est utilisé dans des systèmes d'information géographique (SIG), des services de cartographie, de logistique, d'urbanisme ou de géolocalisation.
+            </p>
+            <h3>Compatibilité avec de nombreux langages de programmation</h3>
+            <p>
+                PostgreSQL est accessible depuis la plupart des langages utilisés dans le développement logiciel moderne. Voici quelques-uns des plus prisés :
+            </p>
+            <ul class="indent">
+                <li>Python</li>
+                <li>JavaScript (via Node.js)</li>
+                <li>Java</li>
+                <li>C#</li>
+                <li>C</li>
+                <li>C++</li>
+                <li>Ruby</li>
+                <li>Perl</li>
+                <li>Go</li>
+                <li>Tcl</li>
+            </ul>
+            <p>
+                Cette compatibilité large permet une intégration fluide dans pratiquement tous les environnements de développement.
+            </p>
+
+            <h3>Fonctionnalités clés de PostgreSQL</h3>
+            <p>
+                PostgreSQL se distingue par la richesse de ses fonctionnalités, comparables à celles des SGBD commerciaux les plus réputés. En voici quelques exemples notables :
+            </p>
+            <ul class="indent">
+                <li>Types de données personnalisés</li>
+                <li>Héritage entre tables (modèle orienté objet)</li>
+                <li>Mécanismes de verrouillage avancés</li>
+                <li>Intégrité référentielle avec clés étrangères</li>
+                <li>Vues, règles, et sous-requêtes complexes</li>
+                <li>Transactions imbriquées avec points de sauvegarde</li>
+                <li>Contrôle de concurrence multiversion (MVCC)</li>
+                <li>Réplication asynchrone entre serveurs</li>
+            </ul>
+            <p>
+                Les versions récentes apportent encore davantage :
+            </p>
+            <ul class="indent">
+                <li>Support natif de Microsoft Windows Server</li>
+                <li>Utilisation de tablespaces pour optimiser le stockage</li>
+                <li>Fonctionnalité de récupération à un instant donné (PITR)</li>
+            </ul>
+            <p>
+                Chaque nouvelle version de PostgreSQL enrichit encore cet ensemble avec des fonctionnalités innovantes.
+            </p>
+
+            <h3>Une architecture extensible par conception</h3>
+            <p>
+                L’un des grands atouts de PostgreSQL est son extensibilité native. Il permet aux utilisateurs d’aller bien au-delà des fonctionnalités standards :
+            </p>
+            <ul class="indent">
+                <li>Création de types de données personnalisés</li>
+                <li>Définition de nouveaux index</li>
+                <li>Intégration de langages procéduraux</li>
+                <li>Ajout de fonctions utilisateur ou même de modules entièrement personnalisés</li>
+            </ul>
+            <p>
+                Vous avez même la possibilité d’écrire vos propres extensions, comme un nouvel optimiseur ou un moteur de requêtes spécialisé, si les solutions existantes ne répondent pas parfaitement à vos besoins.
+            </p>
+
+            <h3>Qui utilise PostgreSQL ?</h3>
+            <ol  class="indent">
+                <li>Apple</li>
+                <li>Cisco</li>
+                <li>Juniper Networks</li>
+                <li>Instagram</li>
+                <li>...et de nombreuses autres entreprises du secteur technologique, industriel, public ou académique.</li>
+            </ol>
+
+            <h3>PostgreSQL aujourd’hui</h3>
+            <p>
+                PostgreSQL n’est pas seulement un système de base de données mature : il est aujourd’hui au cœur de nombreuses architectures modernes. Grâce à sa richesse fonctionnelle et à sa stabilité éprouvée, il reste un choix privilégié pour les développeurs, les architectes cloud et les analystes de données.
+            </p>
+
+            <h3>Une base solide pour les infrastructures cloud</h3>
+            <p>
+                PostgreSQL est de plus en plus utilisé dans les environnements cloud natifs. Des plateformes comme <strong>AWS</strong>, <strong>Google Cloud</strong>, <strong>Microsoft Azure</strong>, ou encore <strong>Heroku</strong>, proposent des versions managées de PostgreSQL prêtes à l’emploi. Des services comme <strong>Neon</strong> et <strong>Supabase</strong> vont encore plus loin en offrant des expériences serverless ou orientées développeurs.
+            </p>
+            <p>
+                Par ailleurs, l’écosystème s’enrichit avec des outils compatibles Kubernetes (comme <strong>CloudNativePG</strong>), facilitant le déploiement de clusters PostgreSQL à haute disponibilité dans des infrastructures conteneurisées.
+            </p>
+
+            <h3>Une extensibilité qui suit l’évolution des besoins</h3>
+            <p>
+                L’architecture modulaire de PostgreSQL permet d’ajouter des fonctionnalités via des extensions. Parmi les plus populaires aujourd’hui :
+            </p>
+                <ul class="indent">
+                    <li><strong>PostGIS</strong> : pour les données géospatiales.</li>
+                    <li><strong>pgvector</strong> : pour la recherche vectorielle, notamment dans les applications d’IA (moteurs de recommandation, embeddings, etc.).</li>
+                    <li><strong>timescaledb</strong> : pour le traitement des séries temporelles à grande échelle.</li>
+                    <li><strong>pg_partman</strong> : pour la gestion automatisée de la partition de tables volumineuses.</li>
+                </ul>
+            <p>
+                Ces extensions permettent à PostgreSQL de rivaliser avec des solutions spécialisées, tout en conservant la cohérence relationnelle.
+            </p>
+
+            <h3>Une communauté toujours dynamique</h3>
+            <p>
+                Le développement de PostgreSQL est toujours piloté par une communauté mondiale très active, qui publie une nouvelle version <strong>chaque année</strong>. Ces versions apportent constamment des améliorations de performance, de sécurité, de compatibilité SQL et de nouvelles fonctionnalités pratiques.
+            </p>
+            <p>
+                Par exemple, les dernières versions ont introduit des avancées en matière de <strong>parallélisme des requêtes</strong>, de c<strong>ompression</strong>, de <strong>réplication logique</strong>, et de <strong>sécurité des accès</strong>.
+            </p>
+            <p>
+                Nous vous guiderons pas à pas, avec des explications précises, des exemples concrets et des exercices pratiques.
+            </p>
+        </main>
+    </div>
+
+    <div class="pagination">
+        <a href="02-installation.html" class="next">
+            Installation de PostgreSQL →
+        </a>
+        <a href="index.html" class="home">🏠 Accueil</a>
+    </div>
+
+    <!-- Pied de page -->
+    <footer role="contentinfo">
+        <p>
+            &copy; 2025 Data Skill Hub - Tous droits réservés.
+            &copy; 2025 - Ce site vous guide pas à pas vers la maîtrise de PostgreSQL
+        </p>
+        <a href="#top" class="back-to-top">↑ Retour en haut</a>
+        <!-- <a href="#top" class="back-to-top">&#8593; Retour en haut</a> -->
+    </footer>
+
+        <script src="../js/script.js" defer></script>
+        <script src="../assets/js/main.js"></script>
+        <script src="../assets/js/exercice.js"></script>
+        <script src="../assets/js/tutoriels.js"></script>
+        <button id="scrollTopBtn" aria-label="Retour en haut">&#8679;</button>
+<!--  
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPage = location.pathname.split('/').pop();
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            sidebarLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+-->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const main = document.querySelector('main');
+        const toc = document.getElementById('toc-content');
+
+        if (!main || !toc) return;
+
+        const headers = main.querySelectorAll('h2, h3');
+        headers.forEach((el, i) => {
+            // ❌ Ignore les titres avec la classe "no-toc"
+            if (el.classList.contains('no-toc')) return;
+
+            // ✅ Crée un id unique s’il n’existe pas
+            if (!el.id) {
+                el.id = `section-${i}`;
+            }
+
+            // ✅ Crée un lien dans le sommaire
+            const link = document.createElement('a');
+            link.href = `#${el.id}`;
+            link.textContent = el.textContent;
+            link.className = el.tagName.toLowerCase(); // h2 ou h3
+            toc.appendChild(link);
+        });
+    });
+</script>
+</body>
+</html>

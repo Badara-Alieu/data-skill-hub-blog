@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="manifest" href="site.webmanifest">
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accueil | Votre site de tutoriels professionnels PostgreSQL, Excel et VBA</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer>
+        // JS pour activer/désactiver le menu mobile
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.nav-menu');
+            toggle.addEventListener('click', () => {
+                nav.classList.toggle('active');
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 50px;
+            line-height: 1;
+        }
+        .typewriter {
+            font-size: 16px;
+            border-right: 2px solid #333;
+            white-space: pre-line; /* conserve les retours à la ligne */
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- En-tête avec logo et navigation -->
+    <header>
+        <div class="header-content">
+            <img src="images/illustrations/Logo Data Skills Hub.png" alt="Logo du site" class="logo" />
+            <h1>Apprenez PostgreSQL, Excel et VBA</h1>
+            <button class="menu-toggle" aria-label="Ouvrir le menu">&#9776;</button>
+        </div>
+
+        <nav aria-label="Navigation principale">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Accueil</a></li>
+                <li><a href="postgresql.html">PostgreSQL</a></li>
+                <li><a href="excel.html">Excel</a></li>
+                <li><a href="excel-vba.html">Excel VBA</a></li>
+                <li><a href="blog/blog.html">Blog</a></li>
+                <li><a href="ressources.html">Ressources</a></li>
+                <li><a href="apropos.html">À propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ✅ Disposition avec sidebar à gauche et contenu à droite -->
+    <div class="layout-postgres">
+        <!-- Barre latérale (liste des leçons PostgreSQL) -->
+        <aside class="sidebar">
+            <h2>PostgreSQL : Leçons</h2>
+            <ul>
+                <li><a href="postgresql/01-introduction.html">1. Introduction</a></li>
+                <li><a href="postgresql/02-installation.html">2. Installation de PostgreSQL</a></li>
+                <li><a href="postgresql/03-connexion.html">3. Connexion au serveur</a></li>
+                <li><a href="postgresql/04-creation-base.html">4. Création de base de données</a></li>
+                <li><a href="postgresql/05-execution-requetes.html">5. Exécution de requêtes</a></li>
+                <li><a href="postgresql/06-types-donnees.html">6. Types de données</a></li>
+                <li><a href="postgresql/07-fonctions-utiles.html">7. Fonctions utiles</a></li>
+                <li><a href="postgresql/08-sauvegarde.html">8. Sauvegardez vos données</a></li>
+                <li><a href="postgresql/100-exercices.html">100. Exercices pratiques</a></li>
+            </ul>
+            
+            <h2>Excel VBA : Leçons</h2>
+            <ul>
+                <li><a href="excel_vba/01-introduction.html">1. Introduction à Excel VBA</a></li>
+                <li><a href="excel_vba/02-environnement-vbe.html">2. Environnement VBE</a></li>
+                <li><a href="excel_vba/03-premieres-macros.html">3. Vos premières macros</a></li>
+                <li><a href="excel_vba/04-variables-types.html"4. >Les variables types</a></li>
+                <li><a href="excel_vba/05-conditions-boucles.html">5. Conditions des boucles</a></li>
+                <li><a href="excel_vba/06-sub-fonctions.html">6. Sub fonctions</a></li>
+                <li><a href="excel_vba/07-interaction-excel.html">7. Interaction avec excel</a></li>
+                <li><a href="excel_vba/08-projets-pratiques.html">8. Projets pratiques</a></li>
+                <li><a href="excel_vba/100-exercices.html">100. Exercices pratiques</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+<!--  
+        <h1>Bienvenue sur notre site de formation</h1>
+-->
+        <div id="text" class="typewriter"></div>
+
+        <!-- Importation du script JS -->
+        <script src="js/index.js"></script>
+            <!-- 
+                <p>
+                    Nous vous proposons des ressources professionnelles, des tutoriels détaillés
+                    et des fichiers pratiques pour maîtriser PostgreSQL, Excel et Excel VBA.
+                </p>
+                <p>
+                    Que vous soyez curieux, professionnel ou expert, vous trouverez ici des
+                    contenus utiles, clairs et progressifs.
+                </p>
+                <h3>Commencer</h3>
+                <p>
+                    Dans cette première section, vous allez découvrir PostgreSQL en cinq étapes simples.
+                    À la fin du module « Démarrage », vous disposerez d’un serveur PostgreSQL installé localement,
+                    ainsi que d’une base démonstration pour vous entraîner en toute autonomie.
+                </p>
+-->
+            </section>
+        </main>
+    </div>
+
+    <!-- Pied de page -->
+    <footer role="contentinfo">
+        <p>&copy; 2025 - Des formations pas à pas, pour aller plus loin</p>
+        <a href="#top" class="back-to-top">↑ Retour en haut</a>
+        <!-- <a href="#top" class="back-to-top">&#8593; Retour en haut</a> -->
+    </footer>
+</body>
+</html>

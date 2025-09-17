@@ -1,0 +1,59 @@
+/* 📂 assets/css/index.css (ajout pour aside) */
+/* === ASIDE : Menu des tutoriels === */
+#menu-tutoriels {
+    background-color: #ffffff;
+    border-left: 3px solid #007bff;
+    padding: 20px;
+    margin-top: 100px;
+    margin-left: 20px;
+    width: 280px;
+    flex-shrink: 0; /* garde une largeur fixe */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+#menu-tutoriels h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #007bff;
+}
+
+#menu-tutoriels ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menu-tutoriels li {
+    margin-bottom: 1.2rem;
+}
+
+#menu-tutoriels a {
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+#menu-tutoriels a:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+#menu-tutoriels p {
+    margin: 0.2rem 0 0 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* === Organisation principale avec aside à droite === */
+#conteneur-principal {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;   /* centre le tout */
+    gap: 30px;                 /* espace entre contenu et aside */
+    max-width: 1200px;         /* limite la largeur totale */
+    margin: 40px auto;         /* centre la page */
+    padding: 0 20px;
+}
+
+

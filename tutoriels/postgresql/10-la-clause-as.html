@@ -1,0 +1,974 @@
+<<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+    <!-- Favicon standard -->
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Découvrez la commande SELECT ... FROM dans PostgreSQL - Data Skill Hub" />
+    <title>La commande SELECT | Data Skill Hub</title>
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <script defer>
+        // JS pour activer/désactiver le menu mobile
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.nav-menu');
+            toggle.addEventListener('click', () => {
+                nav.classList.toggle('active');
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <img src="../images/illustrations/Logo Data Skills Hub.png" alt="Logo du site" class="logo" />
+            <h1>Apprenez PostgreSQL, Excel et VBA</h1>
+            <button class="menu-toggle" aria-label="Ouvrir le menu">&#9776;</button>
+        </div>
+        
+        <nav aria-label="Navigation principale">
+            <ul class="nav-menu">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../postgresql.html">PostgreSQL</a></li>
+                <li><a href="../excel.html">Excel</a></li>
+                <li><a href="../excel-vba.html">Excel VBA</a></li>
+                <li><a href="../blog/blog.html">Blog</a></li>
+                <li><a href="../ressources.html">Ressources</a></li>
+                <li><a href="../apropos.html">À propos</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="layout-postgres">
+        <aside class="sidebar">
+            <h2>PostgreSQL : Leçons</h2>
+            <ul>
+                <li><a href="01-introduction.html">1. Introduction</a></li>
+                <li><a href="02-installation.html">2. Installation de PostgreSQL</a></li>
+                <li><a href="03-connexion.html">3. Connexion au serveur</a></li>
+                <li><a href="04-creation-base.html">4. Création d’une base</a></li>
+                <li><a href="05-execution-requetes.html">5. Exécution de requêtes SQL</a></li>
+                <li><a href="06-types-donnees.html">6. Les types de données</a></li>
+                <li><a href="07-fonctions-utiles.html">7. Les fonctions utiles</a></li>
+                <li><a href="08-sauvegarde.html">8. Sauvegarde & restauration</a></li>
+                <li><a href="09-select-from.html">9. La commande SELECT FROM...</a></li>
+                <li><a href="100-exercices.html">100. Exercices</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+        <aside class="toc">
+            <h2 class="no-toc">Sommaire</h2>
+            <nav id="toc-content"></nav>
+        </aside>
+
+            <h2>1. Introduction à SELECT ... FROM</h2>
+            <ul class="indent">
+                <!-- 👇 Illustration ajoutée ici -->
+                <figure class="illustration">
+                    <img src="../images/" alt="">
+                    <img src="../images/illustrations/PostgreSQL/Logo PostgreSQL.png" alt="Le logo officiel de PostgreSQL" style="max-width:100%; border:1px solid #ccc; border-radius:8px;">
+                    <figcaption class="description-illustration">
+                        Figure 1 – Logo officiel de PostgreSQL
+                    </figcaption>
+                </figure>
+            </ul>
+            <h3>1. Objectifs pédagogiques du tutoriel</h3>
+            
+            <p>
+                À la fin de ce chapitre, le lecteur saura :
+            </p>
+            <h3>2. Bienvenue dans le monde réel des données</h3>
+
+            <p>
+                Avant d’aller plus loin, prenons un moment pour <strong>imaginer la réalité</strong> derrière une base de données.
+                Fermez les yeux quelques secondes, et visualisez cela : <br>
+            </p>
+
+            <h3>Ce que fait réellement SELECT ... FROM</h3>
+            <p>
+                Cette commande est la <strong>porte d’entrée</strong> vers l’univers du SQL. C’est l’une des commandes <strong>les plus fondamentales du langage SQL</strong>, et sans doute la plus utilisée.
+                <br>Elle permet <strong>d’interroger</strong> une base de données pour en <strong>extraire des informations</strong> qui vous intéressent, dans un océan de données potentiellement énorme, en partant d’une ou plusieurs tables.
+            </p>
+            <h3>4. Syntaxe de base</h3>
+            <div class="code-wrapper">
+                <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                <pre><code class="sql-requête">
+SELECT 
+    colonne1,
+    colonne2, ...
+FROM nom_de_la_table;
+                </code></pre>
+            </div>
+
+            <h3>5. Exemple concret : la table clients</h3>
+            <p>
+            <pre><code class="sql-table">
+ id_pays |   nom_pays    |   capitale   | langue_officielle | superficie
+---------+---------------+--------------+-------------------+------------
+       1 | Bénin         | Porto-Novo   | Français          |  114763.00
+       2 | Burkina Faso  | Ouagadougou  | Français          |  272967.00
+       3 | Cap Vert      | Praia        | Portugais         |    4033.00
+       4 | Côte d'Ivoire | Yamoussoukro | Français          |  322463.00
+       5 | Gambie        | Banjul       | Anglais           |   11295.00
+(5 lignes)
+            </code></pre>
+
+            <ul class="indent">
+                <li>id_pays : un identifiant unique</li>
+                <li>nom_pays : le nom du pays</li>
+                <li>capitale : sa captale</li>
+                <li>langue_officielle : la langue officielle parlée</li>
+                <li>superficie : la superficie du pays</li>
+            </ul>
+
+            <h4>Lire toutes les données de la table</h4>
+
+            <p>
+                Pour afficher toutes les informations de cette table, on pourrait écrire :
+            </p>
+            <h4>Lire uniquement certaines colonnes</h4>
+            <div class="code-wrapper">
+                <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                <pre><code class="sql-requête">
+SELECT 
+    nom_pays, 
+    capitale 
+FROM pays;
+                </code></pre>
+            </div>
+            <p><strong>Résultat obtenu :</strong></p>
+                <pre><code class="sql-table">
+   nom_pays    |   capitale
+---------------+--------------
+ Bénin         | Porto-Novo
+ Burkina Faso  | Ouagadougou
+ Cap Vert      | Praia
+(3 lignes)
+                </code></pre>
+
+            <h3>6. Pourquoi ne pas toujours utiliser * ?</h3>
+            <p>
+                Il peut sembler plus simple de tout afficher. Pourtant, dans les <strong>projets professionnels</strong>, on recommande généralement de <strong>ne sélectionner que les colonnes nécessaires</strong> car les tables peuvent contenir <strong>des dizaines de colonnes</strong>.
+            </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <h3>5. Cas d’usage typiques</h3>
+            <p>Voici les situations les plus courantes dans lesquelles l’alias est utile (et souvent recommandé) :</p>
+            <p>Revenons à notre table <code>employes</code> :</p>
+            <div class="code-wrapper">
+                <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                <pre><code class="sql-requête">
+                    <!-- <pre><code class="sql-table"> -->
+ id  |    nom    |   prenom   | sexe | date_naissance |               email               | telephone | date_embauche | salaire |          poste          |    ville    | id_departement | actif
+-----+-----------+------------+------+----------------+-----------------------------------+-----------+---------------+---------+-------------------------+-------------+----------------+-------
+   1 | Doumbouya | Aboubacar  | M    | 1987-11-16     | aboubacar.doumbouya54@afrique.com | 627218108 | 2018-01-01    | 3005.35 | Responsable financier   | Lomé        |              2 | t
+   2 | Bah       | Mariama    | F    | 1990-12-31     | mariama.bah88@afrique.com         | 627412782 | 2018-08-09    | 4320.25 | Chef de projet          | Bissau      |              5 | t
+   3 | Diallo    | Alpha      | M    | 1991-02-09     | alpha.diallo94@afrique.com        | 627147938 | 2020-11-05    | 2338.65 | Administrateur systèmes | Freetown    |              4 | t
+   4 | Bah       | Nene       | F    | 1999-08-10     | nene.bah65@afrique.com            | 627512564 | 2019-11-01    | 3526.38 | Analyste de données     | Ouagadougou |              2 | t
+   5 | Bah       | Kadiatou   | F    | 1999-05-07     | kadiatou.bah9@afrique.com         | 627433166 | 2024-05-30    | 2369.85 | Chef de projet          | Bissau      |              2 | t
+   6 | Konaté    | Aboubacar  | M    | 1998-09-03     | aboubacar.konaté61@afrique.com    | 627281973 | 2023-11-02    | 2268.49 | Développeur SQL         | Freetown    |              2 | t
+   7 | Touré     | Fatoumata  | F    | 1997-08-19     | fatoumata.touré15@afrique.com     | 627803303 | 2018-11-07    | 4036.39 | Comptable               | Bissau      |              4 | t
+   8 | Camara    | Hadja      | F    | 1984-09-07     | hadja.camara48@afrique.com        | 627476960 | 2023-07-10    | 3232.44 | Technicien réseau       | Monrovia    |              5 | t
+   9 | Sylla     | Yaya       | M    | 1980-12-10     | yaya.sylla9@afrique.com           | 627335463 | 2024-06-20    | 2794.78 | Assistante RH           | Abidjan     |              5 | t
+  10 | Keita     | Ousmane    | M    | 1975-03-04     | ousmane.keita79@afrique.com       | 627850620 | 2024-05-29    | 3674.47 | Assistante RH           | Abidjan     |              5 | t
+  11 | Sylla     | Aïssatou   | F    | 1981-07-15     | aissatou.sylla91@afrique.com      | 627549899 | 2018-08-01    | 3164.35 | Chargé de communication | Niamey      |              5 | t
+  12 | Fofana    | Aboubacar  | M    | 1986-11-27     | aboubacar.fofana19@afrique.com    | 627480420 | 2019-02-24    | 3197.17 | Administrateur systèmes | Ouagadougou |              4 | t
+  13 | Traoré    | Kadiatou   | F    | 1985-03-30     | kadiatou.traoré13@afrique.com     | 627451399 | 2023-06-10    | 2802.51 | Responsable financier   | Monrovia    |              4 | t
+  14 | Diallo    | Aboubacar  | M    | 1975-01-22     | aboubacar.diallo1@afrique.com     | 627112239 | 2021-07-26    | 4290.13 | Technicien réseau       | Lomé        |              4 | t
+  15 | Fofana    | Ibrahima   | M    | 1997-11-16     | ibrahima.fofana44@afrique.com     | 627227903 | 2022-03-21    | 3095.31 | Gestionnaire paie       | Lomé        |              4 | t
+  16 | Sylla     | Nafissatou | F    | 2000-03-19     | nafissatou.sylla4@afrique.com     | 627436727 | 2023-11-11    | 2418.38 | Administrateur systèmes | Bissau      |              1 | t
+  17 | Doumbouya | Mamadou    | M    | 1990-05-13     | mamadou.doumbouya49@afrique.com   | 627264296 | 2022-05-06    | 2700.13 | Comptable               | Bissau      |              5 | t
+  18 | Sow       | Ousmane    | M    | 1977-07-11     | ousmane.sow33@afrique.com         | 627908067 | 2024-11-23    | 4051.75 | Gestionnaire paie       | Bissau      |              4 | t
+  19 | Traoré    | Salimatou  | F    | 1988-01-20     | salimatou.traoré62@afrique.com    | 627422978 | 2020-07-07    | 4341.40 | Analyste de données     | Conakry     |              5 | t
+  20 | Diallo    | Aboubacar  | M    | 1978-11-12     | aboubacar.diallo8@afrique.com     | 627748267 | 2021-08-11    | 3584.30 | Développeur SQL         | Lomé        |              4 | t
+  21 | Fofana    | Salimatou  | F    | 2000-10-18     | salimatou.fofana50@afrique.com    | 627142481 | 2020-11-01    | 3783.71 | Responsable financier   | Abidjan     |              5 | t
+  22 | Kouyaté   | Kadiatou   | F    | 1994-10-18     | kadiatou.kouyaté58@afrique.com    | 627422786 | 2020-10-22    | 2265.28 | Développeur SQL         | Bamako      |              5 | t
+  23 | Touré     | Aboubacar  | M    | 1976-07-05     | aboubacar.touré11@afrique.com     | 627603259 | 2022-09-21    | 4111.90 | Chargé de communication | Freetown    |              1 | t
+  24 | Diakité   | Hadja      | F    | 1993-05-21     | hadja.diakité51@afrique.com       | 627304452 | 2024-11-10    | 3990.15 | Administrateur systèmes | Conakry     |              2 | t
+  25 | Sylla     | Aboubacar  | M    | 1993-01-08     | aboubacar.sylla94@afrique.com     | 627948590 | 2018-06-17    | 2189.41 | Développeur SQL         | Conakry     |              1 | t
+  26 | Sanogo    | Salimatou  | F    | 1988-01-07     | salimatou.sanogo33@afrique.com    | 627566217 | 2020-01-02    | 2359.15 | Technicien réseau       | Freetown    |              2 | t
+  27 | Touré     | Mamadou    | M    | 1998-04-16     | mamadou.touré56@afrique.com       | 627160448 | 2019-06-20    | 3281.44 | Chargé de communication | Bamako      |              4 | t
+  28 | Kourouma  | Ibrahima   | M    | 1986-11-17     | ibrahima.kourouma58@afrique.com   | 627972856 | 2018-08-22    | 3518.68 | Technicien réseau       | Ouagadougou |              1 | t
+  29 | Fofana    | Aboubacar  | M    | 1993-07-28     | aboubacar.fofana62@afrique.com    | 627495647 | 2021-07-01    | 2341.83 | Gestionnaire paie       | Freetown    |              4 | t
+  30 | Sankhon   | Mariama    | F    | 1991-08-09     | mariama.sankhon79@afrique.com     | 627268786 | 2018-07-11    | 4338.92 | Responsable financier   | Conakry     |              3 | t
+  31 | Cissé     | Aboubacar  | M    | 1979-04-22     | aboubacar.cissé53@afrique.com     | 627603668 | 2022-11-19    | 3617.62 | Analyste de données     | Niamey      |              3 | t
+  32 | Doumbouya | Salimatou  | F    | 1998-04-06     | salimatou.doumbouya84@afrique.com | 627392801 | 2019-09-27    | 2793.19 | Assistante RH           | Lomé        |              4 | t
+  33 | Kouyaté   | Nafissatou | F    | 2000-04-17     | nafissatou.kouyaté9@afrique.com   | 627914790 | 2021-08-18    | 2648.21 | Responsable financier   | Ouagadougou |              5 | t
+  34 | Barry     | Nafissatou | F    | 1987-12-17     | nafissatou.barry2@afrique.com     | 627354307 | 2024-11-14    | 2838.97 | Analyste de données     | Bamako      |              1 | t
+  35 | Sankhon   | Mamadou    | M    | 1992-07-16     | mamadou.sankhon68@afrique.com     | 627888071 | 2022-04-11    | 2847.25 | Chargé de communication | Bissau      |              2 | t
+  36 | Bah       | Aminata    | F    | 1999-12-13     | aminata.bah75@afrique.com         | 627185496 | 2018-04-09    | 3511.19 | Responsable financier   | Bamako      |              4 | t
+  37 | Sanogo    | Kadiatou   | F    | 1991-02-28     | kadiatou.sanogo4@afrique.com      | 627753264 | 2020-02-10    | 3453.09 | Chef de projet          | Bamako      |              5 | t
+  38 | Diakité   | Mohamed    | M    | 1978-11-05     | mohamed.diakité20@afrique.com     | 627121070 | 2021-09-10    | 4015.21 | Chargé de communication | Niamey      |              3 | t
+  39 | Keita     | Salimatou  | F    | 1991-10-30     | salimatou.keita97@afrique.com     | 627473068 | 2018-04-13    | 3433.03 | Chef de projet          | Conakry     |              4 | t
+  40 | Kourouma  | Moussa     | M    | 1988-02-22     | moussa.kourouma12@afrique.com     | 627970149 | 2019-02-16    | 4337.84 | Chargé de communication | Niamey      |              4 | t
+  41 | Traoré    | Nafissatou | F    | 1984-01-12     | nafissatou.traoré98@afrique.com   | 627682752 | 2018-11-25    | 2653.75 | Chef de projet          | Conakry     |              4 | t
+  42 | Kouyaté   | Salimatou  | F    | 1994-09-06     | salimatou.kouyaté19@afrique.com   | 627935769 | 2019-06-11    | 2762.59 | Assistante RH           | Dakar       |              1 | t
+  43 | Doumbouya | Aboubacar  | M    | 1977-03-17     | aboubacar.doumbouya62@afrique.com | 627994870 | 2018-02-17    | 3457.72 | Analyste de données     | Freetown    |              2 | t
+  44 | Keita     | Hadja      | F    | 1978-06-23     | hadja.keita86@afrique.com         | 627809981 | 2024-04-23    | 3440.77 | Développeur SQL         | Freetown    |              2 | t
+  45 | Bah       | Bintou     | F    | 1996-11-21     | bintou.bah83@afrique.com          | 627202297 | 2022-07-31    | 4461.56 | Technicien réseau       | Bissau      |              3 | t
+  46 | Traoré    | Kadiatou   | F    | 1982-08-10     | kadiatou.traoré63@afrique.com     | 627309749 | 2019-09-10    | 4332.45 | Chargé de communication | Abidjan     |              5 | t
+  47 | Kourouma  | Aminata    | F    | 1993-11-14     | aminata.kourouma86@afrique.com    | 627473331 | 2018-04-19    | 2334.00 | Technicien réseau       | Bamako      |              3 | t
+  48 | Sankhon   | Ousmane    | M    | 1987-01-11     | ousmane.sankhon22@afrique.com     | 627486063 | 2022-06-16    | 3110.02 | Gestionnaire paie       | Bamako      |              2 | t
+  49 | Sylla     | Kadiatou   | F    | 1991-02-11     | kadiatou.sylla78@afrique.com      | 627197930 | 2022-01-25    | 2068.09 | Administrateur systèmes | Bamako      |              5 | t
+  50 | Traoré    | Fatoumata  | F    | 1987-02-12     | fatoumata.traoré28@afrique.com    | 627478031 | 2021-07-26    | 4078.60 | Comptable               | Dakar       |              2 | t
+  51 | Traoré    | Aminata    | F    | 1998-09-25     | aminata.traoré66@afrique.com      | 627795990 | 2024-08-17    | 2301.58 | Assistante RH           | Lomé        |              1 | t
+  52 | Touré     | Hadja      | F    | 1989-09-25     | hadja.touré57@afrique.com         | 627262579 | 2022-05-07    | 2676.46 | Analyste de données     | Dakar       |              5 | t
+  53 | Diakité   | Hadja      | F    | 1984-04-23     | hadja.diakité17@afrique.com       | 627740234 | 2021-05-10    | 2348.76 | Responsable financier   | Abidjan     |              3 | t
+  54 | Konaté    | Bintou     | F    | 1975-04-18     | bintou.konaté55@afrique.com       | 627538367 | 2019-04-22    | 3665.28 | Assistante RH           | Conakry     |              4 | t
+  55 | Cissé     | Bintou     | F    | 1992-02-18     | bintou.cissé71@afrique.com        | 627945226 | 2023-01-24    | 3345.44 | Développeur SQL         | Monrovia    |              3 | t
+  56 | Sow       | Hadja      | F    | 1975-04-12     | hadja.sow4@afrique.com            | 627107798 | 2020-12-02    | 2775.89 | Assistante RH           | Ouagadougou |              3 | t
+  57 | Diakité   | Aïssatou   | F    | 1982-05-01     | aissatou.diakité56@afrique.com    | 627499716 | 2020-04-02    | 2188.67 | Analyste de données     | Ouagadougou |              5 | t
+  58 | Diakité   | Fatoumata  | F    | 1986-12-26     | fatoumata.diakité34@afrique.com   | 627957363 | 2021-04-30    | 4294.80 | Assistante RH           | Niamey      |              5 | t
+  59 | Kourouma  | Ibrahima   | M    | 1987-09-26     | ibrahima.kourouma5@afrique.com    | 627349061 | 2021-09-02    | 4470.86 | Responsable financier   | Lomé        |              5 | t
+  60 | Diallo    | Aboubacar  | M    | 1997-01-17     | aboubacar.diallo24@afrique.com    | 627984269 | 2021-02-09    | 3152.99 | Gestionnaire paie       | Freetown    |              1 | t
+  61 | Traoré    | Nafissatou | F    | 1999-07-20     | nafissatou.traoré3@afrique.com    | 627841821 | 2018-06-29    | 2609.78 | Chargé de communication | Freetown    |              4 | t
+  62 | Sylla     | Fatoumata  | F    | 1982-01-31     | fatoumata.sylla91@afrique.com     | 627214842 | 2022-01-17    | 2404.56 | Analyste de données     | Monrovia    |              3 | t
+  63 | Sylla     | Ibrahima   | M    | 1998-11-23     | ibrahima.sylla20@afrique.com      | 627339183 | 2018-11-11    | 2525.94 | Comptable               | Bissau      |              2 | t
+  64 | Fofana    | Aïssatou   | F    | 1979-12-12     | aissatou.fofana69@afrique.com     | 627518115 | 2018-03-15    | 2202.03 | Gestionnaire paie       | Bissau      |              1 | t
+  65 | Konaté    | Aboubacar  | M    | 1996-03-03     | aboubacar.konaté97@afrique.com    | 627196761 | 2022-09-05    | 4280.39 | Responsable financier   | Dakar       |              3 | t
+  66 | Sanogo    | Nafissatou | F    | 1977-10-10     | nafissatou.sanogo34@afrique.com   | 627960168 | 2023-12-20    | 2769.17 | Analyste de données     | Ouagadougou |              5 | t
+  67 | Bah       | Kadiatou   | F    | 1980-01-31     | kadiatou.bah38@afrique.com        | 627564141 | 2020-03-03    | 4037.09 | Comptable               | Lomé        |              5 | t
+  68 | Keita     | Lansana    | M    | 1995-12-10     | lansana.keita74@afrique.com       | 627654383 | 2018-08-11    | 2651.67 | Gestionnaire paie       | Freetown    |              2 | t
+  69 | Kourouma  | Sekou      | M    | 1987-03-22     | sekou.kourouma5@afrique.com       | 627555302 | 2024-06-17    | 3743.79 | Assistante RH           | Ouagadougou |              1 | t
+  70 | Sow       | Alpha      | M    | 1976-03-21     | alpha.sow93@afrique.com           | 627894296 | 2018-06-25    | 2438.45 | Responsable financier   | Dakar       |              3 | t
+  71 | Diakité   | Alpha      | M    | 1985-04-23     | alpha.diakité77@afrique.com       | 627867069 | 2019-06-17    | 2933.66 | Responsable financier   | Monrovia    |              2 | t
+  72 | Kouyaté   | Mariama    | F    | 1996-06-29     | mariama.kouyaté76@afrique.com     | 627698796 | 2022-01-05    | 3660.96 | Administrateur systèmes | Lomé        |              3 | t
+  73 | Sylla     | Moussa     | M    | 1990-08-20     | moussa.sylla6@afrique.com         | 627982857 | 2024-10-24    | 3054.76 | Technicien réseau       | Bamako      |              4 | t
+  74 | Sow       | Lansana    | M    | 1996-04-17     | lansana.sow57@afrique.com         | 627193043 | 2022-12-12    | 2394.70 | Chargé de communication | Abidjan     |              5 | t
+  75 | Diakité   | Nafissatou | F    | 1993-06-11     | nafissatou.diakité49@afrique.com  | 627699286 | 2020-12-04    | 3865.42 | Chef de projet          | Dakar       |              2 | t
+  76 | Fofana    | Moussa     | M    | 1995-04-04     | moussa.fofana66@afrique.com       | 627464209 | 2021-12-09    | 3062.38 | Comptable               | Bamako      |              5 | t
+  77 | Touré     | Hadja      | F    | 1995-07-10     | hadja.touré86@afrique.com         | 627152175 | 2018-12-20    | 2232.14 | Chargé de communication | Bissau      |              5 | t
+  78 | Conté     | Aïssatou   | F    | 1976-01-30     | aissatou.conté19@afrique.com      | 627927556 | 2019-10-06    | 2180.07 | Chef de projet          | Ouagadougou |              5 | t
+  79 | Sylla     | Moussa     | M    | 1988-02-09     | moussa.sylla35@afrique.com        | 627149342 | 2022-08-31    | 2182.91 | Développeur SQL         | Ouagadougou |              3 | t
+  80 | Cissé     | Moussa     | M    | 1989-03-05     | moussa.cissé1@afrique.com         | 627594005 | 2018-04-24    | 3360.92 | Analyste de données     | Abidjan     |              1 | t
+  81 | Diabaté   | Moussa     | M    | 2000-12-24     | moussa.diabaté74@afrique.com      | 627590449 | 2019-12-02    | 2181.50 | Comptable               | Monrovia    |              1 | t
+  82 | Sow       | Moussa     | M    | 1984-02-20     | moussa.sow98@afrique.com          | 627715241 | 2019-10-06    | 2028.43 | Comptable               | Bissau      |              4 | t
+  83 | Conté     | Nene       | F    | 1998-07-07     | nene.conté48@afrique.com          | 627620272 | 2023-05-17    | 4170.48 | Comptable               | Conakry     |              4 | t
+  84 | Touré     | Mariama    | F    | 1988-05-20     | mariama.touré46@afrique.com       | 627287503 | 2019-05-02    | 2113.47 | Gestionnaire paie       | Abidjan     |              1 | t
+  85 | Touré     | Hadja      | F    | 1993-03-28     | hadja.touré90@afrique.com         | 627116211 | 2023-01-06    | 2555.59 | Comptable               | Bissau      |              5 | t
+  86 | Sylla     | Aminata    | F    | 1994-03-19     | aminata.sylla6@afrique.com        | 627497483 | 2018-08-08    | 2431.41 | Analyste de données     | Bamako      |              2 | t
+  87 | Sylla     | Moussa     | M    | 1977-04-23     | moussa.sylla30@afrique.com        | 627754215 | 2024-09-30    | 3555.29 | Gestionnaire paie       | Bamako      |              5 | t
+  88 | Diabaté   | Salimatou  | F    | 1991-06-25     | salimatou.diabaté9@afrique.com    | 627886259 | 2020-07-23    | 2745.59 | Chef de projet          | Freetown    |              5 | t
+  89 | Doumbouya | Bintou     | F    | 1978-11-19     | bintou.doumbouya14@afrique.com    | 627281671 | 2024-01-08    | 2508.40 | Gestionnaire paie       | Freetown    |              3 | t
+  90 | Traoré    | Yaya       | M    | 1980-02-01     | yaya.traoré61@afrique.com         | 627847973 | 2021-10-01    | 3860.68 | Gestionnaire paie       | Dakar       |              2 | t
+  91 | Touré     | Aboubacar  | M    | 1977-06-26     | aboubacar.touré88@afrique.com     | 627551691 | 2022-02-25    | 3279.00 | Chargé de communication | Bissau      |              3 | t
+  92 | Diallo    | Nene       | F    | 1996-01-15     | nene.diallo78@afrique.com         | 627289840 | 2020-09-12    | 3364.33 | Développeur SQL         | Niamey      |              4 | t
+  93 | Conté     | Bintou     | F    | 1991-04-17     | bintou.conté91@afrique.com        | 627786966 | 2019-09-26    | 2879.68 | Comptable               | Dakar       |              2 | t
+  94 | Touré     | Hadja      | F    | 1995-09-04     | hadja.touré22@afrique.com         | 627381382 | 2022-01-09    | 3514.44 | Chef de projet          | Bamako      |              4 | t
+  95 | Doumbouya | Nene       | F    | 1990-09-18     | nene.doumbouya46@afrique.com      | 627500854 | 2021-05-14    | 3910.91 | Chef de projet          | Monrovia    |              5 | t
+  96 | Diallo    | Mamadou    | M    | 1990-04-07     | mamadou.diallo98@afrique.com      | 627625600 | 2018-05-18    | 2232.17 | Comptable               | Bamako      |              5 | t
+  97 | Doumbouya | Nene       | F    | 1988-08-16     | nene.doumbouya52@afrique.com      | 627774325 | 2019-03-05    | 3654.82 | Technicien réseau       | Abidjan     |              5 | t
+  98 | Diabaté   | Hadja      | F    | 1977-07-28     | hadja.diabaté61@afrique.com       | 627235164 | 2023-04-01    | 2098.51 | Analyste de données     | Dakar       |              3 | t
+  99 | Sanogo    | Aminata    | F    | 1988-12-01     | aminata.sanogo61@afrique.com      | 627284672 | 2020-08-15    | 3147.96 | Analyste de données     | Freetown    |              5 | t
+ 100 | Diabaté   | Aboubacar  | M    | 1994-02-25     | aboubacar.diabaté45@afrique.com   | 627324364 | 2024-09-17    | 3422.27 | Comptable               | Abidjan     |              3 | t
+                    </code></pre>
+                </div>
+            <p>
+                Imaginons que vous souhaitez <strong>présenter ces données dans un tableau</strong> pour un rapport destiné à la direction.
+            </p>
+            <p>Vous allez vouloir écrire :</p>
+            <div class="code-wrapper">
+                <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                <pre><code class="sql-requête">
+SELECT 
+    nom AS "Nom de l’employé",
+    prenom "Prénom de l’employé", 
+    ville AS "Ville de résidence", 
+    date_embauche AS "date d’embauche"
+FROM employes;
+                </code></pre>
+            </div>
+            <p>Résultat affiché :</p>
+            <div class="code-wrapper">
+                <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                    <pre><code class="sql-requête">
+ Nom de l'employé | Prénom de l'employé | Ville de résidence | date d'embauche
+------------------+---------------------+--------------------+-----------------
+ Doumbouya        | Aboubacar           | Lomé               | 2018-01-01
+ Bah              | Mariama             | Bissau             | 2018-08-09
+ Diallo           | Alpha               | Freetown           | 2020-11-05
+ Bah              | Nene                | Ouagadougou        | 2019-11-01
+ Bah              | Kadiatou            | Bissau             | 2024-05-30
+ Konaté           | Aboubacar           | Freetown           | 2023-11-02
+ Touré            | Fatoumata           | Bissau             | 2018-11-07
+ Camara           | Hadja               | Monrovia           | 2023-07-10
+ Sylla            | Yaya                | Abidjan            | 2024-06-20
+ Keita            | Ousmane             | Abidjan            | 2024-05-29
+ Sylla            | Aïssatou            | Niamey             | 2018-08-01
+ Fofana           | Aboubacar           | Ouagadougou        | 2019-02-24
+ Traoré           | Kadiatou            | Monrovia           | 2023-06-10
+ Diallo           | Aboubacar           | Lomé               | 2021-07-26
+ Fofana           | Ibrahima            | Lomé               | 2022-03-21
+ Sylla            | Nafissatou          | Bissau             | 2023-11-11
+ Doumbouya        | Mamadou             | Bissau             | 2022-05-06
+ Sow              | Ousmane             | Bissau             | 2024-11-23
+ Traoré           | Salimatou           | Conakry            | 2020-07-07
+ Diallo           | Aboubacar           | Lomé               | 2021-08-11
+ Fofana           | Salimatou           | Abidjan            | 2020-11-01
+ Kouyaté          | Kadiatou            | Bamako             | 2020-10-22
+ Touré            | Aboubacar           | Freetown           | 2022-09-21
+ Diakité          | Hadja               | Conakry            | 2024-11-10
+ Sylla            | Aboubacar           | Conakry            | 2018-06-17
+ Sanogo           | Salimatou           | Freetown           | 2020-01-02
+ Touré            | Mamadou             | Bamako             | 2019-06-20
+ Kourouma         | Ibrahima            | Ouagadougou        | 2018-08-22
+ Fofana           | Aboubacar           | Freetown           | 2021-07-01
+ Sankhon          | Mariama             | Conakry            | 2018-07-11
+ Cissé            | Aboubacar           | Niamey             | 2022-11-19
+ Doumbouya        | Salimatou           | Lomé               | 2019-09-27
+ Kouyaté          | Nafissatou          | Ouagadougou        | 2021-08-18
+ Barry            | Nafissatou          | Bamako             | 2024-11-14
+ Sankhon          | Mamadou             | Bissau             | 2022-04-11
+ Bah              | Aminata             | Bamako             | 2018-04-09
+ Sanogo           | Kadiatou            | Bamako             | 2020-02-10
+ Diakité          | Mohamed             | Niamey             | 2021-09-10
+ Keita            | Salimatou           | Conakry            | 2018-04-13
+ Kourouma         | Moussa              | Niamey             | 2019-02-16
+ Traoré           | Nafissatou          | Conakry            | 2018-11-25
+ Kouyaté          | Salimatou           | Dakar              | 2019-06-11
+ Doumbouya        | Aboubacar           | Freetown           | 2018-02-17
+ Keita            | Hadja               | Freetown           | 2024-04-23
+ Bah              | Bintou              | Bissau             | 2022-07-31
+ Traoré           | Kadiatou            | Abidjan            | 2019-09-10
+ Kourouma         | Aminata             | Bamako             | 2018-04-19
+ Sankhon          | Ousmane             | Bamako             | 2022-06-16
+ Sylla            | Kadiatou            | Bamako             | 2022-01-25
+ Traoré           | Fatoumata           | Dakar              | 2021-07-26
+ Traoré           | Aminata             | Lomé               | 2024-08-17
+ Touré            | Hadja               | Dakar              | 2022-05-07
+ Diakité          | Hadja               | Abidjan            | 2021-05-10
+ Konaté           | Bintou              | Conakry            | 2019-04-22
+ Cissé            | Bintou              | Monrovia           | 2023-01-24
+ Sow              | Hadja               | Ouagadougou        | 2020-12-02
+ Diakité          | Aïssatou            | Ouagadougou        | 2020-04-02
+ Diakité          | Fatoumata           | Niamey             | 2021-04-30
+ Kourouma         | Ibrahima            | Lomé               | 2021-09-02
+ Diallo           | Aboubacar           | Freetown           | 2021-02-09
+ Traoré           | Nafissatou          | Freetown           | 2018-06-29
+ Sylla            | Fatoumata           | Monrovia           | 2022-01-17
+ Sylla            | Ibrahima            | Bissau             | 2018-11-11
+ Fofana           | Aïssatou            | Bissau             | 2018-03-15
+ Konaté           | Aboubacar           | Dakar              | 2022-09-05
+ Sanogo           | Nafissatou          | Ouagadougou        | 2023-12-20
+ Bah              | Kadiatou            | Lomé               | 2020-03-03
+ Keita            | Lansana             | Freetown           | 2018-08-11
+ Kourouma         | Sekou               | Ouagadougou        | 2024-06-17
+ Sow              | Alpha               | Dakar              | 2018-06-25
+ Diakité          | Alpha               | Monrovia           | 2019-06-17
+ Kouyaté          | Mariama             | Lomé               | 2022-01-05
+ Sylla            | Moussa              | Bamako             | 2024-10-24
+ Sow              | Lansana             | Abidjan            | 2022-12-12
+ Diakité          | Nafissatou          | Dakar              | 2020-12-04
+ Fofana           | Moussa              | Bamako             | 2021-12-09
+ Touré            | Hadja               | Bissau             | 2018-12-20
+ Conté            | Aïssatou            | Ouagadougou        | 2019-10-06
+ Sylla            | Moussa              | Ouagadougou        | 2022-08-31
+ Cissé            | Moussa              | Abidjan            | 2018-04-24
+ Diabaté          | Moussa              | Monrovia           | 2019-12-02
+ Sow              | Moussa              | Bissau             | 2019-10-06
+ Conté            | Nene                | Conakry            | 2023-05-17
+ Touré            | Mariama             | Abidjan            | 2019-05-02
+ Touré            | Hadja               | Bissau             | 2023-01-06
+ Sylla            | Aminata             | Bamako             | 2018-08-08
+ Sylla            | Moussa              | Bamako             | 2024-09-30
+ Diabaté          | Salimatou           | Freetown           | 2020-07-23
+ Doumbouya        | Bintou              | Freetown           | 2024-01-08
+ Traoré           | Yaya                | Dakar              | 2021-10-01
+ Touré            | Aboubacar           | Bissau             | 2022-02-25
+ Diallo           | Nene                | Niamey             | 2020-09-12
+ Conté            | Bintou              | Dakar              | 2019-09-26
+ Touré            | Hadja               | Bamako             | 2022-01-09
+ Doumbouya        | Nene                | Monrovia           | 2021-05-14
+ Diallo           | Mamadou             | Bamako             | 2018-05-18
+ Doumbouya        | Nene                | Abidjan            | 2019-03-05
+ Diabaté          | Hadja               | Dakar              | 2023-04-01
+ Sanogo           | Aminata             | Freetown           | 2020-08-15
+ Diabaté          | Aboubacar           | Abidjan            | 2024-09-17
+(100 lignes)
+                    </code></pre>
+            <p>Ce résultat est :</p>
+            <ul class="indent">
+                <li>Clair</li>
+                <li>Lisible</li>
+                <li>Directement exploitable</li>
+            </ul>
+            <p><strong>Renommer une concaténation</strong> :</p>
+            <div class="code-wrapper">
+                <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                <pre><code class="sql-requête">
+SELECT 
+    prenom || ' ' || nom AS nom_complet
+FROM employes;
+                </code></pre>
+            </div>
+            <p>Résultat :</p>
+            <div class="code-wrapper">
+                <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                <pre><code class="sql-requête">
+     nom_complet
+---------------------
+ Aboubacar Doumbouya
+ Mariama Bah
+ Alpha Diallo
+ Nene Bah
+ Kadiatou Bah
+ Aboubacar Konaté
+ Fatoumata Touré
+ Hadja Camara
+ Yaya Sylla
+ Ousmane Keita
+ Aïssatou Sylla
+ Aboubacar Fofana
+ Kadiatou Traoré
+ Aboubacar Diallo
+ Ibrahima Fofana
+ Nafissatou Sylla
+ Mamadou Doumbouya
+ Ousmane Sow
+ Salimatou Traoré
+ Aboubacar Diallo
+ Salimatou Fofana
+ Kadiatou Kouyaté
+ Aboubacar Touré
+ Hadja Diakité
+ Aboubacar Sylla
+ Salimatou Sanogo
+ Mamadou Touré
+ Ibrahima Kourouma
+ Aboubacar Fofana
+ Mariama Sankhon
+ Aboubacar Cissé
+ Salimatou Doumbouya
+ Nafissatou Kouyaté
+ Nafissatou Barry
+ Mamadou Sankhon
+ Aminata Bah
+ Kadiatou Sanogo
+ Mohamed Diakité
+ Salimatou Keita
+ Moussa Kourouma
+ Nafissatou Traoré
+ Salimatou Kouyaté
+ Aboubacar Doumbouya
+ Hadja Keita
+ Bintou Bah
+ Kadiatou Traoré
+ Aminata Kourouma
+ Ousmane Sankhon
+ Kadiatou Sylla
+ Fatoumata Traoré
+ Aminata Traoré
+ Hadja Touré
+ Hadja Diakité
+ Bintou Konaté
+ Bintou Cissé
+ Hadja Sow
+ Aïssatou Diakité
+ Fatoumata Diakité
+ Ibrahima Kourouma
+ Aboubacar Diallo
+ Nafissatou Traoré
+ Fatoumata Sylla
+ Ibrahima Sylla
+ Aïssatou Fofana
+ Aboubacar Konaté
+ Nafissatou Sanogo
+ Kadiatou Bah
+ Lansana Keita
+ Sekou Kourouma
+ Alpha Sow
+ Alpha Diakité
+ Mariama Kouyaté
+ Moussa Sylla
+ Lansana Sow
+ Nafissatou Diakité
+ Moussa Fofana
+ Hadja Touré
+ Aïssatou Conté
+ Moussa Sylla
+ Moussa Cissé
+ Moussa Diabaté
+ Moussa Sow
+ Nene Conté
+ Mariama Touré
+ Hadja Touré
+ Aminata Sylla
+ Moussa Sylla
+ Salimatou Diabaté
+ Bintou Doumbouya
+ Yaya Traoré
+ Aboubacar Touré
+ Nene Diallo
+ Bintou Conté
+ Hadja Touré
+ Nene Doumbouya
+ Mamadou Diallo
+ Nene Doumbouya
+ Hadja Diabaté
+ Aminata Sanogo
+ Aboubacar Diabaté
+(100 lignes)                        
+                    </code></pre>
+            <p>Cela permet d’afficher un nom lisible au lieu de voir apparaître une concaténation comme nom de colonne.</p>
+
+            <p><strong>Renommer une fonction d’agrégation</strong> :</p>
+            <div class="code-wrapper">
+                <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                    pre><code class="sql-requête">
+SELECT 
+    AVG(salaire) AS salaire_moyen
+FROM employes;
+                    </code></pre>
+            </div>
+            <div class="code-wrapper">
+                <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                    pre><code class="sql-requête">
+     salaire_moyen
+-----------------------
+ 3130.5455000000000000
+(1 ligne)                        
+                    </code></pre>
+            <p>Imaginez ce que <code>PostgreSQL</code> renverrait sans AS : une colonne nommée avg — pas très explicite !</p>
+
+            <p><strong>Renommer un champ déjà existant</strong> :</p>
+            <p>
+                Même si vous sélectionnez une colonne déjà nommée, vous pouvez choisir de l’afficher sous un autre nom :
+            </p>
+            <div class="code-wrapper">
+                <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                    <pre><code class="sql-requête">
+SELECT 
+    nom AS nom_de_famille
+FROM employes;
+                    </code></pre>
+            </div>
+            <p>
+                Cela peut être utile pour <strong>adapter le vocabulaire au lecteur final</strong> (ex. : dans une interface utilisateur).
+            </p>            
+ 
+            <h3>6. Peut-on omettre AS ?</h3>
+            <p>
+                Oui, <code>PostgreSQL</code> vous autorise à écrire l’alias <strong>sans le mot-clé</strong> <span class="sql-clause">AS</span> :
+            </p>
+            <div class="code-wrapper">
+                <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                    <pre><code class="sql-requête">
+SELECT 
+    salaire * 12 salaire_annuel
+FROM employes;
+                    </code></pre>
+                </div>
+            <p>Mais cela peut rendre votre code :</p>
+            <ul class="indent">
+                <li>moins lisible ;</li>
+                <li>ambigu dans certains cas complexes (ex : fonctions imbriquées) ;</li>
+                <li>fragile si vous utilisez un outil de visualisation qui dépend de AS pour identifier les colonnes.</li>
+            </ul>
+
+           <h3>7. Bonnes pratiques </h3>
+            <p>Par souci de clarté et de rigueur professionnelle, <strong>utilisez toujours <span class="sql-clause">AS</span> pour nommer vos colonnes</strong>, même lorsque ce n’est pas obligatoire.</p>                    
+
++----------------------------------------- +-----------------------------------------+
+|             Bonnes pratiques             |               Pourquoi ?                | 
++------------------------------------------+-----------------------------------------+ 
+| Utiliser AS	                           | Rend le code explicite                  |
+| Utiliser des noms courts mais parlants   | Lisibilité du résultat                  |
+| Entourer les alias de guillemets doubles | Gérer les espaces ou accents            |  
+| Rester cohérent dans vos noms            | Homogénéité sur l’ensemble des requêtes |
++----------------------------------------------------+-------------------------------+
+
+            <div style="overflow-x:auto;">
+                <table class="composants-table">
+                    <thead>
+                        <tr>
+                            <th>Bonnes pratiques</th>
+                            <th>Pourquoi ?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Utiliser AS</td>
+                            <td>Rend le code explicite</td>
+                        </tr>
+                        <tr>
+                            <td>Utiliser des noms courts mais parlants</td>
+                            <td>Lisibilité du résultat</td>
+                        </tr>
+                        <tr>
+                            <td>Entourer les alias de guillemets doubles</td>
+                            <td>Gérer les espaces ou accents</td>
+                        </tr>
+                        <tr>
+                            <td>Rester cohérent dans vos noms</td>
+                            <td>Homogénéité sur l’ensemble des requêtes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>                            
+            
+            <h3>8. Règles à respecter pour nommer vos alias</h3>
+ 
+            <div style="overflow-x:auto;">
+                <table class="composants-table">
+                    <thead>
+                        <tr>
+                            <th>Recommandation</th>
+                            <th>Exemple</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Utiliser des noms explicites</td>
+                            <td>AS salaire_annuel plutôt que AS sal_ann</td>
+                        </tr>
+                        <tr>
+                            <td>Éviter les espaces</td>
+                            <td>AS nom_complet, pas AS nom complet </td>
+                        </tr>
+                        <tr>
+                            <td>Utiliser le snake_case (standard PostgreSQL)</td>
+                            <td>AS taux_de_croissance</td>
+                        </tr>
+                        <tr>
+                            <td>Éviter les caractères spéciaux</td>
+                            <td>Évitez AS $valeur ou AS total-%</td>
+                        </tr>
+                        <tr>
+                            <td>Si vous utilisez des espaces, encadrez l’alias avec des guillemets doubles</td>
+                            <td> 
+                                SELECT prenom
+                                    || ' ' || nom AS "Nom complet"
+                                FROM employes;    
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> 
+        
+  
+            <h3>9. À retenir</h3>
+            <p>La clause AS est un outil de présentation, mais son impact est considérable. Elle vous permet de :</p>
+            <ul class="indent">
+                <li>Rapprocher les données techniques du langage métier</li>
+                <li>Produire des résultats adaptés à votre public cible</li>
+                <li>Améliorer la compréhension immédiate des résultats</li>
+            </ul>
+
+            <section id="quiz-select-from" aria-labelledby="quiz-select-from">
+             <h3>10. Quiz : Requête SELECT * FROM nom_table</h3>
+            <p>
+                Testez vos connaissances en répondant aux questions ci-dessous. Cliquez sur <span class="valider">"Valider"</span> pour vérifier vos réponses.
+            </p>
+
+<div id="score-container" style="margin-bottom:20px; text-align:center;">
+    <div id="score-display" style="font-weight:bold; margin-bottom:10px;">
+        Score : 0 / 10
+    </div>
+    <div id="progress-bar" style="width:0%; height:10px; background:linear-gradient(90deg, #0077ff, #00d4ff); border-radius:4px; margin:0 auto; transition:width 0.5s ease;"></div>
+</div>
+
+                    <!-- Question 1 -->
+                    <div class="exercice" id="exercice-quiz-clause-as-1">
+                        <label for="reponse-quiz-clause-as-1">1. Que fait la clause <code>AS</code> dans une requête <code>SQL</code> ?</label>
+                            <select id="reponse-quiz-clause-as-1" aria-label="Question 1 - Rôle">
+                                <option value="">-- Choisissez une réponse --</option>
+                                <option value="a">a) Modifie définitivement le nom de la colonne dans la table</option>
+                                <option value="b">b) Renomme temporairement une colonne dans le résultat</option>
+                                <option value="c">c) Supprime une colonne du résultat</option>
+                                <option value="d">d) Crée une nouvelle table</option>
+                            </select>
+                        <button class="valider-btn" data-id="quiz-clause-as-1" data-type="quiz">Valider</button>
+                    <p id="message-quiz-clause-as-1" class="message" aria-live="polite"></p>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="exercice" id="exercice-quiz-clause-as-2" style="display: none;">
+                        <label for="reponse-quiz-clause-as-2">2. Quel est le bon alias pour renommer le résultat de <code>salaire * 12</code> en <code>salaire_annuel</code> ?</label>
+                            <select id="reponse-quiz-clause-as-2" aria-label="Question 2 - Bon alias">
+                                <option value="">-- Choisissez une réponse --</option>
+                                <option value="a">a) salaire * 12 => salaire_annuel</option>
+                                <option value="b">b) salaire * 12 := salaire_annuel</option>
+                                <option value="c">c) salaire * 12 AS salaire_annuel</option>
+                                <option value="d">d) salaire_annuel = salaire * 12</option>
+                            </select>
+                        <button class="valider-btn" data-id="quiz-clause-as-2" data-type="quiz">Valider</button>
+                    <p id="message-quiz-clause-as-2" class="message" aria-live="polite"></p>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="exercice" id="exercice-quiz-clause-as-3" style="display: none;">
+                        <label for="reponse-quiz-clause-as-3">3. L’alias suivant est-il valide ? <br> <code>SELECT 'Bonjour' AS "Message de bienvenue";</code></label>
+                            <select id="reponse-quiz-clause-as-3" aria-label="Question 3 - Validation de l’alias">
+                                <option value="">-- Choisissez une réponse --</option>
+                                <option value="a">a) Oui</option>
+                                <option value="b">b) Non</option>
+                            </select>
+                        <button class="valider-btn" data-id="quiz-clause-as-3" data-type="quiz">Valider</button>
+                    <p id="message-quiz-clause-as-3" class="message" aria-live="polite"></p>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="exercice" id="exercice-quiz-clause-as-4" style="display: none;">
+                        <label for="reponse-quiz-clause-as-4">4. Peut-on omettre le mot <code>AS</code> ?</label>
+                            <select id="reponse-quiz-clause-as-4" aria-label="Question 4 - Omission de AS">
+                                <option value="">-- Choisissez une réponse --</option>
+                                <option value="a">a) Oui, mais ce n’est pas recommandé</option>
+                                <option value="b">b) Non, c’est obligatoire</option>
+                            </select>
+                        <button class="valider-btn" data-id="quiz-clause-as-4" data-type="quiz">Valider</button>
+                    <p id="message-quiz-clause-as-4" class="message" aria-live="polite"></p>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="exercice" id="exercice-quiz-clause-as-5" style="display: none;">
+                        <label for="reponse-quiz-clause-as-5">5. Quel est l’alias de cette requête ? <br> <code>SELECT prenom || ' ' || nom AS nom_complet FROM employes;</code></label>
+                            <select id="reponse-quiz-clause-as-5" aria-label="Question 5 - Alias correcte">
+                                <option value="">-- Choisissez une réponse --</option>
+                                <option value="a">a) prenom</option>
+                                <option value="b">b) nom</option>
+                                <option value="c">c) nom_complet</option>
+                                <option value="d">d) concat_nom</option>
+                            </select>
+                        <button class="valider-btn" data-id="quiz-clause-as-5" data-type="quiz">Valider</button>
+                    <p id="message-quiz-clause-as-5" class="message" aria-live="polite"></p>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="exercice" id="exercice-quiz-clause-as-6" style="display: none;">
+                        <label for="reponse-quiz-clause-as-6">6. Dans quelle clause ne peut-on <strong>pas</strong> réutiliser un alias immédiatement après l’avoir défini ?</label>
+                            <select id="reponse-quiz-clause-as-6" aria-label="Question 6 - Requête correcte">
+                                <option value="">-- Choisissez une réponse --</option>
+                                <option value="a">a) <code>ORDER BY</code></option>
+                                <option value="b">b) <code>SELECT</code></option>
+                                <option value="c">c) <code>GROUP BY</code></option>
+                            </select>
+                        <button class="valider-btn" data-id="quiz-clause-as-6" data-type="quiz">Valider</button>
+                    <p id="message-quiz-clause-as-6" class="message" aria-live="polite"></p>
+                    </div>
+
+                    <!-- Question 7 -->
+                    <div class="exercice" id="exercice-quiz-clause-as-7" style="display: none;">
+                        <label for="reponse-quiz-clause-as-7">7. Lequel de ces alias est <strong>mauvais style</strong> ?</label>
+                            <select id="reponse-quiz-clause-as-7" aria-label="Question 7 - Style alias">
+                                <option value="">-- Choisissez une réponse --</option>
+                                <option value="a">a) <code>salaire_annuel</code></option>
+                                <option value="b">b) <code>AS $bonus</code></option>
+                                <option value="c">c) <code>AS "Nom complet"</code></option>
+                            </select>
+                        <button class="valider-btn" data-id="quiz-clause-as-7" data-type="quiz">Valider</button>
+                    <p id="message-quiz-clause-as-7" class="message" aria-live="polite"></p>
+                    </div>
+
+
+                    <!-- Question 8 -->
+                    <div class="exercice" id="exercice-quiz-clause-as-8" style="display: none;">
+                        <label for="reponse-quiz-clause-as-8">8. Quel alias convient pour une fonction d’agrégation ? <br> <code>SELECT AVG(salaire) AS ? FROM employes;</code></label>
+                            <select id="reponse-quiz-clause-as-8" aria-label="Question 8 - Alias convenable">
+                                <option value="">-- Choisissez une réponse --</option>
+                                <option value="a">a) <code>salaire</code></option>
+                                <option value="b">b) <code>salaire_moyen</code></option>
+                                <option value="c">c) <code>moyenne</code></option>
+                            </select>
+                        <button class="valider-btn" data-id="quiz-clause-as-8" data-type="quiz">Valider</button>
+                    <p id="message-quiz-clause-as-8" class="message" aria-live="polite"></p>
+                    </div>
+
+
+                    <!-- Question 9 -->
+                    <div class="exercice" id="exercice-quiz-clause-as-9" style="display: none;">
+                        <label for="reponse-quiz-clause-as-9">9. Dans une sous-requête, peut-on renommer une colonne avec <code>AS</code> ?</label>
+                            <select id="reponse-quiz-clause-as-9" aria-label="Question 9 - Est-possible">
+                                <option value="">-- Choisissez une réponse --</option>
+                                <option value="a">a) Oui</option>
+                                <option value="b">b) Nom</option>
+                            </select>
+                        <button class="valider-btn" data-id="quiz-clause-as-9" data-type="quiz">Valider</button>
+                    <p id="message-quiz-clause-as-9" class="message" aria-live="polite"></p>
+                    </div>
+
+
+                    <!-- Question 10 -->
+                    <div class="exercice" id="exercice-quiz-clause-as-10" style="display: none;">
+                        <label for="reponse-quiz-clause-as-10">10. Les alias influencent-ils la structure réelle de la base de données ?</label>
+                            <select id="reponse-quiz-clause-as-10" aria-label="Question 10 - Nombre de colonnes">
+                                <option value="">-- Choisissez une réponse --</option>
+                                <option value="a">a) Oui</option>
+                                <option value="b">b) Non</option>
+                            </select>
+                        <button class="valider-btn" data-id="quiz-clause-as-10" data-type="quiz">Valider</button>
+                    <p id="message-quiz-clause-as-10" class="message" aria-live="polite"></p>
+                    </div>
+                </section>
+
+        </main>
+    </div>
+
+    <div class="pagination">
+        <a href="08-sauvegarde.html" class="prev">
+            ← Introduction à PostgreSQL
+        </a>
+        <a href="../index.html" class="home">🏠 Accueil</a>
+        <a href="100-exercices.html" class="next">
+            Connexion au serveur →
+        </a>
+    </div> 
+
+    <!-- Pied de page -->
+    <footer role="contentinfo">
+        <p>
+            &copy; 2025 Data Skill Hub - Tous droits réservés.
+            &copy; 2025 - Ce site vous guide pas à pas vers la maîtrise de PostgreSQL
+        </p>
+        <a href="#top" class="back-to-top">↑ Retour en haut</a>
+        <!-- <a href="#top" class="back-to-top">&#8593; Retour en haut</a> -->
+    </footer>
+
+        <!-- <script src="../js/main.js"></script> -->
+        <script src="../js/script.js" defer></script>
+        <script src="../js/exercices.js"></script>
+        <script src="../js/tutoriels.js"></script>
+        <button id="scrollTopBtn" aria-label="Retour en haut">&#8679;</button>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const main = document.querySelector('main');
+        const toc = document.getElementById('toc-content');
+
+        if (!main || !toc) return;
+
+        const headers = main.querySelectorAll('h2, h3');
+        headers.forEach((el, i) => {
+            // ❌ Ignore les titres avec la classe "no-toc"
+            if (el.classList.contains('no-toc')) return;
+
+            // ✅ Crée un id unique s’il n’existe pas
+            if (!el.id) {
+                el.id = `section-${i}`;
+            }
+
+            // ✅ Crée un lien dans le sommaire
+            const link = document.createElement('a');
+            link.href = `#${el.id}`;
+            link.textContent = el.textContent;
+            link.className = el.tagName.toLowerCase(); // h2 ou h3
+            toc.appendChild(link);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Favicon standard -->
+    <link rel="icon" href="../favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../favicon.png">
+    <link rel="manifest" href="../site.webmanifest">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pourquoi apprendre PostgreSQL en 2025 ? | Data Skills Hub</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <script defer>
+        // JS pour activer/désactiver le menu mobile
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.nav-menu');
+            toggle.addEventListener('click', () => {
+                nav.classList.toggle('active');
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <!-- En-tête -->
+    <header>
+        <div class="header-content">
+            <img src="../images/illustrations/Logo Data Skills Hub.png" alt="Logo du site" class="logo">
+            <h1>Blog – Data Skills Hub</h1>
+            <button class="menu-toggle" aria-label="Ouvrir le menu">&#9776;</button>
+        </div>
+
+        <nav aria-label="Navigation principale">
+            <ul class="nav-menu">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../tutoriels.html">Tutoriels</a></li>
+                <li><a href="../exercices.html">Exercices</a></li>
+                <li><a href="blog.html" aria-current="page">Blog</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Mise en page -->
+    <div class="layout-postgres">
+        <aside class="sidebar">
+            <h2>Articles du blog</h2>
+            <ul>
+                <li><a href="01-bienvenue.html">Bienvenue sur le blog</a></li>
+                <li><a href="02-pourquoi-apprendre-postgresql.html" class="active">Pourquoi apprendre PostgreSQL en 2025 ?</a></li>
+                <li><a href="03-astuces-excel.html">5 astuces Excel</a></li>
+                <li><a href="04-vba-automatisation.html">Automatiser avec VBA</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <aside class="toc">
+                <h2 class="no-toc">Sommaire</h2>
+                <nav id="toc-content"></nav>
+            </aside>
+
+            <h2>Pourquoi apprendre PostgreSQL en 2025 ?</h2>
+
+            <p>
+                PostgreSQL… c’est ce nom un peu compliqué qu’on entend de plus en plus quand on parle de bases de données.
+                <br>Quand j’ai commencé à m’y intéresser, je me suis posé une question simple :
+                <br><em>“Est-ce que ça vaut la peine d’apprendre PostgreSQL aujourd’hui ?”</em>
+                <br>Et en 2025, la réponse est un grand <strong>oui</strong> (sinon je ne serais pas là à écrire cet article 😅).
+            </p>
+
+            <h3>1. PostgreSQL est partout</h3>
+            <p>
+                Des startups aux grandes entreprises, PostgreSQL s’impose comme <strong>l’alternative solide à Oracle, SQL Server ou MySQL</strong>.
+                <br>Il est utilisé dans des domaines très variés : applications web, analyse de données, finance, éducation, etc.
+                <br>Et bonne nouvelle : comme il est <strong>open-source</strong>, on peut l’apprendre gratuitement, sans licence coûteuse.
+            </p>
+
+            <div class="info-box">
+                💡 Exemple : Instagram a démarré sur PostgreSQL à ses débuts, avant de compléter son architecture avec d’autres systèmes.
+                Spotify l’utilise aussi dans certaines parties de ses services.
+                Bref, même les “grands” lui font confiance !
+            </div>
+
+            <h3>2. Un outil puissant et moderne</h3>
+            <p>
+                PostgreSQL n’est pas qu’une base de données “classique”.
+                <br>Il gère les données <strong>relationnelles</strong> (tables, colonnes, clés) mais aussi des formats plus <strong>avancées</strong> (JSON, géolocalisation, recherche plein texte).
+                <br>Autrement dit, il s’adapte aussi bien à des projets simples qu’à des systèmes énormes.
+            </p>
+
+            <div class="tip-box">
+                ⚡ Astuce : même si vous commencez petit (par exemple un projet perso), apprendre PostgreSQL vous prépare à des environnements professionnels.
+                Et qui sait, votre projet perso peut devenir le prochain Instagram (bon… peut-être 😏).
+            </div>
+
+            <h3>3. Une compétence recherchée en 2025</h3>
+            <p>
+                Les entreprises veulent des <strong>professionnels capables de gérer et analyser des données</strong>. Maîtriser PostgreSQL, c’est donc un vrai <strong>plus sur le CV</strong>.
+                Sur les offres d’emploi tech, SQL est déjà dans le top des compétences demandées. Et parmi les systèmes SQL, PostgreSQL, lui, se détache comme un des plus appréciés.
+            </p>
+
+            <h3>4. Accessible à tous les apprenants</h3>
+            <p>
+                Ma première rencontre avec SQL ressemblait à ça :
+            </p>
+
+                        <div class="code-wrapper">
+                        <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                        <pre><code class="sql-requête">
+SELECT * FROM utilisateurs;
+                        </code></pre>
+                        </div>
+
+            <p>
+                Et là, surprise → ce n’était pas du chinois (merci l’anglais simple 🙏).
+            </p>
+            <ul class="indent">
+                <li><code>SELECT</code> → sélectionner</li>
+                <li><code>FROM</code> → depuis</li>
+                <li><code>utilisateurs</code> → nom de la table</li>
+            </ul>
+
+            <p>
+                Franchement, ça m’a rassuré : on peut comprendre <strong>sans être un expert</strong>.
+                Et ensuite, pas à pas, on apprend à construire des bases solides et à automatiser des analyses.
+            </p>
+
+            <div class="danger-box">
+                ⚠️ Seul bémol : PostgreSQL ne fait pas encore le café.
+                Mais il peut déjà vous aider à organiser vos recettes ☕📊.
+            </div>
+
+            <!-- 🔥 Nouvelle section sur les graphiques et tendances -->
+            <h3>📊 Graphiques & données récentes</h3>
+            <p>
+                Apprendre PostgreSQL, ce n’est pas seulement suivre une tendance.
+                Voici comment vous pouvez trouver ou créer des <strong>graphiques illustrant la place de PostgreSQL dans les compétences demandées</strong>, et les intégrer de manière crédible et pédagogique dans vos lectures.
+            </p>
+
+            <h4>1. Stack Overflow Developer Survey</h4>
+            <p>
+                Ces sondages annuels montrent très bien la popularité (utilisation, désirée, aimée) des technologies.
+            </p>
+            <ul class="indent">
+                <li>En 2024, PostgreSQL a été utilisé par <strong>49 % des développeurs</strong>, devant MySQL.</li>
+                <li>En 2025, c’est le SGBD le plus désiré : <strong>47 % souhaitent l’utiliser prochainement</strong>, et <strong>65,5 % de ceux qui l’ont déjà utilisé veulent continuer</strong>.</li>
+            </ul>
+
+            <!-- (Illustration : insérer ici le graphique StackOverflow Survey) -->
+            <div class="illustration">
+                <img src="../images/illustrations/postgresql/stackoverflow-survey.png" alt="Résultats du sondage StackOverflow 2025 sur PostgreSQL">
+            </div>
+
+            <h4>2. Classement DB-Engines</h4>
+            <p>
+                Classe les bases de données selon leur popularité (jobs, recherches, discussions, etc.).
+            </p>
+            <ul class="indent">
+                <li>En 2025, PostgreSQL continue de grimper et fait partie des grands “climbers” avec Snowflake.</li>
+                <li>Historique disponible ici : <a href="https://db-engines.com/en/ranking" target="_blank">DB-Engines</a></li>
+            </ul>
+
+            <!-- (Illustration : insérer ici le graphique DB-Engines) -->
+            <div class="illustration">
+                <img src="../images/illustrations/Blog/db-engines.png" alt="Classement DB-Engines montrant PostgreSQL">
+            </div>
+
+            <h4>3. Part de marché</h4>
+            <p>
+                Selon un rapport, début 2025, PostgreSQL représente <strong>16,85 % du marché des bases relationnelles</strong>, juste derrière MySQL. On le retrouve chez Spotify, NASA, Reddit, etc.
+            </p>
+
+            <h4>4. Tendance emploi (StackTrends)</h4>
+            <p>
+                Dans les offres d’emploi, PostgreSQL se place <strong>4ᵉ parmi les bases de données les plus citées</strong>, avec environ <strong>16,6 %</strong> des annonces, juste derrière Oracle et MySQL.
+            </p>
+
+            <h4>Résumé</h4>
+        <!--<table class="blog-table"> -->
+            <table class="composants-table">
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Ce qu’on apprend de PostgreSQL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>StackOverflow Survey</td>
+                        <td>Base la plus utilisée, aimée et désirée</td>
+                    </tr>
+                    <tr>
+                        <td>DB-Engines</td>
+                        <td>Popularité croissante, parmi les “climbers”</td>
+                    </tr>
+                    <tr>
+                        <td>Part de marché</td>
+                        <td>~16,8 % des bases relationnelles en 2025</td>
+                    </tr>
+                    <tr>
+                        <td>Emploi (StackTrends)</td>
+                        <td>Présent dans ~16 % des offres (position 4)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Conclusion</h3>
+            <p>
+                Apprendre PostgreSQL en 2025, c’est :
+            </p>
+            <ul class="indent"> 
+                <li>investir dans une <strong>compétence d’avenir</strong>,</li>
+                <li>progresser sur un outil <strong>gratuit et puissant</strong>,</li>
+                <li>et surtout, <strong>ouvrir la porte à de nombreux projets</strong> (pro ou perso).</li>
+            </ul>
+
+            <p>
+                Moi-même, je ne suis pas encore expert. Mais je sais une chose :
+                <br>chaque commande que j’apprends aujourd’hui est un pas de plus vers des opportunités concrètes demain.
+            </p>
+
+            <div class="info-box">
+                📌 Mon conseil : si vous hésitez encore, installez PostgreSQL, lancez-le une première fois,
+                et testez une requête simple comme <code>SELECT * FROM utilisateurs;</code>.
+                Vous verrez… on prend vite goût à jouer avec les données 😉.
+            </div>
+        </main>
+    </div>
+
+    <!-- Pied de page -->
+    <footer role="contentinfo">
+        <p>&copy; 2025 Data Skills Hub - Tous droits réservés.</p>
+        <a href="#top" class="back-to-top">↑ Retour en haut</a>
+    </footer>
+
+    <script src="../js/script.js" defer></script>
+
+    <script>
+        // Générer le sommaire automatique
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('main');
+            const toc = document.getElementById('toc-content');
+
+            if (!main || !toc) return;
+
+            const headers = main.querySelectorAll('h2, h3');
+            headers.forEach((el, i) => {
+                if (el.classList.contains('no-toc')) return;
+                if (!el.id) el.id = `section-${i}`;
+
+                const link = document.createElement('a');
+                link.href = `#${el.id}`;
+                link.textContent = el.textContent;
+                link.className = el.tagName.toLowerCase();
+                toc.appendChild(link);
+            });
+        });
+    </script>
+    <script src="../js/script.js" defer></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/blog.css">
+
+</body>
+</html>

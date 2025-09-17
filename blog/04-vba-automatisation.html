@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatiser vos tâches avec Excel VBA | Blog Data Skills Hub</title>
+    <link rel="icon" href="../favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../favicon.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/blog.css">
+</head>
+
+<body>
+
+    <!-- En-tête -->
+    <header>
+        <div class="header-content">
+            <img src="../images/illustrations/PostgreSQL/Logo PostgreSQL.png" alt="Logo du site" class="logo" />
+            <h1>Blog – Data Skills Hub</h1>
+            <button class="menu-toggle" aria-label="Ouvrir le menu">&#9776;</button>
+        </div>
+
+        <nav aria-label="Navigation principale">
+            <ul class="nav-menu">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../tutoriels.html">Tutoriels</a></li>
+                <li><a href="../exercices.html">Exercices</a></li>
+                <li><a href="blog.html" aria-current="page">Blog</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Mise en page -->
+    <div class="layout-postgres">
+        <aside class="sidebar">
+            <h2>Articles du blog</h2>
+            <ul>
+                <li><a href="01-bienvenue.html">Bienvenue sur le blog</a></li>
+                <li><a href="02-pourquoi-apprendre-postgresql.html">Pourquoi apprendre PostgreSQL en 2025 ?</a></li>
+                <li><a href="03-astuces-excel.html">5 astuces Excel</a></li>
+                <li><a href="04-vba-automatisation.html" class="active">Automatiser avec VBA</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <aside class="toc">
+                <h2 class="no-toc">Sommaire</h2>
+                <nav id="toc-content"></nav>
+            </aside>
+
+            <h2>Automatiser vos tâches avec Excel VBA : par où débuter ?</h2>
+
+            <figure class="illustration">
+                <img src="../images/illustrations/Excel_VBA/vba.jpg"
+                    alt="Illustration Excel VBA – automatisation"
+                    style="max-width:100%;">
+                <figcaption class="description-illustration">
+                    Figure 1 – Illustration de l’automatisation avec Excel VBA
+                </figcaption>
+            </figure>
+
+            <p>
+                Vous passez trop de temps à copier-coller, mettre en forme vos tableaux ou générer vos rapports ?  
+                Bonne nouvelle : <strong>Excel VBA</strong> peut faire tout cela à votre place !
+            </p>
+
+            <h3>Qu’est-ce que VBA ?</h3>
+            <p>
+                VBA (Visual Basic for Applications) est un langage de programmation intégré à Excel.  
+                Il permet de créer des <strong>macros</strong> pour automatiser vos actions et booster votre productivité.
+            </p>
+
+            <div class="info-box">
+                ℹ️ Info : VBA est disponible par défaut dans toutes les versions desktop d’Excel (Windows et Mac).
+            </div>
+
+            <h3>Exemple simple de macro</h3>
+            <p>Voici une première macro qui affiche un message :</p>
+
+
+                        <div class="code-wrapper">
+                        <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                        <pre><code class="sql-requête">
+Sub BonjourMonde()
+    MsgBox "Bienvenue dans le monde magique de VBA !"
+End Sub
+                        </code></pre>
+                        </div>
+
+            <div class="tip-box">
+                💡 Astuce : commencez toujours par de petites macros, puis complexifiez au fur et à mesure.
+            </div>
+
+            <h3>Que peut-on automatiser avec VBA ?</h3>
+            <ul>
+                <li>Générer des rapports en un clic</li>
+                <li>Nettoyer et organiser vos données</li>
+                <li>Créer vos propres menus et boutons</li>
+                <li>Envoyer automatiquement des emails</li>
+            </ul>
+
+            <div class="danger-box">
+                ⚠️ Attention : une macro mal conçue peut écraser vos données. Testez toujours sur une copie de votre fichier !
+            </div>
+
+            <h3>Comment débuter ?</h3>
+            <p>
+                - Activez l’onglet <strong>Développeur</strong> dans Excel.<br>
+                - Ouvrez l’éditeur VBA avec <kbd>Alt + F11</kbd>.<br>
+                - Écrivez une macro simple (comme celle ci-dessus).<br>
+                - Lancez-la avec <kbd>F5</kbd> et admirez le résultat !
+            </p>
+
+            <h2>Conclusion</h2>
+            <p>
+                Excel VBA transforme Excel en <strong>super-assistant personnel</strong>.  
+                Commencez petit, pratiquez régulièrement et vous verrez vos tâches répétitives disparaître comme par magie.  
+                Prochainement, nous explorerons des <strong>mini-projets VBA concrets</strong> !
+            </p>
+        </main>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>&copy; 2025 Data Skills Hub - Tous droits réservés.</p>
+        <a href="#top" class="back-to-top">↑ Retour en haut</a>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/script.js" defer></script>
+
+    <script>
+        // Génération automatique du sommaire
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('main');
+            const toc = document.getElementById('toc-content');
+
+            if (!main || !toc) return;
+
+            const headers = main.querySelectorAll('h2, h3');
+            headers.forEach((el, i) => {
+                if (el.classList.contains('no-toc')) return;
+                if (!el.id) el.id = `section-${i}`;
+
+                const link = document.createElement('a');
+                link.href = `#${el.id}`;
+                link.textContent = el.textContent;
+                link.className = el.tagName.toLowerCase();
+                toc.appendChild(link);
+            });
+        });
+    </script>
+</body>
+</html>

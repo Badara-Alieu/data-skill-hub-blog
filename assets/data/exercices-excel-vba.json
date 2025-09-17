@@ -1,0 +1,26 @@
+{
+    "VBA - Bases": [
+        {
+            "titre": "Première macro",
+            "url": "tutoriels/excel_vba/introduction.html",
+            "description": "Créez et exécutez votre première macro avec l’enregistreur."
+        },
+        {
+            "titre": "Variables en VBA",
+            "url": "tutoriels/excel_vba/variables.html",
+            "description": "Apprenez à déclarer et utiliser des variables dans vos macros."
+        }
+    ],
+    "VBA - Avancé": [
+        {
+            "titre": "Boucles For et While",
+            "url": "tutoriels/excel_vba/variables.html",
+            "description": "Automatisez des tâches répétitives avec des boucles VBA."
+        },
+        {
+            "titre": "Interaction avec Excel",
+            "url": "tutoriels/excel_vba/introduction.html",
+            "description": "Manipulez des cellules et feuilles via VBA."
+        }
+    ]
+}

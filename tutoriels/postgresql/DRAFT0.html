@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Découvrez la commande SELECT ... FROM dans PostgreSQL - Data Skill Hub" />
+        <title>La commande SELECT | Data Skill Hub</title>
+
+        <!-- ✅ Feuille de style locale (chemin relatif car dans /tutoriels/) -->
+        <link rel="stylesheet" href="../assets/css/style.css" />
+    </head>
+
+    <body>
+        <!-- ✅ Conteneur principal - pas besoin de classe spéciale ici -->
+        <div id="conteneur-principal">
+            
+            <!-- ✅ L’<aside> sera généré automatiquement par le script JS -->
+
+            <header>
+                <h1 id="site-title">Data Skill Hub</h1>
+                <nav aria-label="Navigation principale">
+                    <ul class="nav-menu">
+                        <li><a href="../index.html">Accueil</a></li>
+                        <li><a href="../tutoriels.html" aria-current="page">Tutoriels</a></li>
+                        <li><a href="../exercices.html">Exercices</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+            </header>
+
+            <main id="main-content">
+                <article aria-labelledby="titre-tutoriel">
+                    <h2 id="titre-tutoriel">
+                        1. Introduction à SELECT ... FROM
+                    </h2>
+
+                    <!-- 🎯 Objectifs pédagogiques -->
+                    <section id="sql-objectifs_select...from" aria-labelledby="objectifs_select...from">
+                    
+                        <code class="sous-titre">
+                            1. Objectifs pédagogiques du tutoriel
+                        </code>
+                        <p>
+                            À la fin de ce chapitre, le lecteur saura :
+                        </p>
+                        <ul>
+                            <li>Comprendre à quoi sert la commande SQL <code>SELECT ... FROM</code></li>
+                            <li>Identifier la structure de base d’une requête de lecture dans une base de données relationnelle</li>
+                            <li>Savoir interroger une table pour afficher toutes les colonnes ou seulement certaines d’entre elles</li>
+                            <li>Prendre conscience de la <strong>logique relationnelle</strong> derrière l’organisation des données</li>
+                            <li>Faire le lien entre les données techniques et leur usage dans la vie réelle</li>
+                        </ul>
+                    </section>
+
+                    <section id="sql-bienvenue-dans-monde-donnees" aria-labelledby="Bienvenue-dans-monde-donnees">
+                        <code class="sous-titre">
+                            2. Bienvenue dans le monde réel des données
+                        </code>
+                        <p>
+                            Avant d’aller plus loin, prenons un moment pour <strong>imaginer la réalité</strong> derrière une base de données.
+                            Fermez les yeux quelques secondes, et visualisez cela : <br>
+                        </p>
+                        <p>
+                            Un immense classeur dans lequel chaque feuille contient des informations précises sur vos clients, vos produits, vos commandes ou vos employés. Ce classeur, c’est votre <strong>base de données</strong>.
+                            <br>Et chaque feuille ? Ce sont les <strong>tables</strong>. <br>
+                        </p>
+                        <p>
+                            Dans ce monde structuré, organisé, chaque table est composée <strong>de colonnes</strong> (les champs comme <code>nom</code>, <code>âge</code>, <code>ville</code>) et <strong>de lignes</strong> (les enregistrements, un par client, un par produit...). <br>
+                        </p>   
+                        <p> 
+                            Dans la réalité professionnelle — que ce soit pour gérer des clients, analyser des ventes ou suivre des produits — les données sont <strong>organisées et enregistrées dans des tables</strong>.
+                        </p>
+                        <p>
+                            Mais comment lire ces données ? 
+                            <br>Comment communiquer avec une base de données?
+                            <br>Comment dire à la base de données :
+                        </p>
+                        
+                        <div class="sql-idente-explanation">
+                            “Montrez-moi la liste de mes clients.”
+                            <br>“Donnez-moi les villes dans lesquelles ils habitent.”
+                            <br>“Combien d’articles sont en stock ?”
+                        </div>
+                        
+                        <p>
+                            C’est ici qu’intervient la commande la plus fondamentale du SQL :
+                            <br><code>SELECT ... FROM ...</code>
+                        </p>
+                    </section>
+
+                    <section id="sql-role-de-from" aria-labelledby="sql-role-de-from">
+                        <code class="sous-titre">
+                            3. Ce que fait réellement SELECT ... FROM
+                        </code>
+                        <p>
+                            Cette commande est la <strong>porte d’entrée</strong> vers l’univers du SQL. C’est l’une des commandes <strong>les plus fondamentales du langage SQL</strong>, et sans doute la plus utilisée.
+                            <br>Elle permet <strong>d’interroger</strong> une base de données pour en <strong>extraire des informations</strong> qui vous intéressent, dans un océan de données potentiellement énorme, en partant d’une ou plusieurs tables.
+                        </p>
+                        <ul>
+                            <li><code>SELECT</code> indique <strong>quelles colonnes</strong> vous voulez voir apparaître.</li>
+                            <li><code>FROM</code> indique <strong>dans quelle table</strong> aller chercher ces colonnes, <strong>où chercher</strong> les données.</li>
+                        </ul>
+                        <p>
+                            La commande <code>SELECT ... FROM</code> permet de travailler <strong>avec des données réelles</strong>, stockées dans des <strong>tables de la base de données</strong>. C’est la <strong>porte d’entrée vers le vrai monde des bases de données</strong>, le <strong>premier pas vers l’analyse de données réelles</strong>, stockées dans des bases de données relationnelles.
+                        </p>
+                        <p>
+                            D’un point de vue pratique, elle se lit comme une phrase naturelle :
+                        </p>
+                        <div class="sql-idente-explanation">
+                            “Je veux voir ces colonnes, à partir de cette table.”
+                            <br>“Veuillez me montrer telles colonnes à partir de telle table.”
+                        </div>
+                    </section>
+
+                    <section id="sql-syntaxe-de-base" aria-labelledby="sql-syntaxte-de-base">
+                        <code class="sous-titre">
+                            4. Syntaxe de base
+                        </code>
+                        <p>
+                            Voici la structure de base d’une requête : <br>
+                        </p>
+                        <div class="code-wrapper">
+                        <button class="copy-button" onclick="copyToClipboard(this)">📋 Copier</button>
+                        <pre><code class="sql-requête">
+SELECT 
+    colonne1,
+    colonne2, ...
+FROM nom_de_la_table;
+                        </code></pre>
+                        </div>
+                        <p>
+                            👉 Cela signifie : <br>
+                        </p>
+                        <div class="sql-idente-explanation">
+                            « Montrez-moi les colonnes que j’ai listées, en les prenant dans cette table. »
+                            <br>« Je veux lire les colonnes suivantes, qui se trouvent dans cette table. »
+                        </div> 
+                    </section>
+
+                    <section id="sql-exeple-concret-select-from" aria-labelledby="sql-exeple-concret-select-from">
+                        <code class="sous-titre">
+                            5. Exemple concret : la table clients
+                        </code>
+
+                        <p>
+                            Imaginons que votre base de données contienne une table appelée pays_afrique_ouest, avec les informations suivantes :
+                        </p>
+                        <pre><code class="sql-table">
+ id_pays |   nom_pays    |   capitale   | langue_officielle | superficie
+---------+---------------+--------------+-------------------+------------
+       1 | Bénin         | Porto-Novo   | Français          |  114763.00
+       2 | Burkina Faso  | Ouagadougou  | Français          |  272967.00
+       3 | Cap Vert      | Praia        | Portugais         |    4033.00
+       4 | Côte d'Ivoire | Yamoussoukro | Français          |  322463.00
+       5 | Gambie        | Banjul       | Anglais           |   11295.00
+       6 | Ghana         | Accra        | Anglais           |  238535.00
+       7 | Guinée        | Conakry      | Français          |  245857.00
+       8 | Guinée Bissau | Bissau       | Portugais         |   36125.00
+       9 | Libéria       | Monrovia     | Anglais           |  111369.00
+      10 | Mali          | Bamako       | Français          | 1240192.00
+      11 | Mauritanie    | Nouakchott   | Arabe, Français   | 1030700.00
+      12 | Niger         | Niamey       | Français          | 1267000.00
+      13 | Nigéria       | Abuja        | Anglais           |  923768.00
+      14 | Sénégal       | Dakar        | Français          |  196722.00
+      15 | Sierra Leone  | Freetown     | Anglais           |   71740.00
+      16 | Togo          | Lomé         | Français          |   56785.00
+(16 lignes)
+                        </code></pre>
+                        <p>
+                            Chaque ligne représente un pays. Chaque colonne correspond à un attribut (une information au sujet du pays) :
+                        </p>
+                        <ul>
+                            <li>id_pays : un identifiant unique</li>
+                            <li>nom_pays : le nom du pays</li>
+                            <li>capitale : sa captale</li>
+                            <li>langue_officielle : la langue officielle parlée</li>
+                            <li>superficie : la superficie du pays</li>
+                        </ul>
+                        <code class="sous-sous-titre">
+                            Lire toutes les données de la table
+                        </code>
+                        <p>
+                            Pour afficher toutes les informations de cette table, on pourrait écrire :
+                        </p>
+                        <pre><code class="sql-requête">SELECT * FROM pays;</code></pre>
+                        <p>
+                            Le symbole <code>*</code> signifie : <strong>"toutes les colonnes".</strong>
+                            <br>On demande ici à la base de données de <strong>tout afficher</strong>.
+                        </p>
+                        <p><strong>Résultat obtenu :</strong></p> <br>
+                        <pre><code class="sql-table">
+ id_pays |   nom_pays    |   capitale   | langue_officielle | superficie
+---------+---------------+--------------+-------------------+------------
+       1 | Bénin         | Porto-Novo   | Français          |  114763.00
+       2 | Burkina Faso  | Ouagadougou  | Français          |  272967.00
+       3 | Cap Vert      | Praia        | Portugais         |    4033.00
+       4 | Côte d'Ivoire | Yamoussoukro | Français          |  322463.00
+       5 | Gambie        | Banjul       | Anglais           |   11295.00
+       6 | Ghana         | Accra        | Anglais           |  238535.00
+       7 | Guinée        | Conakry      | Français          |  245857.00
+       8 | Guinée Bissau | Bissau       | Portugais         |   36125.00
+       9 | Libéria       | Monrovia     | Anglais           |  111369.00
+      10 | Mali          | Bamako       | Français          | 1240192.00
+      11 | Mauritanie    | Nouakchott   | Arabe, Français   | 1030700.00
+      12 | Niger         | Niamey       | Français          | 1267000.00
+      13 | Nigéria       | Abuja        | Anglais           |  923768.00
+      14 | Sénégal       | Dakar        | Français          |  196722.00
+      15 | Sierra Leone  | Freetown     | Anglais           |   71740.00
+      16 | Togo          | Lomé         | Français          |   56785.00
+(16 lignes)
+                        </code></pre>
+                        <p>
+                            Mais dans la pratique, il est souvent préférable de <strong>sélectionner expliciment les colonnes</strong> que l’on souhaite voir. Cela rend les requêtes plus <strong>claires, plus performantes et plus faciles à maintenir</strong>.
+                        </p>
+
+                        <code class="sous-sous-titre">
+                            Lire uniquement certaines colonnes
+                        </code>
+                        <pre><code class="sql-requête">SELECT nom_pays, capitale FROM pays;</code></pre>
+                        <p>
+                            Ici, vous ne demandez que les colonnes <code>nom_pays</code> et <code>capitale</code>.
+                            <br>Vous limitez l'affichage à ce <strong>qui vous est réellement utile</strong>.
+                        </p>
+                        <p>
+                            👉 Cette requête demande à la base de données :
+                        </p>
+                        <p>
+                            "Montrez-moi les colonnes nom et ville de la table clients."
+                        </p>
+                        <p><strong>Résultat obtenu :</strong></p>
+                        <pre><code class="sql-table">
+   nom_pays    |   capitale
+---------------+--------------
+ Bénin         | Porto-Novo
+ Burkina Faso  | Ouagadougou
+ Cap Vert      | Praia
+ Côte d'Ivoire | Yamoussoukro
+ Gambie        | Banjul
+ Ghana         | Accra
+ Guinée        | Conakry
+ Guinée Bissau | Bissau
+ Libéria       | Monrovia
+ Mali          | Bamako
+ Mauritanie    | Nouakchott
+ Niger         | Niamey
+ Nigéria       | Abuja
+ Sénégal       | Dakar
+ Sierra Leone  | Freetown
+ Togo          | Lomé
+(16 lignes)
+                        </code></pre>
+                        <p>
+                            On remarque qu’<strong>aucune autre information</strong> (comme l'âge ou l’identifiant) n’est affichée. On a donc<strong> ciblé exactement</strong> ce que l’on voulait.
+                        </p>
+                    </section>
+
+                    <section id="sql-pourquoi-ne-pas-toujours-utiliser-asterisk" aria-labelledby="sql-pourquoi-ne-pas-toujours-utiliser-asterisk">
+                        <code class="sous-titre">
+                            6. Pourquoi ne pas toujours utiliser * ?
+                        </code>
+                        <p>
+                            Il peut sembler plus simple de tout afficher. Pourtant, dans les <strong>projets professionnels</strong>, on recommande généralement de <strong>ne sélectionner que les colonnes nécessaires</strong> car les tables peuvent contenir <strong>des dizaines de colonnes</strong>.
+                        </p>
+                        <p>
+                            En sélectionnant uniquement ce dont on a besoin, on :
+                        </p>
+                        <ul>
+                            <li>Allège le volume de données retourné</li>
+                            <li>Améliore la lisibilité <strong>en se concentrant uniquement sur ce que l’on analyse</strong></li>
+                            <li>Optimise les performances <strong>en transférant moins de données</strong></li>
+                            <li>Prépare le terrain pour des analyses plus fines</li>
+                        </ul>
+                        <p>
+                            En somme, on travaille plus efficacement,<strong>avec clarté et précision.</strong>
+                        </p>
+                        <p>
+                            Par exemple, si vous aviez la table <code>clients</code> suivante :
+                        </p>
+                        <pre><code class="sql-table">
+
+ id  |       prenom_nom       |     pays      |     ville
+-----+------------------------+---------------+----------------
+   1 | Aïcha Traoré           | Mali          | Ségou
+   2 | Mamadou Diallo         | Guinée        | Kankan
+   3 | Aminata Konaté         | Mali          | Bamako
+   4 | Ibrahim Cissé          | Sénégal       | Dakar
+   5 | Fatoumata Sow          | Guinée        | Kindia
+   6 | Idrissa Camara         | Guinée        | Labé
+   7 | Marie Koffi            | Côte d'Ivoire | Abidjan
+   8 | Abdoulaye Barry        | Guinée        | Labé
+   9 | Hawa Sylla             | Mali          | Kayes
+  10 | Seydou Coulibaly       | Mali          | Bamako
+  11 | Salif Sanogo           | Côte d'Ivoire | Korhogo
+  12 | Mariam Keita           | Mali          | Ségou
+  13 | Bintou Ouattara        | Côte d'Ivoire | Bouaké
+  14 | Moussa Diarra          | Mali          | Mopti
+  15 | Awa Bamba              | Côte d'Ivoire | Abidjan
+  16 | Ousmane Fofana         | Guinée        | Kindia
+  17 | Assétou Maïga          | Mali          | Kayes
+  18 | Issoufou Zongo         | Burkina Faso  | Ouagadougou
+  19 | Safiatou Guira         | Burkina Faso  | Bobo-Dioulasso
+  20 | Ismaël Ouedraogo       | Burkina Faso  | Koudougou
+  21 | Fanta Kaboré           | Burkina Faso  | Ouagadougou
+  22 | Harouna Savadogo       | Burkina Faso  | Bobo-Dioulasso
+  23 | Habibatou Bâ           | Sénégal       | Saint-Louis
+  24 | Lassina Bamba          | Côte d'Ivoire | Yamoussoukro
+  25 | Koumba Doumbia         | Mali          | Mopti
+  26 | Alassane Ouédraogo     | Burkina Faso  | Koudougou
+  27 | Adama Dembélé          | Mali          | Ségou
+  28 | Mariatou Sagna         | Sénégal       | Kaolack
+  29 | Daouda Traoré          | Mali          | Kayes
+  30 | Aminata Djaló          | Guinée-Bissau | Bissau
+  31 | Alpha Barry            | Guinée        | Conakry
+  32 | Rokia Camara           | Guinée        | Kindia
+  33 | Mamadi Condé           | Guinée        | Kankan
+  34 | Kadiatou Bah           | Guinée        | Labé
+  35 | Mohamed Lamine Touré   | Guinée        | Conakry
+  36 | Rahina Bello           | Nigeria       | Lagos
+  37 | Chinedu Okafor         | Nigeria       | Abuja
+  38 | Adama Faye             | Sénégal       | Thiès
+  39 | Mariama Tounkara       | Mali          | Bamako
+  40 | Oumar N'Diaye          | Sénégal       | Dakar
+  41 | Rosine Agossou         | Bénin         | Cotonou
+  42 | Julien Teko            | Togo          | Lomé
+  43 | Célestine Kossi        | Togo          | Kara
+  44 | Eugène Lawson          | Togo          | Sokodé
+  45 | Christelle Adéoti      | Bénin         | Porto-Novo
+  46 | Rodrigue Tchobo        | Bénin         | Parakou
+  47 | Akoua Mensah           | Ghana         | Accra
+  48 | Koffi Gbégnon          | Togo          | Lomé
+  49 | Dorcas Ayivi           | Bénin         | Cotonou
+  50 | Benjamin Kpadonou      | Bénin         | Parakou
+  51 | Mercy Akinwale         | Nigeria       | Ibadan
+  52 | Tunde Balogun          | Nigeria       | Kano
+  53 | Bola Adeyemi           | Nigeria       | Lagos
+  54 | Ngozi Chukwu           | Nigeria       | Abuja
+  55 | Kemi Okonjo            | Nigeria       | Kano
+  56 | Ibrahim Sule           | Niger         | Niamey
+  57 | Aisha Bello            | Niger         | Maradi
+  58 | Hadja Bangoura         | Guinée        | Kankan
+  59 | Bakary Sidibé          | Mali          | Kayes
+  60 | Kadidiatou Diakité     | Mali          | Bamako
+  61 | Nafi Fall              | Sénégal       | Saint-Louis
+  62 | Malik Gassama          | Gambie        | Banjul
+  63 | Sokhna Seck            | Sénégal       | Dakar
+  64 | El Hadj Ndiaye         | Sénégal       | Kaolack
+  65 | Mame Diarra Gaye       | Sénégal       | Thiès
+  66 | Ibrahima Mbaye         | Sénégal       | Dakar
+  67 | Néné Sow               | Guinée        | Conakry
+  68 | Serigne Diop           | Sénégal       | Dakar
+  69 | Astou Gueye            | Sénégal       | Thiès
+  70 | Cheikh Ndao            | Sénégal       | Saint-Louis
+  71 | Abdoul Aziz Gueye      | Sénégal       | Dakar
+  72 | Mame Fama Lo           | Sénégal       | Kaolack
+  73 | Samba Ka               | Sénégal       | Dakar
+  74 | Djeneba Sissoko        | Mali          | Mopti
+  75 | Oumou Koné             | Côte d'Ivoire | Abidjan
+  76 | Karim Samaké           | Mali          | Bamako
+  77 | Saran Kanté            | Guinée        | Labé
+  78 | Oumarou Hamani         | Niger         | Zinder
+  79 | Djibo Ali              | Niger         | Maradi
+  80 | Hadizatou Maïna        | Niger         | Niamey
+  81 | Fatou Keïta            | Mali          | Ségou
+  82 | Amadou Yattara         | Mali          | Bamako
+  83 | Bibata Tapsoba         | Burkina Faso  | Koudougou
+  84 | Firmin Nikiéma         | Burkina Faso  | Bobo-Dioulasso
+  85 | Lydie Zongo            | Burkina Faso  | Ouagadougou
+  86 | Jean-Baptiste Ouattara | Côte d'Ivoire | Yamoussoukro
+  87 | Clarisse Zinsou        | Bénin         | Cotonou
+  88 | Rodrigue Houngbédji    | Bénin         | Parakou
+  89 | Noël Assogba           | Bénin         | Porto-Novo
+  90 | Lauriane Adjovi        | Bénin         | Cotonou
+  91 | Isidore Hounsa         | Bénin         | Cotonou
+  92 | Aimé Amoussou          | Bénin         | Cotonou
+  93 | Victor Ahouandjinou    | Bénin         | Porto-Novo
+  94 | André Agbessi          | Bénin         | Cotonou
+  95 | Pascal Adjakly         | Togo          | Sokodé
+  96 | Solange Abla           | Togo          | Kara
+  97 | Rodrigue Kouassi       | Côte d'Ivoire | Yamoussoukro
+  98 | Grâce Gbèhanzin        | Bénin         | Cotonou
+  99 | Edwige Yao             | Côte d'Ivoire | Abidjan
+ 100 | Fatima Jalloh          | Sierra Leone  | Bo
+ 101 | James Doe              | Libéria       | Gbarnga
+ 102 | Helena Gomes           | Cap-Vert      | Praia
+ 103 | Fatou Njie             | Gambie        | Brikama
+ 104 | Joaquim Pereira        | Guinée-Bissau | Bafata
+ 105 | Francis Sillah         | Sierra Leone  | Freetown
+ 106 | Daniel Freeman         | Libéria       | Monrovia
+ 107 | Samuel Lopes           | Cap-Vert      | Mindelo
+(107 lignes)
+                        </code></pre>
+                        <p>
+                            et que vous prépariez une <strong>liste des villes des clients</strong> pour une étude géographique, il est inutile d’afficher leur identifiant ou leur nom complet.
+                        </p>
+                    </section>
+
+                    <section id="sql-comparaison-avec-le-langage-humain" aria-labelledby="sql-comparaison-avec-le-langage-humain">
+                        <code class="sous-titre">
+                            7. Comparaison avec le langage humain
+                        </code>
+                        <p>La commande <code>SELECT ... FROM</code> fonctionne comme une phrase naturelle :</p>
+                        <pre><code class="sql-table">
++----------------------------------------------------+---------------------------------+
+|                   Langage Humain                   |        En SQL(PostgreSQL)       |
++----------------------------------------------------+---------------------------------+ 
+| Je veux voir le nom et la ville des clients	     | SELECT nom, ville FROM clients; |
+| Montrez-moi toutes les colonnes de la table clients| SELECT * FROM clients;          |
+| Je veux uniquement la ville de résidence           | SELECT ville FROM clients;      |      
++----------------------------------------------------+---------------------------------+
+                        </code></pre>
+                        <p>
+                            Le SQL devient alors <strong>un langage de dialogue</strong> avec la base de données. Et <code>SELECT ... FROM</code>, c’est la <strong>phrase de base pour démarrer la conversation</strong>.
+                        </p>
+                    </section>
+
+                    <section id="sql-resume-select-from" aria-labelledby="sql-resume-select-from">
+                        <code class="sous-titre">
+                            8. En résumé
+                        </code>
+                        <p>
+                            La commande <code>SELECT ... FROM</code> est le <strong>point de départ incontournable</strong> lorsqu’on commence à manipuler des données issues de tables. <br>
+                            <br>Elle nous permet :
+                        </p>
+                        <ul>
+                            <li>D’<strong>interroger</strong> une base de données</li>
+                            <li>D’<strong>extraire</strong> les colonnes qui nous intéressent</li>
+                            <li>D’<strong>afficher</strong> ces données sous forme de résultats exploitables</li>
+                        </ul>
+                        <p>
+                            Mais cette commande seule n’est que le début : ce qui la rend vraiment puissante, c’est la possibilité de renommer les colonnes pour les rendre plus lisibles, de filtrer les lignes avec des conditions (WHERE), de trier les résultats avec ORDER BY, de compter ou faire des statistiques , ou encore de li Limiter le nombre de lignes avec LIMIT et  plus tard, explorer les jointures entre plusieurs tables.
+                        </p>
+                    </section>
+
+                    <!-- ✅ Quiz final -->
+                    <section id="quiz-select-from" aria-labelledby="quiz-select-from">
+                        <code class="sous-titre">
+                            9. Quiz : Requête SELECT * FROM nom_table
+                        </code>
+
+                        <p>Testez vos connaissances en répondant aux questions ci-dessous. Cliquez sur <span class="valider">"Valider"</span> pour vérifier vos réponses.</p>
+
+                        <!-- Question 1 -->
+                        <div class="exercice" id="exercice-quiz-select-from-1">
+                            <label for="reponse-quiz-select-from-1">1. Que signifie le mot-clé <code>SELECT</code> en SQL ?</label>
+                                <select id="reponse-quiz-select-from-1" aria-label="Question 1 - SELECT">
+                                    <option value="">-- Choisissez une réponse --</option>
+                                    <option value="a">a) Créer une table</option>
+                                    <option value="b">b) Supprimer une table</option>
+                                    <option value="c">c) Sélectionner des données</option>
+                                    <option value="d">d) Modifier des données</option>
+                                </select>
+                            <button class="valider-btn" data-id="quiz-select-from-1" data-type="quiz">Valider</button>
+                        <p id="message-quiz-select-from-1" class="message" aria-live="polite"></p>
+                        </div>
+
+                        <!-- Question 2 -->
+                        <div class="exercice" id="exercice-quiz-select-from-2" style="display: none;">
+                            <label for="reponse-quiz-select-from-2">2. À quoi sert la clause <code>FROM</code> dans une requête SQL ?</label>
+                                <select id="reponse-quiz-select-from-2" aria-label="Question 2 - FROM">
+                                    <option value="">-- Choisissez une réponse --</option>
+                                    <option value="a">a) Spécifier la condition de tri</option>
+                                    <option value="b">b) Indiquer la table où chercher les données</option>
+                                    <option value="c">c) Ajouter une nouvelle colonne</option>
+                                    <option value="d">d) Trier les résultats</option>
+                                </select>
+                            <button class="valider-btn" data-id="quiz-select-from-2" data-type="quiz">Valider</button>
+                        <p id="message-quiz-select-from-2" class="message" aria-live="polite"></p>
+                        </div>
+
+                        <!-- Question 3 -->
+                        <div class="exercice" id="exercice-quiz-select-from-3" style="display: none;">
+                            <label for="reponse-quiz-select-from-3">3. Laquelle de ces requêtes est correcte pour afficher toutes les colonnes de la table <code>employes</code> ?</label>
+                                <select id="reponse-quiz-select-from-3" aria-label="Question 3 - Syntaxe complète">
+                                    <option value="">-- Choisissez une réponse --</option>
+                                    <option value="a">a) GET * FROM employes;</option>
+                                    <option value="b">b) SHOW ALL FROM employes;</option>
+                                    <option value="c">c) SELECT * FROM employes;</option>
+                                    <option value="d">d) SELECT ALL FROM employes;</option>
+                                </select>
+                            <button class="valider-btn" data-id="quiz-select-from-3" data-type="quiz">Valider</button>
+                        <p id="message-quiz-select-from-3" class="message" aria-live="polite"></p>
+                        </div>
+
+                        <!-- Question 4 -->
+                        <div class="exercice" id="exercice-quiz-select-from-4" style="display: none;">
+                            <label for="reponse-quiz-select-from-4">4. Dans la requête suivante, que représente <code>*</code> ?<br><code>SELECT * FROM produits;</code></label>
+                                <select id="reponse-quiz-select-from-4" aria-label="Question 4 - Signification de *">
+                                    <option value="">-- Choisissez une réponse --</option>
+                                    <option value="a">a) Une multiplication</option>
+                                    <option value="b">b) Une condition</option>
+                                    <option value="c">c) Toutes les lignes</option>
+                                    <option value="d">d) Toutes les colonnes</option>
+                                </select>
+                            <button class="valider-btn" data-id="quiz-select-from-4" data-type="quiz">Valider</button>
+                        <p id="message-quiz-select-from-4" class="message" aria-live="polite"></p>
+                        </div>
+
+                        <!-- Question 5 -->
+                        <div class="exercice" id="exercice-quiz-select-from-5" style="display: none;">
+                            <label for="reponse-quiz-select-from-5">5. Quelle bonne pratique est recommandée en production ?</label>
+                                <select id="reponse-quiz-select-from-5" aria-label="Question 5 - Bonne pratique recommandée">
+                                    <option value="">-- Choisissez une réponse --</option>
+                                    <option value="a">a) Toujours utiliser SELECT *</option>
+                                    <option value="b">b) Ne pas utiliser de point-virgule</option>
+                                    <option value="c">c) Éviter les colonnes nommées</option>
+                                    <option value="d">d) Sélectionner uniquement les colonnes nécessaires</option>
+                                </select>
+                            <button class="valider-btn" data-id="quiz-select-from-5" data-type="quiz">Valider</button>
+                        <p id="message-quiz-select-from-5" class="message" aria-live="polite"></p>
+                        </div>
+
+                        <!-- Question 6 -->
+                        <div class="exercice" id="exercice-quiz-select-from-6" style="display: none;">
+                            <label for="reponse-quiz-select-from-6">6. La requête suivante est-elle correcte ? <br><code>SELECT nom_pays superficie FROM pays;</code></label>
+                                <select id="reponse-quiz-select-from-6" aria-label="Question 6 - Requête correcte">
+                                    <option value="">-- Choisissez une réponse --</option>
+                                    <option value="a">a) Oui</option>
+                                    <option value="b">b) Non, il manque une virgule</option>
+                                    <option value="c">c) Non, il faut un point-virgule</option>
+                                    <option value="d">d) Non, SELECT n'est pas obligatoire</option>
+                                </select>
+                            <button class="valider-btn" data-id="quiz-select-from-6" data-type="quiz">Valider</button>
+                        <p id="message-quiz-select-from-6" class="message" aria-live="polite"></p>
+                        </div>
+
+                        <!-- Question 7 -->
+                        <div class="exercice" id="exercice-quiz-select-from-7" style="display: none;">
+                            <label for="reponse-quiz-select-from-7">7. Dans :<br><code>SELECT nom, prenom FROM clients;</code> <br>Combien de colonnes seront affichées ?</label>
+                                <select id="reponse-quiz-select-from-7" aria-label="Question 7 - Nombre de colonnes">
+                                    <option value="">-- Choisissez une réponse --</option>
+                                    <option value="a">a) 0</option>
+                                    <option value="b">b) 1</option>
+                                    <option value="c">c) 2</option>
+                                    <option value="d">d) Toutes</option>
+                                </select>
+                            <button class="valider-btn" data-id="quiz-select-from-7" data-type="quiz">Valider</button>
+                        <p id="message-quiz-select-from-7" class="message" aria-live="polite"></p>
+                        </div>
+
+                    </section>
+                </article>
+            </main>
+        </div>
+
+            <footer role="contentinfo">
+                <p>&copy; 2025 Data Skill Hub - Tous droits réservés.</p>
+            </footer>
+
+            <!-- ✅ Scripts -->
+            <script src="../assets/js/main.js"></script>
+            <script src="../assets/js/exercices.js"></script>
+            <script src="../assets/js/tutoriels.js"></script>
+
+            <!-- ✅ Bouton retour haut -->
+            <button id="scrollTopBtn" aria-label="Retour en haut">&#8679;</button>
+    </body>
+</html>
+

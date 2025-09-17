@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2. Installation de PostgreSQL | Tutoriel PostgreSQL</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="../images/illustrations/PostgreSQL/Logo PostgreSQL.png" alt="Logo du site" class="logo" />
+            <h1>Apprenez PostgreSQL, Excel et VBA</h1>
+            <button class="menu-toggle" aria-label="Ouvrir le menu">&#9776;</button>
+        </div>
+
+        <nav aria-label="Navigation principale">
+            <ul class="nav-menu">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../postgresql.html">PostgreSQL</a></li>
+                <li><a href="../excel.html">Excel</a></li>
+                <li><a href="../excel-vba.html">Excel VBA</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+                <li><a href="../ressources.html">Ressources</a></li>
+                <li><a href="../apropos.html">À propos</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="layout-postgres">
+        <aside class="sidebar">
+            <h2>PostgreSQL : Leçons</h2>
+            <ul>
+                <li><a href="01-introduction.html">1. Introduction</a></li>
+                <li><a href="02-installation.html">2. Installation de PostgreSQL</a></li>
+                <li><a href="03-connexion.html">3. Connexion au serveur</a></li>
+                <li><a href="04-creation-base.html">4. Création d’une base</a></li>
+                <li><a href="05-execution-requetes.html">5. Exécution de requêtes SQL</a></li>
+                <li><a href="06-types-donnees.html">6. Les types de données</a></li>
+                <li><a href="07-fonctions-utiles.html">7. Les fonctions utiles</a></li>
+                <li><a href="08-sauvegarde.html">8. Sauvegarde & restauration</a></li>
+                <li><a href="09-select-from.html">9. La commande SELECT FROM...</a></li>
+                <li><a href="100-exercices.html">100. Exercices</a></li>
+            </ul>
+        </aside>
+        
+        <main class="main-content">
+        <aside class="toc">
+            <h2 class="no-toc">Sommaire</h2>
+            <nav id="toc-content"></nav>
+        </aside>
+        
+            <h2>2. Installation de PostgreSQL</h2>
+            <p>Cette section vous guide dans l’installation de PostgreSQL sur différents systèmes.</p>
+            <p>
+                Dans cette leçon, vous apprendrez à installer PostgreSQL sur Windows, macOS et Linux.
+            </p>
+            <p>
+                Nous verrons aussi comment utiliser l’installateur officiel ou des outils comme Docker
+            </p> 
+            <h3>Installer PostgreSQL sur Windows</h3>
+            <h4>Introduction</h4>
+            <p>
+                PostgreSQL est un système de gestion de base de données relationnelle (SGBDR) puissant, fiable et conforme aux standards. Bien qu’historiquement conçu pour les systèmes UNIX, il est aujourd’hui parfaitement compatible avec Windows.
+                Dans cette leçon, vous apprendrez à installer PostgreSQL sur un poste Windows, à configurer votre environnement, et à préparer votre système pour les prochaines leçons du tutoriel.
+            </p>
+            <h4>Alternatives à l’installation locale</h4>
+            <p>
+                Si vous ne souhaitez pas installer PostgreSQL sur votre ordinateur, vous pouvez opter pour une solution cloud. Le service Neon propose une instance PostgreSQL gratuite, accessible en quelques secondes, sans carte bancaire. Idéal pour tester rapidement.
+            </p>
+
+            <h3>Étape 1 – Télécharger l’installateur PostgreSQL pour Windows</h3>
+<!--  
+            <p>
+                Rendez-vous sur la page de <a href=" https://www.enterprisedb.com/downloads/postgres-postgresql-downloads/" target="_blank">téléchargement de PostgreSQL</a> proposée par EnterpriseDB pour obtenir la dernière version stable de PostgreSQL pour Windows (64 bits).
+                Au moment de rédiger ce tutoriel, la version proposée est la 17.5-1, mais n’hésitez pas à choisir la plus récente.
+            </p>
+-->
+            <p>
+                Accédez à la page de <a href=" https://www.enterprisedb.com/downloads/postgres-postgresql-downloads/" target="_blank">téléchargement officielle de PostgreSQL</a> sur le site d’EnterpriseDB afin de récupérer la dernière version stable pour Windows (64 bits).
+                Au moment de la rédaction ce tutoriel, la version disponible est la 17.5-1, mais vous pouvez bien sûr installer une version plus récente si elle est proposée.
+            </p>
+
+            <!-- 👇 Illustration ajoutée ici -->
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/01_Site officiel de téléchargement de PostgreSQL.png" alt="Fenêtre de contrôle de compte utilisateur" style="max-width:100%; border:1px solid #ccc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Figure 1 – Site officiel de téléchargement de PostgreSQL
+                </figcaption>
+            </figure>
+
+            <h3>Étape 2 – Installer PostgreSQL étape par étape</h3>
+            <p>
+                Vous devez disposer des droits d’administrateur pour installer PostgreSQL car lors de l’installation, PostgreSQL
+            </p>
+            <ol class="indent">
+                <li>Crée des dossiers 📁 dans C:\Program Files\PostgreSQL\...</li>
+                <li>Ajoute un <strong>compte utilisateur 🧑‍💻 système</strong> (souvent nommé postgres)</li>
+                <li>Crée un <strong>service Windows</strong> 🔄 (pour que PostgreSQL démarre automatiquement)</li>
+                <li>Modifie les variables d’environnement 🛠️ (PATH)</li>
+                <li>Initialise les permissions d’accès 🔐 à la base</li>
+            </ol>
+            <p>
+                Toutes ces actions nécessitent des <strong>privilèges élevés</strong>.
+                <br>Mais il existe des <strong>alternatives avancées</strong> :
+            </p>
+            <h4>✅ 1. Installation portable (sans installation système)</h4>
+            <ul class="indent">
+                <li>Vous pouvez télécharger une version binaire “portable” de PostgreSQL et la placer dans un dossier personnel.</li>
+                <li>Il faudra ensuite :</li>
+                <ul>
+                    <li>Initialiser le cluster avec initdb</li>
+                    <li>Lancer le serveur manuellement via pg_ctl</li>
+                    <li>Éviter toute dépendance au registre Windows</li>
+                </ul>
+            </ul>
+
+            <div class="danger-box">
+                <strong>🔴⚠️ Attention</strong><br>
+                Cette méthode est réservée aux utilisateurs avancés (administrateurs système, développeurs expérimentés).
+            </div>
+
+            <h4>✅ 2. Utiliser PostgreSQL dans WSL ou Docker (sous Windows)</h4>
+            <ul class="indent">
+                <li><strong>WSL (Windows Subsystem for Linux)</strong> : vous installez PostgreSQL dans un environnement Linux isolé.</li>
+                <li><strong>Docker</strong> : vous exécutez PostgreSQL dans un conteneur, sans toucher au système.</li>    
+            </ul>
+            <p>
+                Ces options ne nécessitent pas forcément de modifier le système Windows, mais requièrent que <strong>WSL ou Docker soient déjà installés</strong>, ce qui <strong>nécessite souvent les droits d’administrateur au départ</strong>.
+            </p>
+
+            <div class="info-box">
+                🟢 <strong>En résumé</strong>
+                <br>L’installation standard de PostgreSQL nécessite les droits d’administrateur pour fonctionner correctement.
+                <br>Mais des alternatives “sans installation système” existent, bien qu’elles soient moins simples à mettre en œuvre.
+            </div>
+
+            <h3>Étape 1 – Lancer la fenêtre de contrôle de compte utilisateur</h3>
+            <p>
+                Après avoir téléchargé le fichier postgresql-17.5-1-windows-x64.exe depuis la page officielle d’EnterpriseDB, double-cliquez dessus pour lancer l’installation.
+            </p>
+            <p>
+                À ce moment, Windows affiche une fenêtre de <strong>contrôle de compte utilisateur</strong> (appelée <strong>UAC</strong> – <strong>User Account Control</strong>) comme ci-dessous :
+            </p>
+                
+            <!-- 👇 Illustration ajoutée ici -->
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/02_Contrôle de compte d'utilisateur.png" alt="Fenêtre de contrôle de compte utilisateur" style="max-width:100%; border:1px solid #ccc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Figure 2 – La fenêtre de contrôle de compte utilisateur
+                </figcaption>
+            </figure>
+
+            <p>
+                Cette fenêtre vous demande :
+                <ul>
+                    <strong>"Voulez-vous autoriser cette application d’un éditeur inconnu à apporter des modifications à votre appareil ?”</strong> 
+                </ul>
+                Cela signifie simplement que l’installateur PostgreSQL souhaite effectuer des actions système nécessaires à son bon fonctionnement (création de dossiers, ajout d’un service Windows, etc.)."
+            </p>
+            <p>
+                ✔️ <strong>Si vous êtes sûr d’avoir téléchargé l’installateur depuis le site officiel</strong>, cliquez sur <strong>Oui</strong> pour poursuivre l’installation.
+            </p>
+            <p>
+                💡 <strong>Remarque</strong> : Si le bouton “<strong>Oui</strong>” est grisé, cela signifie que vous n’avez pas les droits administrateur. Dans ce cas, demandez à un administrateur de lancer l’installation pour vous.
+            </p>
+
+            <div class="info-box">
+                🟢 <strong>En résumé</strong>
+                <br>Cliquer sur <strong>“Oui”</strong> ne déclenche pas immédiatement une action visible, mais autorise simplement le système à lancer l’installateur PostgreSQL avec les droits nécessaires.
+                <br>L’assistant d’installation s’ouvre alors dans une nouvelle fenêtre, prêt à vous guider pas à pas.
+            </div>
+
+            <h3>Étape 2 – Lancer l’accueil de l’assistant d’installation PostgreSQL</h3>
+            <p>
+                Lorsque vous cliquez sur le bouton “<strong>Oui</strong>” dans la fenêtre de contrôle de compte utilisateur (UAC), Windows autorise l’exécution de l’installateur PostgreSQL avec les <strong>droits administrateur</strong>.
+            </p>
+            <p>
+                Cette autorisation est essentielle, car PostgreSQL doit :
+            </p>
+            <ul class="indent">
+                <li>créer des dossiers dans des emplacements système (comme C:\Program Files),</li>
+                <li>ajouter un <strong>service Windows</strong> pour exécuter PostgreSQL en arrière-plan,</li>
+                <li>et configurer les composants nécessaires pour faire fonctionner le serveur de bases de données.</li>
+            </ul>
+            <p>
+                Une fois cette autorisation accordée, le programme d’installation démarre immédiatement et affiche la <strong>première page de l’assistant d’installation de PostgreSQL</strong>. <br>Vous êtes alors prêt à suivre les différentes étapes guidées de l’installation.
+            </p>
+                
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/03_Assistant d'installation de PostgreSQL.png" alt="Assistant d'installation de PostgreSQL" style="max-width:100%; border:1px solid #ccc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Figure 3 - L’accueil de l’assistant d’installation de PostgreSQL
+                </figcaption>
+            </figure>
+
+            <p>Cliquez sur le bouton <code>suivant</code> pour continuer.</p>
+
+            <h3>Étape 3 – Choisir le dossier d’installation</h3>
+            <p>
+                Après avoir cliqué sur “<strong>Suivant</strong>” dans la fenêtre d’accueil de l’assistant PostgreSQL, vous accédez à une nouvelle page intitulée <strong>Répertoire d'installation</strong>.
+            </p>
+            <p>
+                PostgreSQL vous propose un chemin d’installation par défaut, généralement le suivant : 
+            
+                <div class="explication">
+                    C:\Program Files\PostgreSQL\17\
+                </div>
+            </p>
+            <p>
+                C’est dans ce dossier que seront placés les fichiers du serveur PostgreSQL, ses outils associés <code class="explication">(psql, pgAdmin, etc.)</code> ainsi que tous les composants sélectionnés.
+            </p>
+
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/04_Répertoire d'installation.png" alt="Répertoire d'installation" style="max-width:100%; border:1px solid cc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Fig 4 - Choisir le répertoire d'installation
+                </figcaption>
+            </figure>
+
+            <p>
+                Vous-vous posez sans doute la question de savoir si vous pouvez modifier ce chemin.
+            </p>
+            <p>
+                Pour la plupart des utilisateurs, <strong>il est recommandé de conserver le chemin par défaut</strong>, surtout si vous débutez. <br>
+                Vous pouvez toutefois choisir un autre dossier si vous avez des contraintes d’espace disque ou des habitudes spécifiques <div class="explication">(ex. : D:\PostgreSQL\17)</div>.
+            </p>
+
+            <div class="info-box">
+                🟢 <strong>En résumé</strong>
+                <br>Cette étape vous permet de définir où PostgreSQL sera installé sur votre machine.
+                <br>Si vous n’avez pas de besoin particulier, le dossier proposé par défaut convient parfaitement.
+            </div>
+            <p>
+                ➡️ Cliquez ensuite sur “<strong>Suivant</strong>” pour passer à l’étape suivante : <strong>la sélection des composants à installer</strong>.
+            </p>
+                
+            <h3>Étape 4 – Sélectionner les composants à installer</h3>
+            <p>
+                Après avoir choisi le dossier d’installation, l’assistant vous conduit à une nouvelle page intitulée <strong>Selection des composants</strong>
+            </p>
+            <p>
+                Cette étape vous permet de <strong>choisir précisément ce que PostgreSQL va installer</strong> sur votre machine. Vous verrez une liste de cases à cocher, avec les composants suivants :
+            </p>
+
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/05_Sélection des composants à installer.png" alt="Sélection des composants" style="max-width:100%; border:1px solid cc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Fig 5 - La sélection des composants à installer
+                </figcaption>
+            </figure>
+
+            <h4>🧩 Composants proposés</h4>
+
+                <div style="overflow-x:auto;">
+                    <table class="composants-table">
+                        <thead>
+                            <tr>
+                                <th>Composant</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>PostgreSQL Server</strong></td>
+                                <td>Le cœur du système — le moteur de base de données. <strong>Obligatoire.</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>pgAdmin 4</strong></td>
+                                <td>Une interface web intuitive pour administrer PostgreSQL. <strong>Recommandé.</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Command Line Tools</strong></td>
+                                <td>Des outils comme <code>psql</code> pour travailler en ligne de commande. <strong>Indispensable.</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>StackBuilder</strong></td>
+                                <td>Un utilitaire pour télécharger des modules supplémentaires (PostGIS, ODBC, etc.). <strong>Facultatif.</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Documentation</strong></td>
+                                <td>Une copie locale de la documentation officielle. <strong>Utile hors ligne.</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            <p>
+                📌 <strong>Tous ces composants sont cochés par défaut</strong>.
+                <br>Vous pouvez les laisser ainsi, à moins d’avoir des besoins spécifiques.
+            </p>
+
+            <div class="info-box">
+                🟢 <strong>En résumé</strong>
+                <br>Cette étape vous permet de choisir ce que PostgreSQL installera sur votre machine.
+                <br>À moins que vous ne sachiez exactement ce que vous faites, conservez les options par défaut — elles conviennent à presque tous les utilisateurs.
+            </div> 
+            <p>
+                ➡️ Une fois votre sélection terminée, cliquez sur “</strong>Suivant</strong>” pour continuer l’installation et définir l’emplacement du dossier des données PostgreSQL.
+            </p>
+
+            <h3>Étape 5 – Choisir le dossier pour les données</h3>
+            <p>
+                Après avoir sélectionné les composants à installer, vous arrivez à l’étape suivante intitulée <strong>Répertoire des données</strong>.
+            </p>
+            <p>
+                C’est ici que PostgreSQL enregistrera <strong>toutes les bases de données que vous allez créer</strong>, ainsi que leurs fichiers internes, les journaux de transactions, les paramètres de configuration, etc.
+            </p>
+
+            <p>
+                Par défaut, l’assistant propose un chemin comme : <code class="explication">C:\Program Files\PostgreSQL\17\Data\</code>
+            </p>
+
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/06_Répertoire des données.png" alt="Répertoire des données" style="max-width:100%; border:1px solid cc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Fig 6 - Le choix du repertoire pour les données
+                </figcaption>
+            </figure>
+
+            <p>
+                Sauf cas particuliers (partition spécifique, SSD séparé, serveur de fichiers), <strong>il est recommandé de conserver le chemin proposé par défaut</strong>. PostgreSQL y stockera les fichiers critiques de fonctionnement et vos futures données.
+            </p>
+            <p>
+                ⚠️ Ce dossier <strong>ne doit pas être supprimé ou déplacé</strong> après l’installation, sans quoi le serveur ne pourra plus démarrer.
+            </p>                    
+                        
+            <div class="info-box">
+                🟢 <strong>En résumé</strong>
+                <br>Cette étape vous permet d’indiquer où PostgreSQL va stocker toutes vos données.
+                <br>Si vous ne savez pas quoi choisir, laissez le chemin par défaut.
+            </div>
+            <p>
+                ➡️ Cliquez sur “<strong>Suivant</strong>” pour continuer. Vous serez alors invité à <strong>définir le mot de passe du superutilisateur</strong> <code>postgres</code> — une étape cruciale pour sécuriser votre base.
+            </p>
+            <h3>Étape 6 – Définir le mot de passe du superutilisateur postgres</h3>
+            <p>
+                Après avoir choisi le dossier de données, vous accédez à une étape essentielle de l’installation : <strong>la définition du mot de passe du superutilisateur PostgreSQL</strong>.
+            </p>
+            <p>Cette page est intitulée <strong>Mot de passe</strong></p>
+
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/07_Mot de passe.png" alt="Mot de passe" style="max-width:100%; border:1px solid cc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Fig 7 - Définir le mot de passe du superutilisateur postgres 
+                </figcaption>
+            </figure>
+
+            <h5>👤 Qui est postgres ?</h5>
+            <p>Lors de l’installation, PostgreSQL crée automatiquement un compte interne appelé <code>postgres</code>.</p>
+            <ul class="indent">
+                <li>C’est l’<strong>utilisateur administrateur</strong> (ou superutilisateur) de la base de données.</li>
+                <li>Il a <strong>tous les droits</strong> : création de bases, gestion des utilisateurs, modifications système, etc.</li>
+                <li>Il est <strong>indépendant</strong> de votre session Windows : vous devrez vous y connecter manuellement via psql, pgAdmin ou une application.</li>
+            </ul> 
+            <h5>🔐 Ce que vous devez faire ici</h5>
+            <p>
+                L’assistant vous demande de <strong>définir un mot de passe sécurisé</strong> pour l’utilisateur <code>postgres</code>.
+            </p> 
+            <p>
+                Ce mot de passe sera requis à chaque fois que vous voudrez :
+            </p>
+            <ul class="indent">
+                <li>vous connecter à PostgreSQL via psql ou pgAdmin,</li>
+                <li>exécuter des requêtes SQL en tant qu’administrateur,</li>
+                <li>créer d'autres utilisateurs ou bases de données.</li>
+            </ul>
+            <h5>✅ Recommandations pour bien choisir ce mot de passe</h5>
+
+                <div style="overflow-x:auto;">
+                    <table class="composants-table">
+                        <thead>
+                            <tr>
+                                <th>Bonnes pratiques ✔️</th>
+                                <th>À éviter ❌</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Utilisez au moins <strong>8 à 12 caractères</strong></td>
+                                <td>Pas de mot de passe vide</td>
+                            </tr>
+                            <tr>
+                                <td>Combinez <strong>lettres, chiffres et symboles</strong></td>
+                                <td>Pas de 123456, admin, ou password</td>
+                            </tr>
+                            <tr>
+                                <td>Exemple : Jobe@2025</td>
+                                <td>Évitez les mots courants ou trop simples</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> 
+            <p>
+                📝 <strong>Note</strong> : PostgreSQL ne vous redemandera pas ce mot de passe à chaque lancement. Il est mémorisé par vos outils (ex : pgAdmin), <strong>mais reste requis lors des connexions manuelles</strong>.
+            </p>
+            <div class="info-box">
+                🟢 <strong>En résumé</strong>
+                <br>Cette étape est cruciale : vous définissez ici le mot de passe du superutilisateur postgres, qui vous donne un accès total à votre serveur PostgreSQL.
+                <br>Choisissez un mot de passe fort et conservez-le précieusement : vous en aurez besoin pour toutes vos connexions futures.
+            </div>
+            <p>
+                ➡️ Cliquez sur “<strong>Suivant</strong>” une fois votre mot de passe défini.
+                <br>Vous passerez alors à l’étape suivante : le choix du port d'écoute de PostgreSQL.
+            </p>
+            <h3>Étape 7 – Choisir le port d’écoute de PostgreSQL</h3>
+            <p>
+                Après avoir défini le mot de passe du superutilisateur postgres, l’assistant vous demande de configurer un paramètre fondamental : <strong>le port d'écoute</strong> du serveur PostgreSQL.
+            </p>
+            <p>La fenêtre affichée s’intitule <strong>Port</strong></p>
+            <h5>Qu’est-ce qu’un port d’écoute ?</h5>
+            <p>
+                Un <strong>port</strong> est un canal de communication numérique par lequel un service (comme PostgreSQL) écoute les requêtes réseau sur votre machine.
+            </p>
+            <p>
+                Lorsque vous vous connectez à votre base de données (depuis psql, pgAdmin, un script Python ou une application web), la connexion se fait à <code>localhost:5432</code>
+                <br>C’est-à-dire :
+            </p>
+            <ul class="indent">
+                <li>localhost = votre propre machine,</li>
+                <li>5432 = le port par défaut de PostgreSQL.</li>
+            </ul>
+
+            <p>
+                L’assistant vous propose le port 5432 par défaut.
+                <br>Dans la majorité des cas, vous pouvez <strong>laisser cette valeur telle quelle</strong>.
+                <br><code>Port: 5432</code>
+            </p>
+            <p>
+                Vous pouvez <strong>modifier ce port</strong> si, par exemple :
+            </p>
+            <ul class="indent">
+                <li>un autre service utilise déjà le port 5432 (vous avez déjà une autre instance PostgreSQL installée),</li>
+                <li>vous installez plusieurs serveurs PostgreSQL côte à côte (avec des ports différents),</li>
+                <li>ou vous souhaitez renforcer la sécurité en ne laissant pas le port par défaut accessible.</li>
+            </ul>
+            <p>Dans ces cas, vous pouvez entrer une autre valeur comme :</p>
+            <p>
+                <code>
+                    5433 (figure 7) 
+                    <br>5434
+                    <br>54321
+                </code>
+            </p>
+            <p>
+                Assurez-vous simplement que ce port n’est pas déjà utilisé sur votre système.
+            </p>
+
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/08_Le port d’écoute de postgresql.png" alt="Le port d’écoute" style="max-width:100%; border:1px solid cc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Fig 8 - Le port d’écoute de postgresql
+                </figcaption>
+            </figure>  
+
+            <div class="danger-box">
+                <strong>🔴⚠️ Attention</strong>
+                <br>Si vous modifiez ce port, vous devrez vous y reconnecter avec ce numéro.
+                <br>Par exemple, pour se connecter en ligne de commande : <br>
+                <code>psql -U postgres -h localhost -p 5433</code>
+            </div>
+ 
+            <div class="info-box">
+                🟢 <strong>En résumé</strong>
+                <br>Le port est le canal par lequel PostgreSQL communique. Le port 5432 est standard et convient à la majorité des installations.
+                <br>Changez-le uniquement si vous avez une bonne raison (autre instance, conflit de port, etc.).
+            </div>
+            <p>
+                ➡️ Cliquez sur “Suivant” une fois le port configuré.
+                Vous passerez ensuite à l’étape 8 : la configuration des paramètres régionaux (locale), qui détermine le format des dates, chiffres et tri alphabétique dans vos bases.
+            </p>
+
+            <h3>Étape 8 – Choisir les paramètres régionaux (Locale)</h3>
+            <p>
+                Après avoir défini le port d’écoute, l’assistant vous présente une étape un peu moins connue, mais importante pour le bon fonctionnement de vos bases de données : <strong>Options avancés (Locale utilisée)</strong>
+            </p>
+            <h5>Qu’est-ce que la locale ?</h5>
+            <p>
+                La locale détermine la manière dont PostgreSQL va gérer certains aspects <strong>culturels ou linguistiques</strong>, notamment :
+            </p>
+            <ul class="indent">
+                <li>le tri alphabétique (ORDER BY),</li>
+                <li>la casse des lettres (majuscule/minuscule),</li>
+                <li>les formats de date, d’heure, de nombre,</li>
+                <li>la sensibilité linguistique de certaines comparaisons.</li>
+            </ul>
+            <h5>Que propose l’assistant PostgreSQL ici ?</h5>
+            <p>
+                Un menu déroulant intitulé “Locale” vous est proposé.
+                <br>Par défaut, il est réglé sur :
+                <code>Default locale</code>
+            </p>
+            <p>Ce qui signifie :</p>
+            <p>
+                PostgreSQL utilisera les paramètres régionaux de votre système Windows (souvent <code>fr_FR</code> pour un Windows en français, ou <code>en_US</code> sur un système anglais).
+            </p>
+            <h5>Faut-il modifier cette locale ?</h5>
+            <p>
+                Dans <strong>90 % des cas, vous pouvez laisser cette option sur</strong> <code>Default locale</code>.
+                Cela convient très bien pour un usage personnel, une formation, un développement local ou un usage professionnel classique.
+            </p>
+            <p>
+                Vous pouvez toutefois choisir une locale spécifique dans certains cas particuliers :
+            </p>
+            <ul class="indent">
+                <li>Pour garantir un <strong>tri alphabétique strictement binaire</strong> (C ou POSIX)</li>
+                <li>Pour forcer l'anglais (en_US.UTF-8) si vous travaillez avec des outils anglophones</li>
+                <li>Pour harmoniser les traitements sur un serveur de production multi-utilisateur</li>
+            </ul>
+            <p>
+                Mais si vous <strong>ne savez pas ce que vous faites</strong>, il est préférable de <strong>ne pas toucher à cette option</strong>.
+            </p>
+
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/09_Options avancés (Locale utilisée).png" alt="Choisir les paramètres régionaux" style="max-width:100%; border:1px solid cc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Fig 9 - Choix des paramètres régionaux
+                </figcaption>
+            </figure>
+
+            <div class="info-box"> 
+                <strong>🟢 En résumé</strong>
+                <br>La locale détermine le comportement linguistique de votre base de données (tri, format, casse…).
+                <br>Laissez-la sur <code>Default locale</code> sauf si vous avez un besoin précis ou des contraintes techniques.
+            </div>
+            <p>
+                ➡️ Cliquez ensuite sur “<strong>Suivant</strong>” pour accéder à l’étape suivante :
+                <br><strong>le résumé des paramètres d’installation</strong>, dernière étape avant le lancement réel du processus.
+            </p>
+
+            <h3>Étape 9 – Vérifier le résumé de l’installation</h3>
+            <p>
+                Après avoir configuré tous les paramètres nécessaires (dossier, composants, mot de passe, port, locale...), l’assistant PostgreSQL vous affiche une page intitulée : <br>
+                <strong>Pre Installation Summary</strong>
+                <br>(<code>en français : Résumé avant installation</code>)
+            </p>
+            <p>
+                C’est une <strong>étape cruciale</strong> : elle vous permet de <strong>revoir tous les paramètres que vous avez choisis</strong> avant que l’installation ne commence réellement.
+            </p>
+            <h5>Que contient cette page ?</h5>
+            <p>La page de résumé affiche toutes les informations suivantes :</p>
+            <ul class="indent">
+                <li>📂 Répertoire d'installation <br><code>Ex. : C:\Program Files\PostgreSQL\17\</code></li>
+                <li>📦 Composants sélectionnés <br>(PostgreSQL Server, pgAdmin 4, outils en ligne de commande, StackBuilder…)</li>
+                <li>🔐 Mot de passe défini pour l'utilisateur postgres <br>(Le mot de passe ne s'affiche pas, mais est rappelé en tant qu'étape configurée.)</li>
+                <li>📁 Dossier de données PostgreSQL <br>Ex. : C:\Program Files\PostgreSQL\17\data\</li>
+                <li>🌐 Port d'écoute choisi <br>Ex. : 5432 ou 5433</li>
+                <li>🌍 Locale sélectionnée <br>Ex. : Default locale ou en_US.UTF-8, etc.</li>
+            </ul>
+            <h5>Que devez-vous faire ici ?</h5>
+            <p>👉 Relisez attentivement tous les paramètres.</p>
+            <p>Si vous constatez une erreur (par exemple, un port incorrect, un mauvais dossier ou un composant oublié), vous pouvez cliquer sur “<strong>Retour</strong>” pour revenir à l'étape concernée et la corriger.</p>
+            <p>Sinon, vous pouvez continuer sereinement.</p>
+
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/10_Preinstallation summary.png" alt="Preinstallation summary" style="max-width:100%; border:1px solid cc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Fig 10 - Vérification du résumé de l’installation
+                </figcaption>
+            </figure> 
+
+            <div> class="info-box">
+                <strong>🟢 En résumé</strong>
+                <br>Cette étape vous offre une dernière occasion de <strong>vérifier tous les paramètres avant l’installation</strong>.
+                <br>Prenez un instant pour les relire — vous pourrez encore revenir en arrière si nécessaire.
+            </div>
+            <p>
+                ➡️ Cliquez sur “<strong>Suivant</strong>” pour démarrer l’installation proprement dite.
+                Le processus de copie et de configuration des fichiers va alors commencer.
+            </p>
+
+            <h3>Étape 10 – Prêt pour l’installation</h3>
+            <p>
+                Vous pensiez que c’était parti ?
+                <br>Eh bien... pas tout à fait ! 😄
+            </p>
+            <p>
+                Avant de lancer l’installation, PostgreSQL affiche une étape de confirmation intitulée “<strong>Prêt pour l’installation</strong>” — une sorte de :
+            </p>
+            <p>
+                🗣️ “<code>Tu es bien sûr de vouloir faire ça ? Parce qu’après, y’a plus de retour en arrière…</code>”
+            </p>
+
+            <p>
+                Cette page vous indique que <strong>toutes les options sont validées</strong>, que tout est prêt, et que <strong>le processus d’installation réelle va démarrer</strong> dès que vous cliquerez sur “<strong>Suivant</strong>”.
+            </p>
+            <h5>À quoi sert cette étape ?</h5>
+            <p>Elle vous offre :</p>
+            <ul class="indent">
+                <li>✅ Une <strong>dernière vérification</strong> avant le lancement</li>
+                <li>🧘 Une <strong>pause zen</strong> pour respirer un bon coup</li>
+                <li>🔁 La possibilité de <strong>revenir en arrière</strong> si vous avez un doute</li>
+                <li>🚀 Le signal que vous êtes prêt à entrer dans la phase sérieuse de l’installation</li>
+            </ul>
+            <p>
+                C’est une étape courante dans les installateurs Windows, qui évite les “Oups, j’ai cliqué trop vite…”
+            </p>
+
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/11_Prêt pour l'installation.png" alt="Prêt pour l'installation" style="max-width:100%; border:1px solid cc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Fig 11 - Prêt pour l'installation de PostgreSQL sur votre ordinateur
+                </figcaption>
+            </figure> 
+
+            <div class="info-box">
+                🟢 <strong>En résumé</strong>
+                <br>Cette étape vous donne une dernière chance de relire vos choix, d’ajuster un paramètre… ou de tout annuler pour devenir moine shaolin 🧘‍♂️.
+                <br>Mais si tout est bon, cliquez fièrement sur “Suivant”. Personne ne vous jugera.
+                <br>(Enfin… sauf peut-être le pingouin de Linux. 🐧)
+            </div>
+                        
+            <h3>Étape 11 – Installation de PostgreSQL en cours</h3>
+            <p>
+                Après avoir confirmé tous les paramètres dans la page de résumé, vous cliquez sur “<strong>Suivant</strong>” une dernière fois.
+                L’assistant lance alors le processus d’installation proprement dit. Cette étape est intitulée : <code>Installation en cours</code>
+            </p>
+            <h5>Que se passe-t-il concrètement à cette étape ?</h5>
+            <p>
+                L’installateur procède à une série d’opérations techniques automatiques, parmi lesquelles :
+            </p>
+            <ol class="indent">
+                <li>📁 Création des dossiers d'installation et de données (/data)</li>
+                <li>📥 Copie de tous les fichiers nécessaires (binaire du serveur, outils, pgAdmin, etc.)</li>
+                <li>🛠️ Configuration automatique des fichiers internes (postgresql.conf, pg_hba.conf)</li>
+                <li>🗃️ Initialisation du cluster de base de données PostgreSQL</li>
+                <li>👤 Création de l’utilisateur système PostgreSQL sur Windows</li>
+                <li>🔄 Ajout et démarrage du service Windows PostgreSQL</li>
+                <li>📌 Enregistrement des paramètres dans le registre Windows</li>
+            </ol>
+            <p>
+                Pendant ce temps, une <strong>barre de progression verte</strong> s’affiche, indiquant visuellement l’avancement de l’installation.
+                <br>L’opération prend généralement 1 à 3 minutes sur une machine moderne. Et un message “Merci de patienter durant l’installation de PostgreSQL sur votre ordinateur” s’affiche durant tout le processus.
+            </p>
+            <p>
+                Pendant cette étape, vous n’avez rien à faire. Attendez simplement que l’installation se termine.
+            </p>
+
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/12_Installation en cours.png" alt="Installation en cours" style="max-width:100%; border:1px solid cc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Fig 12 - Installation de PostgreSQL en cours
+                </figcaption>
+            </figure>
+
+            <h5>Que faire si une erreur survient ?</h5>
+            <p>
+                Dans certains cas (très rares), une erreur peut interrompre l’installation :
+            </p>
+            <ul class="indent">
+                <li>Conflit de port déjà utilisé</li>
+                <li>Manque de droits d’administrateur</li>
+                <li>Antivirus ou pare-feu bloquant une opération</li>
+            </ul>
+            <p>
+                Dans ce cas, l’assistant vous affichera un message explicite. Vous pourrez relancer l’installation après avoir corrigé le problème.
+            </p>
+
+            <div class="info-box">
+                🟢 <strong>En résumé</strong>
+                <br>Cette étape correspond à la vraie phase d'installation technique de PostgreSQL. Le système copie, configure, initialise et démarre le serveur.
+                <br>Vous n’avez rien à faire, si ce n’est patienter jusqu’à la fin du processus.
+            </div>
+            <p>
+                    ➡️ Une fois l’installation terminée, vous serez automatiquement redirigé vers la <strong>dernière étape</strong> : la confirmation de la réussite de l’installation, et éventuellement, le lancement de StackBuilder.
+            </p>
+
+            <h3>Étape 12 – Fin de l’installation et option StackBuilder</h3>
+            <p>
+                Une fois l’installation terminée, l’assistant PostgreSQL vous affiche une dernière page intitulée <strong>Fin de l’assistant d’installation de PostgreSQL</strong>.
+            </p>
+
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/13_La Fin de l'assistant d'installation de PostgreSQL.png" alt="Installation en cours" style="max-width:100%; border:1px solid cc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Fig 13 - Fin de l'installation de PostgreSQL
+                </figcaption>
+            </figure>
+
+
+            <p>Cette étape vous <strong>confirme que l’installation s’est bien déroulée</strong> et vous propose une <strong>option facultative</strong> : lancer StackBuilder.</p>
+                
+            <h5>Que voit-on à cette étape ?</h5>
+            <p>Voici ce que contient la fenêtre de clôture :</p>
+            <ul class="indent">
+                <li>Un message de confirmation du type : <br>"Setup has finished installing PostgreSQL on your computer."</li>
+                <li>Une case cochée par défaut : <br>"<strong>Launch StackBuilder at exit</strong>"</li>
+                <li>Un bouton “<strong>Finish</strong>” pour quitter l’assistant</li>
+            </ul>
+
+            <h5>Qu’est-ce que StackBuilder ?</h5>
+            <p>
+                <strong>StackBuilder</strong> est un outil fourni par EnterpriseDB qui permet de :
+            </p>
+            <ul class="indent">
+                <li>Télécharger et installer des <strong>extensions ou modules complémentaires</strong> :</li>
+                <ul>
+                    <li>PostGIS (Systèmes d’Information Géographique)</li>
+                    <li>PL/Java, PL/Perl, PL/Python</li>
+                    <li>ODBC, JDBC, drivers</li>
+                    <li>outils de réplication, sauvegarde, BI, etc.</li>
+                </ul>
+                <li>Ajouter des <strong>composants Open Source</strong> directement compatibles avec votre version de PostgreSQL</li>
+                <li>Accéder à un écosystème riche autour de PostgreSQL</li>
+            </ul>
+            <p>
+                Cet outil est <strong>facultatif</strong> mais très utile si vous souhaitez <strong>étendre les fonctionnalités</strong> de votre serveur PostgreSQL.
+            </p>
+            <h5>Dois-je lancer StackBuilder maintenant ?</h5>
+            <p>
+                Cela dépend de votre besoin :
+            </p>
+            <div style="overflow-x:auto;">
+                <table class="composants-table">
+                    <thead>
+                        <tr>
+                            <th>Cas de figure</th>
+                            <th>Recommandation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Vous débutez et souhaitez apprendre PostgreSQL</strong></td>
+                            <td>❌ Décochez la case, inutile pour le moment</td>
+                        </tr>
+                        <tr>
+                            <td>Vous installez PostgreSQL pour un usage professionnel</td>
+                            <td>✅ Vous pouvez l’exécuter pour installer PostGIS ou des connecteurs</td>
+                        </tr>
+                        <tr>
+                            <td>Vous ne savez pas ce que c’est</td>
+                            <td>❌ Ignorez-le, vous pourrez y revenir plus tard</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h5>Que faire ensuite ?</h5>
+            <ol class="indent">
+                <li>Si vous <strong>laissez la case cochée</strong>, StackBuilder se lancera immédiatement après avoir cliqué sur “<strong>Finish</strong>”.</li>
+                <li>Si vous la <strong>décochez</strong>, l’installation se termine proprement et vous revenez à votre bureau Windows.</li>
+            </ol>
+            <div class="info-box">
+                🟢 <strong>En résumé</strong>
+                <br>Cette dernière étape vous confirme que PostgreSQL est installé avec succès.
+                <br>StackBuilder est un outil optionnel pour enrichir votre serveur — vous pouvez le lancer maintenant ou plus tard, selon vos besoins.
+            </div>
+            <p>
+                🎉 <strong>Félicitations !</strong> Vous venez de terminer l’installation complète de PostgreSQL sur Windows.
+            </p>
+            <p>
+                👉 Vous êtes maintenant prêt à ouvrir <strong>pgAdmin</strong>, lancer <strong>psql</strong> en ligne de commande, ou créer votre première base de données.
+            </p>
+
+            <h3>Page finale – Installation terminée avec succès : que faire maintenant ?</h3>
+            <p>Félicitations 🎉</p>
+            <p>
+                Vous avez terminé avec succès toutes les étapes de l’installation de <strong>PostgreSQL sur Windows</strong>. Vous êtes maintenant prêt à démarrer votre parcours avec l’un des systèmes de gestion de bases de données les plus puissants et les plus utilisés au monde.
+            </p>
+            <p>
+                Mais avant de vous lancer, prenez quelques instants pour <strong>vérifier que tout fonctionne correctement</strong>.
+            </p>
+            <h3>1. Vérifier que PostgreSQL a été installé</h3>
+            <p>
+                Voici les principaux éléments que vous devriez retrouver sur votre système après l'installation :
+            </p>
+            <div style="overflow-x:auto;">
+                <table class="composants-table">
+                    <thead>
+                        <tr>
+                            <th>Élément</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>🖥️ Serveur PostgreSQL</strong></td>
+                            <td>Il tourne en arrière-plan en tant que service <strong>Windows<s/trong></strong></td>
+                        </tr>
+                        <tr>
+                            <td>🧑‍💻 pgAdmin 4</td>
+                            <td>Interface web d'administration graphique</td>
+                        </tr>
+                        <tr>
+                            <td>📟 psql</td>
+                            <td>Console en ligne de commande pour interagir avec PostgreSQL</td>
+                        </tr>
+                        <tr>
+                            <td>📁 Répertoires</td>
+                            <td>C:\Program Files\PostgreSQL\17\ et C:\Program Files\PostgreSQL\17\data\</td>
+                        </tr>
+                        <tr>
+                            <td>🔄 Service actif</td>
+                            <td>Nom du service Windows : postgresql-x64-17L</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3> 2. Tester la connexion avec psql</h3>
+            <p>
+                Ouvrez Git Bash ou l'invite de commande (cmd). Puis tapez l’une des commandes suivantes :
+            </p>
+            <code>psql -U postgres -h localhost -p 5432</code> ou <code>psql -U postgres -h localhost -p 5433</code> selon votre numéro de port ensuite appuyez la touche <code class="references">Enter</code>
+            <p>
+                Un prompt demande le mot de passe pour l’utilisateur <code>postgres</code> (figure 13)
+            </p>
+
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/14_Se connecter à PostgreSQL via Bash.png" alt="Se connecter à PostgreSQL via Bash" style="max-width:100%; border:1px solid #ccc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Figure 14 – Se connecter à PostgreSQL via Bash
+                </figcaption>
+            </figure>
+
+            <p>
+                Entrez votre mot de passe.
+                <br>✅ Si tout fonctionne, vous verrez apparaître le prompt PostgreSQL : <code>postgres=#</code>
+            </p>
+
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/15_Connecter à PostgreSQL via Bash.png" alt="Connecté à PostgreSQL via Bash" style="max-width:100%; border:1px solid #ccc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Figure 15 – Connecté à PostgreSQL via Bash
+                </figcaption>
+            </figure>
+                
+            <h3>3. Vérifier avec pgAdmin</h3>
+            <ol class="indent">
+                <li>Cliquez sur l’icône <strong>pgAdmin 4</strong> dans le menu Démarrer</li>
+                <li>Attendez que l’interface se charge dans votre navigateur</li>
+                <li>Cliquez sur "<strong>Add New Server</strong>" ou sélectionnez le serveur PostgreSQL déjà présent</li>
+                <li>Entrez le mot de passe que vous avez défini lors de l’installation</li>
+            </ol>
+            <h3>4. Bonus : vérifier le service PostgreSQL dans Windows</h3>
+            <p>
+                Ouvrez la boîte de dialogue "Exécuter" (ou “Run” en anglais) (Win + R) et tapez : <code>services.msc</code>
+            </p>
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/16_La fenêtre Exécuter.png" alt="La fenêtre Exécuter" style="max-width:100%; border:1px solid #ccc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Figure 16 – La fenêtre Exécuter
+                </figcaption>
+            </figure>
+            <p>
+                Cherchez la ligne <code>postgresql-x64-17</code>.
+            </p>
+            <p>
+                📌 Le <strong>statut doit être</strong> : "<strong>En cours d’exécution</strong>" ou "<strong>Running</strong>" en anglais.
+                <br>Si ce n’est pas le cas, faites un clic droit et cliquez sur “Démarrer”.
+            </p>
+            <figure class="illustration">
+                <img src="../images/" alt="">
+                <img src="../images/illustrations/PostgreSQL/17_La fenêtre des services.png" alt="La fenêtre des services" style="max-width:100%; border:1px solid #ccc; border-radius:8px;">
+                <figcaption class="description-illustration">
+                    Figure 17 – La fenêtre des services
+                </figcaption>
+            </figure>
+            <h3>Et maintenant, que faire ?</h3>
+            <p>
+                Vous avez plusieurs options pour continuer :
+            </p>
+            <div style="overflow-x:auto;">
+                <table class="composants-table">
+                    <thead>
+                        <tr>
+                            <th>Objectif</th>
+                            <th>Par où commencer ?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Apprendre le SQL et créer vos premières bases</td>
+                            <td>Leçon 01 – Introduction à PostgreSQL</td>
+                        </tr>
+                        <tr>
+                            <td>Maîtriser pgAdmin 4</td>
+                            <td>Guide d’initiation à pgAdmin</td>
+                        </tr>
+                        <tr>
+                            <td>Travailler en ligne de commande psql</td>
+                            <td>Console en ligne de commande pour interagir avec PostgreSQL</td>
+                        </tr>
+                        <tr>
+                            <td>Installer des extensions</td>
+                            <td>Utiliser StackBuilder (PostGIS, PL/Python...)</td>
+                        </tr>
+                        <tr>
+                            <td>Sécuriser son serveur</td>
+                            <td>Apprendre à gérer les utilisateurs et les droits</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-box">
+                💬 <strong>Conseil de formateur</strong>
+                <br>PostgreSQL est un outil extrêmement puissant. Prenez le temps de bien comprendre les bases : types de données, requêtes SQL, relations entre tables, index, utilisateurs…
+                <br>Vous construirez ainsi des bases solides pour aller vers des projets plus ambitieux (API, entrepôt de données, automatisation…).
+            </div>
+            <h3>🎉 Bravo encore</h3>
+            <p>
+                Vous êtes maintenant <strong>opérationnel pour utiliser PostgreSQL</strong> en toute autonomie.
+                Nous vous invitons à continuer avec les leçons suivantes pour découvrir en profondeur la richesse de ce système.
+            </p>
+
+        </main>
+    </div>
+
+    <div class="pagination">
+        <a href="01-introduction.html" class="prev">
+            ← Introduction à PostgreSQL
+        </a>
+        <a href="../index.html" class="home">🏠 Accueil</a>
+        <a href="03-connexion.html" class="next">
+            Connexion au serveur →
+        </a>
+    </div>    
+
+    <!-- Pied de page -->
+    <footer role="contentinfo">
+        <p>&copy; 2025 - Ce site vous guide pas à pas vers la maîtrise de PostgreSQL</p>
+        <a href="#top" class="back-to-top">↑ Retour en haut</a>
+        <!-- <a href="#top" class="back-to-top">&#8593; Retour en haut</a> -->
+    </footer>
+    <script src="../js/script.js" defer></script>
+<!--  
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPage = location.pathname.split('/').pop();
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            sidebarLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+-->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const main = document.querySelector('main');
+        const toc = document.getElementById('toc-content');
+
+        if (!main || !toc) return;
+
+        const headers = main.querySelectorAll('h2, h3');
+        headers.forEach((el, i) => {
+            // ❌ Ignore les titres avec la classe "no-toc"
+            if (el.classList.contains('no-toc')) return;
+
+            // ✅ Crée un id unique s’il n’existe pas
+            if (!el.id) {
+                el.id = `section-${i}`;
+            }
+
+            // ✅ Crée un lien dans le sommaire
+            const link = document.createElement('a');
+            link.href = `#${el.id}`;
+            link.textContent = el.textContent;
+            link.className = el.tagName.toLowerCase(); // h2 ou h3
+            toc.appendChild(link);
+        });
+    });
+</script>
+</body>
+</html>

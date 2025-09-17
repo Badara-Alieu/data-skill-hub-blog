@@ -1,0 +1,14 @@
+{
+    "Excel": [
+        { "titre": "Formules de base", "url": "exercices/excel/formules_base.html" },
+        { "titre": "Mise en forme conditionnelle", "url": "exercices/excel/mise_en_forme.html" }
+    ],
+    "Excel VBA": [
+        { "titre": "Créer une macro simple", "url": "exercices/excel_vba/macro_simple.html" },
+        { "titre": "Boucles en VBA", "url": "exercices/excel_vba/boucles.html" }
+    ],
+    "PostgreSQL": [
+        { "titre": "Créer une table simple", "url": "exercices/postgresql/creer_table.html" },
+        { "titre": "Requêtes SELECT basiques", "url": "exercices/postgresql/select_simple.html" }
+    ]
+}

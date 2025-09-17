@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Data Skill Hub</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/contact.css">
+
+
+    <link rel="stylesheet" href="../assets/css/bloguer.css" />
+    <link rel="stylesheet" href="../assets/css/blog.css" />
+</head>
+
+<body>
+    <header>
+        <div class="site-branding">
+            <img src="../images/logo/logo-site.jpeg" alt="Logo du site" class="site-logo" />
+        </div>
+        <h1 id="site-title">Data Skill Hub</h1>
+
+        <nav aria-label="Navigation principale">
+            <ul class="nav-menu">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="tutoriels.html">Tutoriels</a></li>
+                <li><a href="exercices.html">Exercices</a></li>
+                <li><a href="blog/blog.html">Blog</a></li>
+                <li><a href="contact.html" aria-current="page">Contact</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <!-- Conteneur principal -->
+    <div id="conteneur-principal" class="avec-toc-droite">
+        <main id="main-content">
+            <section aria-labelledby="contact-heading">
+                <h2 id="contact-heading">Contactez-nous</h2>
+                <p>Remplissez le formulaire ci-dessous pour nous envoyer un message :</p>
+            </section>           
+            
+
+        <form id="contact-form">
+            <label for="name">Nom :</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message :</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <button type="submit">Envoyer</button>
+        </form>
+    </main>
+</div>
+
+    <footer role="contentinfo">
+        <p>&copy; 2025 Data Skill Hub - Tous droits réservés.</p>
+        <nav aria-label="Liens secondaires">
+            <ul class="footer-menu">
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="tutoriels.html">Tutoriels</a></li>
+                <li><a href="https://github.com/ton-projet" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+        </nav>
+    </footer>
+    
+    <button id="scrollTopBtn" aria-label="Retour en haut">&#8679;</button>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/contact.js"></script>
+    <script src="server.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Data Skills Hub</title>
+    <link rel="icon" href="../favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../favicon.png">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/bloguer.css" />
+    <link rel="stylesheet" href="../assets/css/blog.css" />
+</head>
+
+<body>
+
+    <!-- En-tête du site -->
+    <header>
+        <div class="site-branding">
+            <img src="../images/logo/logo-site.jpeg" alt="Logo du site" class="site-logo" />
+        </div>
+        <h1 id="site-title">Data Skill Hub</h1>
+
+        <nav aria-label="Navigation principale">
+            <ul class="nav-menu">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../tutoriels.html">Tutoriels</a></li>
+                <li><a href="../exercices.html">Exercices</a></li>
+                <li><a href="blog.html" aria-current="page">Blog</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <div class="blog-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Articles récents</h2>
+            <ul>
+                <li><a href="01-bienvenue.html">Bienvenue sur le blog</a></li>
+                <li><a href="02-pourquoi-apprendre-postgresql.html">Pourquoi apprendre PostgreSQL en 2025 ?</a></li>
+                <li><a href="03-astuces-excel.html">5 astuces Excel à connaître</a></li>
+                <li><a href="04-vba-automatisation.html">Automatiser avec Excel VBA</a></li>
+            </ul>
+        </aside>
+
+        <!-- Contenu principal -->
+        <main class="blog-main">
+            <h2>Bienvenue sur le Blog du Data Skills Hub</h2>
+            <p>
+                Retrouvez ici tous nos <strong>articles, astuces et tutoriels</strong> autour de PostgreSQL,
+                Excel et Excel VBA. Que vous soyez débutant, professionnel ou expert, nos contenus sont faits pour
+                vous aider à progresser rapidement.
+            </p>
+
+            <!-- ✅ Barre de recherche -->
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Rechercher un article..." />
+            </div>
+
+            <!-- Liste des articles -->
+            <article class="blog-card">
+                <img src="../images/illustrations/blog/blog-preview.jpg"
+                    alt="Bienvenue sur le blog Data Skills Hub"
+                    class="blog-thumbnail">
+                <div class="blog-content">
+                    <h3><a href="01-bienvenue.html">Bienvenue sur le blog du Data Skills Hub</a></h3>
+                    <p>Découvrez l’esprit du blog, nos objectifs et comment il va vous aider à progresser
+                        en PostgreSQL, Excel et VBA.</p>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <img src="../images/illustrations/postgresql/Logo PostgreSQL.png"
+                    alt="Pourquoi apprendre PostgreSQL en 2025 ?"
+                    class="blog-thumbnail">
+                <div class="blog-content">
+                    <h3><a href="02-pourquoi-apprendre-postgresql.html">Pourquoi apprendre PostgreSQL en 2025 ?</a></h3>
+                    <p>PostgreSQL est partout : entreprises, sites web, applications. Découvrez pourquoi c’est un outil
+                        incontournable en 2025.</p>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <img src="../images/illustrations/excel/excel.png"
+                    alt="5 astuces Excel incontournables"
+                    class="blog-thumbnail">
+                <div class="blog-content">
+                    <h3><a href="03-astuces-excel.html">5 astuces Excel que tout professionnel devrait connaître</a></h3>
+                    <p>Figer des volets, utiliser RECHERCHEV, créer des tableaux dynamiques... ces astuces vont booster
+                        votre productivité.</p>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <img src="../images/illustrations/excel_vba/vba.jpg"
+                    alt="Automatiser avec VBA"
+                    class="blog-thumbnail">
+                <div class="blog-content">
+                    <h3><a href="04-vba-automatisation.html">Automatiser vos tâches avec Excel VBA : par où commencer ?</a></h3>
+                    <p>Découvrez VBA, le langage d’automatisation intégré à Excel, et créez vos premières macros pour
+                        gagner un temps fou.</p>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <!-- Pied de page -->
+    <footer role="contentinfo">
+        <p>&copy; 2025 Data Skill Hub - Tous droits réservés.</p>
+        <nav aria-label="Liens secondaires">
+            <ul class="footer-menu">
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="tutoriels.html">Tutoriels</a></li>
+                <li><a href="https://github.com/ton-projet" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <button id="scrollTopBtn" aria-label="Retour en haut">&#8679;</button>
+
+    <!-- Scripts -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const searchInput = document.getElementById("searchInput");
+        const articles = document.querySelectorAll(".blog-card");
+
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value.toLowerCase();
+
+            articles.forEach(article => {
+                const text = article.innerText.toLowerCase();
+                article.style.display = text.includes(query) ? "" : "none";
+            });
+        });
+    });
+    </script>
+    <script src="../assets/js/blog.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{
+    "articles": [
+        {
+            "titre": "Bienvenue sur le blog du Data Skill Hub",
+            "url": "01-bienvenue.html",
+            "resume": "Découvrez l’esprit du blog, nos objectifs et comment il va vous aider à progresser en PostgreSQL, Excel et VBA.",
+            "image": "../images/illustrations/blog/blog-preview.jpg"
+        },
+        {
+            "titre": "Pourquoi apprendre PostgreSQL en 2025 ?",
+            "url": "02-pourquoi-apprendre-postgresql.html",
+            "resume": "PostgreSQL est partout : entreprises, sites web, applications. Découvrez pourquoi c’est un outil incontournable en 2025.",
+            "image": "../images/illustrations/postgresql/Logo PostgreSQL.png"
+        },
+        {   
+            "titre": "5 astuces Excel que tout professionnel devrait connaître",
+            "url": "03-astuces-excel.html",
+            "resume": "Figer des volets, utiliser RECHERCHEV, créer des tableaux dynamiques... ces astuces vont booster votre productivité.",
+            "image": "../images/illustrations/excel/excel.png"
+        },
+        {
+            "titre": "Automatiser vos tâches avec Excel VBA : par où commencer ?",
+            "url": "04-vba-automatisation.html",
+            "resume": "Découvrez VBA, le langage d’automatisation intégré à Excel, et créez vos premières macros pour gagner un temps fou.",
+            "image": "../images/illustrations/excel_vba/vba.jpg"
+        },
+        {
+            "titre": "La biographie de Tupac Amaru Shakur",
+            "url": "article-1.html",
+            "image": "../images/illustrations/blog/blog-preview.jpg",
+            "resume": "Découvrez l’esprit du blog, nos objectifs et comment il va vous aider à progresser en PostgreSQL, Excel et VBA."        
+        },
+        {
+            "titre": "La biographie de Tupac Amaru Shakur",
+            "url": "article-1.html",
+            "image": "../images/illustrations/blog/blog-preview.jpg",
+            "resume": "Découvrez l’esprit du blog, nos objectifs et comment il va vous aider à progresser en PostgreSQL, Excel et VBA."
+        },
+        {
+            "titre": "Pourquoi apprendre PostgreSQL en 2025 ?",
+            "url": "article-2.html",
+            "image": "../images/illustrations/postgresql/logo-postgresql.png",
+            "resume": "PostgreSQL est partout : entreprises, sites web, applications. Découvrez pourquoi c’est un outil incontournable en 2025."
+        },
+        {
+            "titre": "5 astuces Excel que tout professionnel devrait connaître",
+            "url": "article-3.html",
+            "image": "../images/illustrations/excel/excel.png",
+            "resume": "Figer des volets, utiliser RECHERCHEV, créer des tableaux dynamiques... ces astuces vont booster votre productivité."
+        },
+        {
+            "titre": "Automatiser vos tâches avec Excel VBA : par où commencer ?",
+            "url": "article-4.html",
+            "image": "../images/illustrations/excel_vba/vba.jpg",
+            "resume": "Découvrez VBA, le langage d’automatisation intégré à Excel, et créez vos premières macros pour gagner un temps fou."
+        }
+    ]
+}

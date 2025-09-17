@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- ===== MÉTA DE BASE ===== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Titre de la page — Nom du site</title>
+  <meta name="description" content="Description concise (150–160 caractères) de la page pour le SEO." />
+
+  <!-- ===== FAVICONS / MANIFEST ===== -->
+  <!-- Remplacez les chemins par les vôtres -->
+  <link rel="icon" href="/assets/icons/favicon.ico" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- ===== OPEN GRAPH / TWITTER ===== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:title" content="Titre OG — Nom du site" />
+  <meta property="og:description" content="Résumé accrocheur pour l'aperçu sur les réseaux sociaux." />
+  <meta property="og:url" content="https://exemple.com/page" />
+  <meta property="og:image" content="https://exemple.com/assets/img/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- ===== CSS ===== -->
+  <!-- Utilisez le même chemin que dans votre projet (ex: assets/css/index.css) -->
+  <link rel="preload" href="/assets/css/index.css" as="style" />
+  <link rel="stylesheet" href="/assets/css/index.css" />
+
+  <!-- ===== DONNÉES STRUCTURÉES (JSON‑LD) ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Nom du site",
+    "url": "https://exemple.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://exemple.com/recherche?q={recherche}",
+      "query-input": "required name=recherche"
+    }
+  }
+  </script>
+
+  <!-- ===== POLICES (ex. Google Fonts en local recommandé) ===== -->
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com" /> -->
+  <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" /> -->
+
+  <!-- ===== BALISES UTILITAIRES ===== -->
+  <meta name="theme-color" content="#ffffff" />
+</head>
+
+<body>
+  <!-- ===== LIEN D'ÉVITEMENT POUR ACCESSIBILITÉ ===== -->
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <!--
+    ===================== APERÇU DE L'IMBRICATION (ARBRE) =====================
+    html
+    └── body
+        ├── header#site-header
+        │   ├── div.branding
+        │   ├── nav#nav-principale (Rôle de navigation principale)
+        │   └── nav#fil-ariane (Breadcrumb)
+        ├── main#contenu (Landmark principal)
+        │   ├── section#hero
+        │   ├── section#features
+        │   ├── article.article
+        │   ├── aside.complement
+        │   └── section#cta
+        ├── footer#site-footer
+        └── button#back-to-top
+    ===========================================================================
+  -->
+
+  <!-- ===== EN‑TÊTE DU SITE ===== -->
+  <header id="site-header" class="header" role="banner">
+    <div class="container branding">
+      <a class="logo" href="/" aria-label="Aller à l'accueil">
+        <img src="/assets/img/logo.svg" alt="Logo du site" width="120" height="32" />
+      </a>
+
+      <form class="search" role="search" action="/recherche" method="get">
+        <label for="q" class="sr-only">Rechercher</label>
+        <input id="q" name="q" type="search" placeholder="Rechercher…" />
+        <button type="submit">OK</button>
+      </form>
+
+      <nav id="nav-principale" class="nav-menu" aria-label="Navigation principale">
+        <button class="nav-toggle" aria-controls="menu" aria-expanded="false">Menu</button>
+        <ul id="menu" class="menu" role="menubar">
+          <li role="none"><a role="menuitem" href="/" aria-current="page">Accueil</a></li>
+          <li role="none"><a role="menuitem" href="/tutoriels.html">Tutoriels</a></li>
+          <li role="none"><a role="menuitem" href="/exercices.html">Exercices</a></li>
+          <li role="none"><a role="menuitem" href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Fil d'Ariane -->
+    <nav id="fil-ariane" class="breadcrumb" aria-label="Fil d'Ariane">
+      <ol>
+        <li><a href="/">Accueil</a></li>
+        <li aria-current="page">Page courante</li>
+      </ol>
+    </nav>
+  </header>
+
+  <!-- ===== CONTENU PRINCIPAL ===== -->
+  <main id="contenu" tabindex="-1">
+    <!-- Section héro -->
+    <section id="hero" class="section hero" aria-labelledby="hero-titre">
+      <div class="container">
+        <h1 id="hero-titre">Bienvenue sur Nom du site</h1>
+        <p class="lead">Plateforme de formation MySQL, PostgreSQL et Excel — tutoriels, exercices et apprentissage interactif.</p>
+        <p>
+          <a class="btn btn-primary" href="/tutoriels.html">Commencer</a>
+          <a class="btn btn-outline" href="/apropos.html">En savoir plus</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Fonctionnalités clés -->
+    <section id="features" class="section features" aria-labelledby="features-titre">
+      <div class="container">
+        <h2 id="features-titre">Ce que vous allez apprendre</h2>
+        <ul class="grid-3">
+          <li class="card">
+            <h3>MySQL</h3>
+            <p>Bases, requêtes, indexation, optimisation.</p>
+          </li>
+          <li class="card">
+            <h3>PostgreSQL</h3>
+            <p>Types avancés, CTE, fenêtres, performances.</p>
+          </li>
+          <li class="card">
+            <h3>Excel</h3>
+            <p>Formules, Tableaux, Power Query, graphiques.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Article d'exemple -->
+    <article class="article" aria-labelledby="article-titre">
+      <div class="container">
+        <header>
+          <h2 id="article-titre">Titre d'article</h2>
+          <p class="meta">Mis à jour le <time datetime="2025-08-31">31 août 2025</time></p>
+        </header>
+        <p>Intro de l'article. Texte exemple pour montrer la structure.</p>
+        <h3>Sous‑section</h3>
+        <p>Contenu détaillé…</p>
+        <footer class="article-footer">
+          <p>Tags : <a href="#">SQL</a>, <a href="#">Excel</a></p>
+        </footer>
+      </div>
+    </article>
+
+    <!-- Contenu complémentaire -->
+    <aside class="complement" aria-label="Ressources complémentaires">
+      <div class="container">
+        <h2>Ressources</h2>
+        <ul>
+          <li><a href="#">Guide de démarrage</a></li>
+          <li><a href="#">Référence SQL</a></li>
+          <li><a href="#">Feuilles de triche Excel</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Appel à l'action -->
+    <section id="cta" class="section cta" aria-labelledby="cta-titre">
+      <div class="container">
+        <h2 id="cta-titre">Prêt à pratiquer ?</h2>
+        <p>Essayez nos exercices corrigés et interactifs.</p>
+        <a class="btn btn-primary" href="/exercices.html">Voir les exercices</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== PIED DE PAGE ===== -->
+  <footer id="site-footer" class="footer" role="contentinfo">
+    <div class="container footer-grid">
+      <section aria-labelledby="footer-a-propos">
+        <h2 id="footer-a-propos" class="sr-only">À propos</h2>
+        <p>© <span id="annee"></span> Nom du site. Tous droits réservés.</p>
+      </section>
+      <nav aria-label="Liens de pied de page">
+        <ul>
+          <li><a href="/confidentialite.html">Confidentialité</a></li>
+          <li><a href="/conditions.html">Conditions</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <address>
+        <p>Conakry, Guinée</p>
+        <a href="mailto:contact@exemple.com">fkkadjoalioubadara@gmail.com</a>
+      </address>
+    </div>
+  </footer>
+
+  <!-- Bouton retour en haut -->
+  <button id="back-to-top" class="back-to-top" aria-label="Revenir en haut" hidden>↑</button>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Met l'année courante dans le footer
+    document.getElementById('annee').textContent = new Date().getFullYear();
+
+    // Gestion du menu mobile
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.getElementById('menu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        menu.classList.toggle('is-open');
+      });
+    }
+
+    // Bouton retour en haut
+    const backToTop = document.getElementById('back-to-top');
+    const onScroll = () => {
+      if (window.scrollY > 400) backToTop.hidden = false; else backToTop.hidden = true;
+    };
+    window.addEventListener('scroll', onScroll, {passive: true});
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+</body>
+</html>

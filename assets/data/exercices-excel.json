@@ -1,0 +1,26 @@
+{
+    "Excel - Bases": [
+        {
+            "titre": "Mise en forme de tableau",
+            "url": "tutoriels/excel/introduction.html",
+            "description": "Apprenez à insérer et mettre en forme un tableau simple dans Excel."
+        },
+        {
+            "titre": "Formules simples",
+            "url": "tutoriels/excel/fonctions.html",
+            "description": "Addition, moyenne, minimum et maximum sur vos données."
+        }
+    ],
+    "Excel - Avancé": [
+        {
+            "titre": "Tableaux croisés dynamiques",
+            "url": "tutoriels/excel/tableaux-croises-dynamiques.html",
+            "description": "Analysez rapidement vos données avec un TCD."
+        },
+        {
+            "titre": "RechercheV",
+            "url": "tutoriels/excel/fonctions.html",
+            "description": "Découvrez comment utiliser la fonction RECHERCHEV efficacement."
+        }
+    ]
+}

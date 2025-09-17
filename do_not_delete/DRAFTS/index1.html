@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Plateforme de formation MySQL, PostgreSQL et Excel - Tutoriels, exercices et apprentissage interactif." />
+        <title>Accueil | Data Skill Hub</title>
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/index.css">
+    </head>
+    <body>
+        <!-- Header EN DEHORS du conteneur principal -->
+        <header>
+            <div class="site-branding">
+                <img src="images/logo/logo-site.jpeg" alt="" id="site-logo">
+                <h1 id="site-title">Data Skill Hub</h1>
+                <nav aria-label="Navigation principale">
+                    <ul class="nav-menu">
+                        <li><a href="index.html" aria-current="page">Accueil</a></li>
+                        <li><a href="tutoriels.html">Tutoriels</a></li>
+                        <li><a href="exercices.html">Exercices</a></li>
+                        <li><a href="blog/blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Conteneur principal : MAIN + (aside injecté) -->
+        <div id="conteneur-principal">
+            <main id="main-content">
+                <div id="text" class="typewriter">Bienvenue sur Data Skill Hub</div>
+                <!--
+                <a href="assets/fichiers/sql/test_db.sql" download> Télécharger la base de données (PostgreSQL)</a>
+                -->
+            </main>
+            <!-- L’ASIDE sera injecté ici par assets/js/tutoriels.js -->
+        </div>
+
+        <footer role="contentinfo">
+            <p>&copy; 2025 Data Skill Hub - Tous droits réservés.</p>
+            <nav aria-label="Liens secondaires">
+                <ul class="footer-menu">
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="tutoriels.html">Tutoriels</a></li>
+                    <li><a href="https://github.com/ton-projet" target="_blank" rel="noopener">GitHub</a></li>
+                </ul>
+            </nav>
+        </footer>
+
+        <!-- Bouton retour en haut -->
+        <button id="scrollTopBtn" aria-label="Retour en haut">&#8679;</button>
+
+        <!-- Scripts : ordre important ! -->
+        <script src="assets/js/main.js"></script>
+        <script src="assets/data/tutoriels-data.js"></script>
+        <script src="assets/js/tutoriels.js"></script>
+        <script src="assets/js/index.js"></script>
+    </body>
+</html>

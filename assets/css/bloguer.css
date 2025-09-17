@@ -1,0 +1,142 @@
+/* =======================
+   Layout principal
+======================= */
+.blog-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 24px;
+    margin: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+    background: #f4f6fa;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.sidebar h2 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #333;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.sidebar a:hover {
+    color: #007BFF;
+}
+
+/* Contenu principal */
+.blog-main h2 {
+    margin-top: 0;
+    font-size: 1.6rem;
+    color: #222;
+}
+
+/* =======================
+   Blog Cards
+======================= */
+.blog-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin: 20px 0;
+    padding: 16px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* Image */
+.blog-thumbnail {
+    width: 160px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+/* Texte */
+.blog-content {
+    flex: 1;
+}
+
+.blog-content h3 {
+    margin: 0 0 8px;
+    font-size: 1.2rem;
+}
+
+.blog-content h3 a {
+    text-decoration: none;
+    color: #004080;
+    transition: color 0.2s ease;
+}
+
+.blog-content h3 a:hover {
+    color: #007BFF;
+}
+
+.blog-content p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+
+.site-branding {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* permet de passer sur deux lignes si pas assez de place */
+}
+
+
+/* =======================
+   Responsive
+======================= */
+@media (max-width: 900px) {
+    .blog-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        margin-bottom: 20px;
+    }
+
+    .blog-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .blog-thumbnail {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.nav-menu a[aria-current="page"] {
+    font-weight: bold;
+    border-bottom: 2px solid #007bff;
+}

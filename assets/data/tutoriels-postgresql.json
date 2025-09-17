@@ -1,0 +1,17 @@
+[
+    {
+        "titre": "Introduction à PostgreSQL",
+        "url": "tutoriels/postgresql/introduction.html",
+        "resume": "Présentation de PostgreSQL et ses principaux cas d’usage."
+    },
+    {
+        "titre": "Créer une base de données",
+        "url": "tutoriels/postgresql/base-de-donnees.html",
+        "resume": "Apprenez à créer et gérer vos premières bases PostgreSQL."
+    },
+    {
+        "titre": "Créer une table",
+        "url": "tutoriels/postgresql/table.html",
+        "resume": "Découvrez la syntaxe pour définir vos tables et colonnes."
+    }
+]

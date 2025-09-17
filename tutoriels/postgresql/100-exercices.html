@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercices : Introduction à PostgreSQL</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="../images/illustrations/PostgreSQL/Logo PostgreSQL.png" alt="Logo PostgreSQL" class="logo" />
+            <h1>Exercices – Introduction à PostgreSQL</h1>
+        </div>
+    </header>
+
+    <div class="layout-postgres">
+        <aside class="sidebar">
+            <h2>Sommaire</h2>
+            <ul>
+                <li><a href="01-introduction.html">← Retour à la leçon</a></li>
+                <li><a href="#partie1"> Compréhension</a></li> <!-- 🧠 -->
+                <li><a href="#partie2"> Synthèse</a></li> <!-- 🔎 -->
+                <li><a href="#partie3"> Rédaction</a></li> <!-- ✍️ -->
+                <li><a href="#partie4"> Application</a></li> <!-- 🧩 </li> -->
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <section id="partie1">
+                <h2> Partie 1 – Questions de compréhension</h2>
+                <h3>Exercice 1.1 – Vrai ou faux ?</h3>
+                <p>Indiquez si les affirmations suivantes sont vraies ou fausses. Justifiez votre réponse.</p>
+                <ul class="indent">
+                    <li>PostgreSQL est un logiciel propriétaire.</li>
+                    <li>PostgreSQL ne fonctionne que sur Linux.</li>
+                    <li>L’extension PostGIS permet à PostgreSQL de gérer des données spatiales.</li>
+                    <li>La pile LAPP inclut PostgreSQL à la place de MySQL.</li>
+                    <li>PostgreSQL ne prend en charge que le langage SQL.</li>
+                </ul>
+
+                <h3>Exercice 1.2 – Réponses courtes</h3>
+                <ol class="indent">
+                    <li>Que signifie l’acronyme SGBDR ?</li>
+                    <li>Quel est l’objectif de l’extension pgvector ?</li>
+                    <li>En quelle année le projet POSTGRES a-t-il vu le jour ?</li>
+                    <li>Citez trois entreprises qui utilisent PostgreSQL.</li>
+                    <li>Quelle est la différence entre Postgres et PostgreSQL ?</li>
+                </ol>
+            </section>
+
+            <section id="partie2">
+                <h2> Partie 2 – Mise en relation et synthèse</h2>
+
+                <h3>Exercice 2.1 – Associez les colonnes</h3>
+                <p>Reliez chaque élément à sa description :</p>
+                <table class="association">
+                    <thead>
+                        <tr><th>A</th><th>B</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>PostGIS</td><td>_____</td><td>A. Extension pour données vectorielles en IA</td></tr>
+                        <tr><td>pg_partman</td><td>_____</td><td>B. Partitionnement automatisé des tables volumineuses</td></tr>
+                        <tr><td>MVCC</td><td>_____</td><td>C. Contrôle de concurrence multiversion</td></tr>
+                        <tr><td>pgvector</td><td>_____</td><td>D. Extension pour données géographiques</td></tr>
+                        <tr><td>TimescaleDB</td><td>_____</td><td>E. Extension pour séries temporelles</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Exercice 2.2 – Classez par thème</h3>
+                <p>Classez les éléments suivants dans les catégories proposées :</p>
+                <ul class="indent">
+                    <li>Héritage de tables</li>
+                    <li>Clés étrangères</li>
+                    <li>Points de sauvegarde</li>
+                    <li>PostGIS</li>
+                    <li>Authentification utilisateur</li>
+                    <li>Langages procéduraux</li>
+                    <li>Tablespaces</li>
+                    <li>MVCC</li>
+                </ul>
+            </section>
+
+            <section id="partie3">
+                <h2> Partie 3 – Rédaction guidée</h2>
+                <h3>Exercice 3.1 – Reformulation</h3>
+                <p>Reformulez avec vos mots :<br>
+                <em>PostgreSQL est une base de données relationnelle open source, connue pour sa robustesse, sa conformité aux standards et sa flexibilité.</em></p>
+
+                <h3>Exercice 3.2 – Présentation personnelle</h3>
+                <p>Expliquez PostgreSQL à un collègue débutant. Mentionnez :<br>
+                Ce que c’est, à quoi ça sert, pourquoi c’est utilisé.</p>
+            </section>
+
+            <section id="partie4">
+                <h2> Partie 4 – Mise en application</h2>
+                <h3>Exercice 4.1 – Étude de cas</h3>
+                <p>Expliquez pourquoi PostgreSQL conviendrait à une startup SaaS avec géolocalisation et analyse de données.</p>
+
+                <h3>Exercice 4.2 – Mini-projet</h3>
+                <p>Choisissez une extension PostgreSQL, documentez-vous (PostGIS, pgvector, etc.) et rédigez un paragraphe sur :</p>
+                <ul class="indent">
+                    <li>Son objectif</li>
+                    <li>Son utilité dans un projet</li>
+                    <li>Un exemple d’utilisation</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <footer role="contentinfo">
+        <p>&copy; 2025 - Des formations pas à pas, pour aller plus loin</p>
+        <a href="#top" class="back-to-top">↑ Retour en haut</a>
+    </footer>
+</body>
+</html>
